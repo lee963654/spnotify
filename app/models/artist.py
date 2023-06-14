@@ -16,9 +16,11 @@ class Artist(db.Model):
     # relationships
     user_followers = db.relationship("User", secondary="user_artist_follow", back_populates="follows_artist")
     albums = db.relationship("Album", back_populates="artist")
+    songs = db.relationship("Song", back_populates="artist")
 
     def to_dict(self):
         return {
+            "id": self.id,
             "name": self.name,
             "about": self.about,
             "artist_picture": self.artist_picture,

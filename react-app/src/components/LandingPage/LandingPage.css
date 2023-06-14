@@ -3,5 +3,9 @@
 }
 
 .artist > img {
-    width: 30rem
+    width: 30rem;
+}
+
+.album > img {
+    width: 30rem;
 }

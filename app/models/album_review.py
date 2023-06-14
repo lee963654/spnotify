@@ -18,6 +18,7 @@ class AlbumReview(db.Model):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "album_id": self.album_id,
             "review": self.review,
             "star_review": self.star_review,

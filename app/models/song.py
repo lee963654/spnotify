@@ -9,6 +9,7 @@ class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
     album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("albums.id")), nullable=False)
+    artist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("artists.id")), nullable=False)
     lyrics = db.Column(db.String, nullable=False)
     song_url = db.Column(db.String)
     num_of_plays = db.Column(db.Integer, default=0)
@@ -17,11 +18,14 @@ class Song(db.Model):
     # relationships
     album = db.relationship("Album", back_populates="songs")
     playlist = db.relationship("Playlist", secondary="songs_in_playlist", back_populates="playlist_songs")
+    artist = db.relationship("Artist", back_populates="songs")
 
     def to_dict(self):
         return {
+            "id": self.id,
             "name": self.name,
             "album_id": self.album_id,
+            "artist_id": self.artist_id,
             "lyrics": self.lyrics,
             "song_url": self.song_url,
             "num_of_plays": self.num_of_plays,

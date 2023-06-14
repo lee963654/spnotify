@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import Sidebar from "./components/Sidebar"
 import LandingPage from "./components/LandingPage"
 import Footer from "./components/Footer"
+import ArtistPage from "./components/ArtistPage"
 
 function App() {
   const dispatch = useDispatch();
@@ -25,14 +26,17 @@ function App() {
       {/* <LandingPage /> */}
       {isLoaded && (
         <Switch>
-          <Route path="/login" >
+          <Route exact path="/login" >
             <LoginFormPage />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
           <Route exact path="/">
             <LandingPage />
+          </Route>
+          <Route exact path="/artists/:id">
+            <ArtistPage />
           </Route>
         </Switch>
       )}
