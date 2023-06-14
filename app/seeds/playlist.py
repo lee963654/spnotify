@@ -5,21 +5,18 @@ def seed_playlists():
     play1 = Playlist(
         name="My Playlist 1",
         user_id = 10,
-        playlist_songs = [1, 2, 3,],
         private=True
     )
 
     play2 = Playlist(
         name="My Playlist 2",
         user_id = 9,
-        playlist_songs = [1, 2, 3, 4, 5,],
         private=False
     )
 
     play3 = Playlist(
         name="My Playlist 3",
         user_id = 7,
-        playlist_songs = [6, 7, 1, 5, 4, 2, 3, 8],
         private=False
     )
 

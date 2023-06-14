@@ -20,14 +20,14 @@ class Playlist(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("user.id")), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     private = db.Column(db.Boolean, default=True)
 
 
     # relationship
-    user_playlist = db.relationship("User", backpopulates="playlists")
-    playlist_songs = db.relationship("Song", secondary=songs_in_playlist, backpopulates="playlist")
-    playlist_review = db.relationship("PlaylistReview", backpopulates="playlist")
+    user_playlist = db.relationship("User", back_populates="playlists")
+    playlist_songs = db.relationship("Song", secondary=songs_in_playlist, back_populates="playlist")
+    playlist_review = db.relationship("PlaylistReview", back_populates="playlist", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

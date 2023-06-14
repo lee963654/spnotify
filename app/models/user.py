@@ -27,10 +27,10 @@ class User(db.Model, UserMixin):
 
 
     # relationships
-    follows_artist = db.relationship("Artist", secondary=user_artist_follow, backpopulates="user_followers")
-    user_album_reviews = db.relationship("AlbumReview", backpopulates="user")
-    playlists = db.relationship("Playlist", backpopulates="user_playlist")
-    playlist_review = db.relationship("PlaylistReview", backpopulates="user_playlist_review")
+    follows_artist = db.relationship("Artist", secondary=user_artist_follow, back_populates="user_followers")
+    user_album_reviews = db.relationship("AlbumReview", back_populates="user")
+    playlists = db.relationship("Playlist", back_populates="user_playlist")
+    playlist_review = db.relationship("PlaylistReview", back_populates="user_playlist_review")
 
     @property
     def password(self):
