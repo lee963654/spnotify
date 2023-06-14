@@ -3,6 +3,17 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
+user_artist_follow = db.Table(
+    "user_artist_follow",
+    db.Model.metadata,
+    db.Column("user_id", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"))),
+    db.Column("artist_id", db.Integer, db.ForeignKey(add_prefix_for_prod("artists.id")))
+)
+
+if environment == 'production':
+    user_artist_follow.schema = SCHEMA
+
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -13,6 +24,12 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+
+    # relationships
+    follows_artist = db.relationship("Artist", secondary=user_artist_follow, backpopulates="user_followers")
+    user_album_reviews = db.relationship("AlbumReview", backpopulates="user")
+    playlists = db.relationship("Playlist", backpopulates="user_playlist")
 
     @property
     def password(self):
@@ -29,5 +46,9 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            "password": self.password,
+            "following": [follow.to_dict() for follow in self.follows_artist],
+            "album_reviews": [review.to_dict() for review in self.user_album_reviews],
+            "playlists": [playlist.to_dict() for playlist in self.playlists]
         }
