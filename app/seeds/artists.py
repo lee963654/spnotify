@@ -5,14 +5,15 @@ def seed_artists():
     gabe = Artist(
         name="Gabe Lee",
         about=f"Equal parts classic songwriter and modern-day storyteller, Gabe Lee has built his own bridge between country, folk and rock. Lee has been collecting stories for years, both onstage and off. With critically-acclaimed albums like 2019's farmland, 2020's Honky-Tonk Hell, and 2022's The Hometown Kid, Lee created a connection with his fanbase by delivering his own stories to an ever-growing audience. His fourth record, Drink the River, takes a different approach. This time, Lee isn't offering listeners a peek into his internal world; he's holding up a mirror to reflect their own.Storytelling has been an anchor of Lee's music since the very beginning. He launched his career as a genre-bending musician after returning to Tennessee, quickly progressing from dive bar gigs to high-profile opening slots (including shows with Jason Isbell, Los Lobos, and other artists who, like him, blurred the lines between roots-rock, country, and other forms of American folk music) to his own headlining shows. Throughout it all, he drew upon the narrative skills he'd sharpened as a student. If albums like Honky-Tonk Hell and The Hometown Kid often unfolded like autobiographical entries from his road journal, then Drink the River shows an even broader range of his storytelling abilities. Lee isn't just writing songs about himself; he's writing songs about all of us. And maybe, in doing so, he can bring us a little closer together.", artist_picture="https://secondbellfest.com/wp-content/uploads/2021/08/Gabe-Lee.jpg",
-        about_picture="https://thebluegrasssituation.com/wp-content/uploads/2022/11/Gabe-Lee-photo-credit-Brooke-Stevens-e1667490656630.jpg",
+        about_picture="https://spnotify.s3.us-east-2.amazonaws.com/Gabe-Lee-photo-credit-Brooke-Stevens-e1667490656630.jpg",
+        artist_picture="https://spnotify.s3.us-east-2.amazonaws.com/Gabe-Leeprofile.jpg"
     )
 
     luke = Artist(
         name="Luke Combs",
         about=f"Blending a love of classic country and Southern-fried soul -- a fusion inspired equally by fellow modern mavericks  and  -- Luke Combs updates these traditional sounds with a hint of modern R&B. This combination, which flourished on ballads, made Combs stand apart from both slick country-pop crooners and bro-country revelers, a distinction that helped him become a hit right out of the gate. His first single, 2016's Hurricane, launched a series of five number one Billboard Country Airplay hits in a row, including When It Rains It Pours, One Number Away, She Got the Best of Me, and Beautiful Crazy. All were pulled from his 2017 debut album, This One's for You (or its expanded reissue), a period that saw Combs become one of the biggest stars in Nashville. That status was cemented when he won the Country Music Association's Best New Artist award in 2018 and by the subsequent success of his sophomore album, 2019's What You See Is What You Get. Combs' fourth album, 2022's Growin' Up, was another chart-topper, and the first edition of a companion set he completed with 2023's Gettin' Old.",
-        artist_picture="https://static.independent.co.uk/2022/07/04/12/newFile-16.jpg",
-        about_picture="https://express-images.franklymedia.com/6616/sites/268/2021/06/08031417/Luke-Combs_Jim-Wright.jpg"
+        artist_picture="https://spnotify.s3.us-east-2.amazonaws.com/Luke-Combs_Jim-Wright.jpg",
+        about_picture="https://spnotify.s3.us-east-2.amazonaws.com/LukeCombs_DoinThis_creditZackMassey_15.jpg"
     )
 
     # stapleton = Artist(
