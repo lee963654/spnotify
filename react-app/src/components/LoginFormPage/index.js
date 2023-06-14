@@ -13,6 +13,15 @@ function LoginFormPage() {
 
   if (sessionUser) return <Redirect to="/" />;
 
+  const demoUserLogin = () => {
+    return dispatch(login('demo@aa.io', "password"))
+  }
+
+  const demoUserLoginTwo = () => {
+    return dispatch(login("marnie@aa.io", "password"))
+  }
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
@@ -49,6 +58,8 @@ function LoginFormPage() {
           />
         </label>
         <button type="submit">Log In</button>
+        <button className='login-form-demo-button' onClick={() => demoUserLogin()}>Login as Demo User One</button>
+          <button className='login-form-demo-button' onClick={() => demoUserLoginTwo()}>Login as Demo User Two</button>
       </form>
     </>
   );

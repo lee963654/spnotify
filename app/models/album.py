@@ -22,7 +22,7 @@ class Album(db.Model):
             "name": self.name,
             "artist_id": self.artist_id,
             "album_picture": self.album_picture,
-            "artist": self.artist.to_dict(),
-            "album_reviews": [review.to_dict() for review in self.album_reviews],
+            # "artist": self.artist.to_dict(),
+            # "album_reviews": [review.to_dict() for review in self.album_reviews],
             "songs": [song.to_dict() for song in self.songs]
         }

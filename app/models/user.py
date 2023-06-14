@@ -49,8 +49,8 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             "password": self.password,
-            "following": [follow.to_dict() for follow in self.follows_artist],
-            "album_reviews": [review.to_dict() for review in self.user_album_reviews],
-            "playlists": [playlist.to_dict() for playlist in self.playlists],
-            "playlist_reviews": [review.to_dict() for review in self.playlist_review]
+            # "following": [follow.to_dict() for follow in self.follows_artist],
+            # "album_reviews": [review.to_dict() for review in self.user_album_reviews],
+            # "playlists": [playlist.to_dict() for playlist in self.playlists],
+            # "playlist_reviews": [review.to_dict() for review in self.playlist_review]
         }

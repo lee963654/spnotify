@@ -1,0 +1,7 @@
+.landing-container {
+    border: 1px solid red;
+}
+
+.artist > img {
+    width: 30rem
+}
