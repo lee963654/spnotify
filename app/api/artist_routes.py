@@ -27,15 +27,19 @@ def get_single_artist(artist_id):
 
     artist = Artist.query.get(artist_id)
     albums = Album.query.filter(Album.artist_id == artist_id)
-
+    songs = Song.query.filter(Song.artist_id == artist_id)
 
     album_res = [album.to_dict() for album in albums]
     print("=================albums for artist==================", album_res)
+
+    songs_res = [song.to_dict() for song in songs]
+    print("++++++++++++++++++++++++SONGS FOR ARTIST+++++++++++++", songs_res)
 
     res = artist.to_dict()
     print("++++++++++++++++++SINGLE ARTIST+++++++++++++++++++++", res)
 
     res["albums"] = album_res
+    res["songs"] = songs_res
     print("+++++++++++++++++++FINAL RES++++++++++++++++++++++", res)
 
     return res
