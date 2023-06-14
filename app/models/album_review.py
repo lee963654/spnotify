@@ -8,7 +8,7 @@ class AlbumReview(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("album.id")), nullable=False)
-    review = db.Column(db.String(1000), nullable=False)
+    review = db.Column(db.String, nullable=False)
     star_review = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("user.id")), nullable=False)
 

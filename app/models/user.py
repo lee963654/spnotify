@@ -30,6 +30,7 @@ class User(db.Model, UserMixin):
     follows_artist = db.relationship("Artist", secondary=user_artist_follow, backpopulates="user_followers")
     user_album_reviews = db.relationship("AlbumReview", backpopulates="user")
     playlists = db.relationship("Playlist", backpopulates="user_playlist")
+    playlist_review = db.relationship("PlaylistReview", backpopulates="user_playlist_review")
 
     @property
     def password(self):
@@ -50,5 +51,6 @@ class User(db.Model, UserMixin):
             "password": self.password,
             "following": [follow.to_dict() for follow in self.follows_artist],
             "album_reviews": [review.to_dict() for review in self.user_album_reviews],
-            "playlists": [playlist.to_dict() for playlist in self.playlists]
+            "playlists": [playlist.to_dict() for playlist in self.playlists],
+            "playlist_reviews": [review.to_dict() for review in self.playlist_review]
         }

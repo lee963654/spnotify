@@ -10,14 +10,17 @@ class PlaylistReview(db.Model):
     review = db.Column(db.String(1000), nullable=False)
     star_review = db.Column(db.Integer, nullable=False)
     playlist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("playlists.id")), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
 
     # relationship
-    playlist = db.relationship("Playlist", backpopulates="playlist_review")
+    playlist = db.relationship("Playlist", backpopulates="playlist_review", cascade="all, delete-orphan")
+    user_playlist_review = db.relationship("User", backpopulates="playlist_review")
 
     def to_dict(self):
         return {
             "review": self.review,
             "star_review": self.star_review,
             "playlist_id": self.playlist_id,
-            "playlist": self.playlist.to_dict()
+            "playlist": self.playlist.to_dict(),
+            "user_playlist_review": self.user_playlist_review.to_dict()
         }

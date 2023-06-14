@@ -21,6 +21,7 @@ class Playlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("user.id")), nullable=False)
+    private = db.Column(db.Boolean, default=True)
 
 
     # relationship
@@ -32,6 +33,7 @@ class Playlist(db.Model):
         return {
             "name": self.name,
             "user_id": self.user_id,
+            "private": self.private,
             "user_playlist": self.user_playlist.to_dict(),
             "songs_in_playlist": [song.to_dict() for song in self.playlist_songs],
             "playlist_reviews": [review.to_dict() for review in self.playlist_review]

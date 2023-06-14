@@ -10,7 +10,7 @@ class Song(db.Model):
     name = db.Column(db.String(50), nullable=False, unique=True)
     album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("album.id")), nullable=False)
     lyrics = db.Column(db.String, nullable=False)
-    song_url = db.Column(db.String, nullable=False)
+    song_url = db.Column(db.String)
     num_of_plays = db.Column(db.Integer, default=0)
 
 

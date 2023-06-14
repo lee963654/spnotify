@@ -9,8 +9,8 @@ class Artist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
     about = db.Column(db.String, nullable=False)
-    artist_picture = db.Column(db.String(255), nullable=False)
-    about_picture = db.Column(db.String(255), nullable=False)
+    artist_picture = db.Column(db.String(255))
+    about_picture = db.Column(db.String(255))
 
 
     # relationships

@@ -37,9 +37,44 @@ def seed_songs():
     buffalo = Song(
         name = "Buffalo Road",
         album_id = 1,
-        lyrics = f"You could say that I awoke in this condition, Little heart barely beating gotta whole lotta healin to go, I used to be a smooth navigator, Saddle up and see you later, Who'dve thought my luck would turn around and knock me out cold, On the Buffalo Road, I came all this way to find a new direction, But the trouble makes it hardly ever worth the drive, I used to be a bad operator, Saddle up and see you later, I'm gonna fly this rusty ol' tractor of a soul, On up to the Buffalo Road, Yea, the Buffalo Road, Let's get lost somewhere way outside the city, Build a little track of fence on the greener side, I used to be a, Hard negotiator, Saddle up see you later, I never thought I'd find myself at home our here on the Buffalo Road, Mmmm the Buffalo Road, The Buffalo Road, Mmm the Buffalo Road, Yea, the Buffalo Road, Keep on shinin'"
+        lyrics = f"You could say that I awoke in this condition, Little heart barely beating gotta whole lotta healin to go, I used to be a smooth navigator, Saddle up and see you later, Who'dve thought my luck would turn around and knock me out cold, On the Buffalo Road, I came all this way to find a new direction, But the trouble makes it hardly ever worth the drive, I used to be a bad operator, Saddle up and see you later, I'm gonna fly this rusty ol' tractor of a soul, On up to the Buffalo Road, Yea, the Buffalo Road, Let's get lost somewhere way outside the city, Build a little track of fence on the greener side, I used to be a, Hard negotiator, Saddle up see you later, I never thought I'd find myself at home our here on the Buffalo Road, Mmmm the Buffalo Road, The Buffalo Road, Mmm the Buffalo Road, Yea, the Buffalo Road, Keep on shinin'",
+        song_url = "https://youtu.be/bcFOcWrxlec",
+        num_of_plays = 78
     )
 
+    blue = Song(
+        name = "Blue Collar Boys",
+        album_id = 2,
+        lyrics = f"We were just river kids, Pickin' up stones like David did, Watchin' them long necks break off of Freight Train Bridge, We went to church in a Detroit car, Our daddies drank draft at the local bar, With an achin' back just like old granddad did, And we like cold keg beer and fixin' up trucks, Old bird dogs and the woman we love, Maxwell House steamin' out of a coffee cup, We say our prayers, send 'em to the sky, Bust our backs, barely getting by, Carolina to California, up to Illinois, Yeah, there's guys like us, Blue collar boys, We're the white paint peeling off a picket fence, The rust stains covering a Craftsman wrench, When the sun's coming up, you can bet we're clocking in, Cash our paycheck, two day break, and do it again, We like cold keg beer and fixin' up trucks, Old bird dogs and the woman we love, Maxwell House steamin' out of a coffee cup, We say our prayers, send 'em to the sky, Bust our backs, barely getting by, Carolina to California, up to Illinois, Yeah, there's guys like us, Blue collar boys, We're worn out boots and old Levi's, The wind behind the Stars and Stripes, And we like cold keg beer and fixin' up trucks, Old bird dogs and the woman we love, Maxwell House steamin' out of a coffee cup, We say our prayers, send 'em to the sky, Bust our backs, barely getting by, Carolina to California, up to Illinois, Yeah, there's guys like us, Yeah, there's guys like us, Blue collar boys, Blue collar boys",
+        song_url = "https://youtu.be/bcFOcWrxlec",
+        num_of_plays = 45
+    )
+
+    every = Song(
+        name = "Every Little Bit Helps",
+        album_id = 2,
+        lyrics = f"This futon I crashed on in college, well, it ain't our bed, But at least it don't smell like you, Patron up on the counter, well, it ain't your red, And them long stems are long gone too, Put that record on, took your pictures off the shelf, Oh, 'cause every little bit helps, It might not get me all the way over you, But every little bit gets me a little bit closer to, Walkin' right out of the valley of the shadow of death, Step by step I'm gettin', Out from under that spell you put on me, And oh you just left, and I know I might only be, One night into your goodbye gone kinda hell, Oh, but every little bit helps, And it's fine if I might as well spin my tires to the other side of town, But at least I'm out of this house, And this dive's tired of playin' man it ain't my sound, But at least they're playin' it loud, Two beers in but a day-long gone come 12, Oh, 'cause every little bit helps, It might not get me all the way over you, But every little bit gets me a little bit closer to, Walkin' right out of the valley of the shadow of death, Step by step, I'm gettin', Out from under that spell you put on me, And oh you just left, and I know I might only be, One night into your goodbye gone kinda hell, Oh, but every little bit helps, Every sip, every drink that girl and her wink, It ain't much but I think that every little bit helps, Might not get me all the way over you, But every little bit gets me a little bit closer to, Walkin' right out of the valley of the shadow of death, Step by step I'm gettin', Out from under that spell you put on me, And oh, you just left, and I know I might only be, One night into your goodbye gone kinda hell, Oh, but every little bit helps, Yeah, every little bit helps",
+        song_url = "https://youtu.be/bcFOcWrxlec",
+        num_of_plays = 85
+    )
+
+    leaving = Song(
+        name = "Even though I'm Leaving",
+        album_id = 2,
+        lyrics =f"Daddy, I'm afraid, won't you stay a little while?, Keep me safe 'cause there's monsters right outside, Daddy, please don't go, I don't wanna be alone, 'Cause the second that you're gone they're gonna know, Before he went to bed, he grabbed my hand and said, Just 'cause I'm leaving, It don't mean that I won't be right by your side, When you need me, And you can't see me in the middle of the night, Just close your eyes and say a prayer, It's okay, I know you're scared, When I'm not here, but I'll always be right there, Even though I'm leaving, I ain't going nowhere, Dad, we've all been late and Uncle Sam don't like to wait, He's got a big old plane that's gonna take me far away, I know I act tough but there's a churning in my gut, 'Cause I just can't call you up when things get rough, Before I left, he hugged my neck and said, Just 'cause you're leaving, It don't mean that I won't be right by your side, When you need me, And you can't see me in the middle of the night, Just close your eyes and say a prayer, It's okay, I know you're scared, I might be here, but I'll always be right there, Even though you're leaving, I ain't going nowhere, Daddy, I'm afraid, won't you stay a little while?, I never thought I'd see the day I had to say goodbye, Daddy, please don't go, I can't do this on my own, There's no way that I can walk this road alone, Daddy grabbed my hand and said, Just 'cause I'm leaving, It don't mean that I won't be right by your side, When you need me, And you can't see me in the middle of the night, Just close your eyes and say a prayer, It's okay, boy, I ain't scared, I won't be here, But I'll always be right there, Even though I'm leaving, I ain't going nowhere, I ain't going nowhere.",
+        song_url = "https://youtu.be/bcFOcWrxlec",
+        num_of_plays = 49
+    )
+
+    db.session.add(wide)
+    db.session.add(over)
+    db.session.add(rusty)
+    db.session.add(rain)
+    db.session.add(buffalo)
+    db.session.add(blue)
+    db.session.add(every)
+    db.session.add(leaving)
+    db.session.commit()
 
 
 
