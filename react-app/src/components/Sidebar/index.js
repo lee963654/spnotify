@@ -3,19 +3,37 @@ import { useDispatch, useSelector } from 'react-redux';
 import "./Sidebar.css";
 import OpenModalCheck from './OpenModalCheck';
 import ConfirmLoginOrSignin from './Confirm';
-import { getUserPlaylistsThunk } from '../../store/playlists';
+import { getUserPlaylistsThunk, createPlaylistThunk } from '../../store/playlists';
+import OpenModalPlaylist from './OpenModalPlaylist';
+import CreatePlaylistModal from '../CreatePlaylistModal';
+import DeletePlaylistModal from '../DeletePlaylistModal';
+
 
 
 export default function Sidebar() {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user);
-    console.log("THIS IS THE SESSION USER", sessionUser)
+    // console.log("THIS IS THE SESSION USER", sessionUser)
     const userId = sessionUser?.id
-    console.log("THIS IS THE SESSION USER ID", userId)
+    // console.log("THIS IS THE SESSION USER ID", userId)
     const userPlaylists = useSelector(state => state?.playlists?.userPlaylists)
 
-    console.log("userplaylists testing ===============", userPlaylists[userId])
-    console.log("userplaylists mapping over", userPlaylists[userId]?.[0])
+    // console.log("userplaylists testing ===============", userPlaylists[userId])
+    // console.log("userplaylists length=================", userPlaylists[userId]?.length)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        const formData = new FormData()
+        let playlistLength = userPlaylists[userId]?.length + 1
+        let playlistName = `My Playlist #${playlistLength}`
+        let isPrivate = false
+
+        formData.append("name", playlistName)
+        formData.append("private", isPrivate)
+
+        const newPlaylist = await dispatch(createPlaylistThunk(formData))
+    }
 
 
 
@@ -62,6 +80,11 @@ export default function Sidebar() {
                     </div>
                     <div>
                         <p>Your Library</p>
+                        {/* <OpenModalPlaylist
+                            buttonText="Create Playlist"
+                            modalComponent={<CreatePlaylistModal userId={userId} />}
+                        /> */}
+                        <button onClick={handleSubmit}>Create a playlist</button>
                         <div>
                             {userPlaylists && userPlaylists[userId]?.map(playlist => (
                                 <div key={playlist.id}>
@@ -70,6 +93,12 @@ export default function Sidebar() {
                                         <p>Playlist</p>
                                         <p>{playlist?.user_playlist?.username}</p>
                                     </div>
+                                    <OpenModalPlaylist
+                                        buttonText="Delete Playlist"
+
+                                        modalComponent={<DeletePlaylistModal playlistId={playlist.id} playlistName={playlist.name} />}
+
+                                    />
                                 </div>
                             ))}
                         </div>
