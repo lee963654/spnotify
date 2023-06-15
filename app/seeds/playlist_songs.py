@@ -1,28 +1,28 @@
-from app.models import db, PlaylistSongs, environment, SCHEMA
+from app.models import db, PlaylistSong, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_playlist_songs():
-    song1 = PlaylistSongs(
+    song1 = PlaylistSong(
         playlist_id = 1,
         song_id = 1
     )
-    song2 = PlaylistSongs(
+    song2 = PlaylistSong(
         playlist_id = 2,
         song_id = 2
     )
-    song3 = PlaylistSongs(
+    song3 = PlaylistSong(
         playlist_id = 2,
         song_id = 1
     )
-    song4 = PlaylistSongs(
+    song4 = PlaylistSong(
         playlist_id = 2,
         song_id = 3
     )
-    song5 = PlaylistSongs(
+    song5 = PlaylistSong(
         playlist_id = 3,
         song_id = 4
     )
-    song6 = PlaylistSongs(
+    song6 = PlaylistSong(
         playlist_id = 3,
         song_id = 5
     )

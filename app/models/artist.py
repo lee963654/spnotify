@@ -26,5 +26,5 @@ class Artist(db.Model):
             "artist_picture": self.artist_picture,
             "about_picture": self.about_picture,
             "users_following": [user.to_dict() for user in self.user_followers],
-            # "albums": [album.to_dict() for album in self.albums]
+            "albums": [album.to_dict() for album in self.albums]
         }

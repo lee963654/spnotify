@@ -6,5 +6,5 @@ from .album_review import AlbumReview
 from .song import Song
 from .playlist import Playlist
 from .playlist_review import PlaylistReview
-from .playlist_songs import PlaylistSongs
+from .playlist_song import PlaylistSong
 from .db import environment, SCHEMA

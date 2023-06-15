@@ -33,13 +33,15 @@ def get_single_artist(artist_id):
     print("=================albums for artist==================", album_res)
 
     songs_res = [song.to_dict() for song in songs]
-    print("++++++++++++++++++++++++SONGS FOR ARTIST+++++++++++++", songs_res)
+    # print("++++++++++++++++++++++++SONGS FOR ARTIST+++++++++++++", songs_res)
 
     res = artist.to_dict()
     print("++++++++++++++++++SINGLE ARTIST+++++++++++++++++++++", res)
 
+
+
     res["albums"] = album_res
     res["songs"] = songs_res
-    print("+++++++++++++++++++FINAL RES++++++++++++++++++++++", res)
+    # print("+++++++++++++++++++FINAL RES++++++++++++++++++++++", res)
 
     return res
