@@ -6,13 +6,14 @@ def seed_albums():
         name="The Hometown Kid",
         artist_id = 1,
         album_picture="https://spnotify.s3.us-east-2.amazonaws.com/hometownkid.jpg",
-
+        release_year = 2022
     )
 
     what_you_see = Album(
         name="What You See Ain't Always What You Get (Deluxe Edition)",
         artist_id = 2,
-        album_picture="https://spnotify.s3.us-east-2.amazonaws.com/whatyouseeis.jpg"
+        album_picture="https://spnotify.s3.us-east-2.amazonaws.com/whatyouseeis.jpg",
+        release_year = 2020
     )
 
     # starting = Album(

@@ -13,6 +13,7 @@ class Song(db.Model):
     lyrics = db.Column(db.String, nullable=False)
     song_url = db.Column(db.String)
     num_of_plays = db.Column(db.Integer, default=0)
+    album_cover=db.Column(db.String)
 
 
     # relationships
@@ -30,6 +31,7 @@ class Song(db.Model):
             "lyrics": self.lyrics,
             "song_url": self.song_url,
             "num_of_plays": self.num_of_plays,
+            "album_cover": self.album_cover,
             # "album": self.album.to_dict(),
             # "playlist": [lst.to_dict() for lst in self.playlist]
 
