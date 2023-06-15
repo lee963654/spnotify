@@ -22,6 +22,6 @@ class PlaylistReview(db.Model):
             "review": self.review,
             "star_review": self.star_review,
             "playlist_id": self.playlist_id,
-            "playlist": self.playlist.to_dict(),
+            # "playlist": self.playlist.to_dict(),
             "user_playlist_review": self.user_playlist_review.to_dict()
         }

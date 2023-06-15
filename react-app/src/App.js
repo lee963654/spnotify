@@ -9,6 +9,8 @@ import Sidebar from "./components/Sidebar"
 import LandingPage from "./components/LandingPage"
 import Footer from "./components/Footer"
 import ArtistPage from "./components/ArtistPage"
+import LoginFormModal from "./components/LoginFormModal";
+import SignupFormModal from "./components/SignupFormModal";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,27 +21,32 @@ function App() {
 
   return (
     <div className="main-container">
-
-        <Navigation isLoaded={isLoaded} />
+      <div className="side-landing-container">
         <Sidebar />
-        <Footer />
-      {/* <LandingPage /> */}
-      {isLoaded && (
-        <Switch>
-          <Route exact path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route exact path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-          <Route exact path="/artists/:id">
-            <ArtistPage />
-          </Route>
-        </Switch>
-      )}
+        <div className="nav-landing-container">
+          <Navigation isLoaded={isLoaded} />
+          {isLoaded && (
+            <Switch>
+              <Route exact path="/login" >
+                <LoginFormModal />
+              </Route>
+              <Route exact path="/signup">
+                <SignupFormModal />
+              </Route>
+              <Route exact path="/">
+                <LandingPage />
+              </Route>
+              <Route exact path="/artists/:id">
+                <ArtistPage />
+              </Route>
+            </Switch>
+          )}
+
+        </div>
+
+      </div>
+
+      <Footer />
     </div>
   );
 }

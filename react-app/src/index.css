@@ -1,1 +1,26 @@
 /* TODO Add site wide styles */
+/* .footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+*/
+
+.side-landing-container {
+    display: flex;
+}
+
+.main-container {
+    border: purple solid 1px;
+}
+
+body {
+    margin: 0;
+}
+
+.nav-landing-container {
+    width: 100%;
+
+    margin-left: 18rem;
+
+}

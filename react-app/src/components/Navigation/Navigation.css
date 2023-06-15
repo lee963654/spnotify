@@ -8,4 +8,6 @@
 
 .nav-container {
   border: 1px black solid;
+  position:sticky;
+  top:0;
 }

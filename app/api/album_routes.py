@@ -11,7 +11,7 @@ def get_albums():
     Getting all albums
     """
     albums = Album.query.all()
-    print("++++++++++++ALBUMS", albums, "+++++++++++++++++++++")
+    # print("++++++++++++ALBUMS", albums, "+++++++++++++++++++++")
 
     res = {
         album.id : album.to_dict() for album in albums
