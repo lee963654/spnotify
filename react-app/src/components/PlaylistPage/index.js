@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { getAllPlaylistsThunk } from '../../store/playlists';
+import { getAllPlaylistsThunk, getUserPlaylistsThunk } from '../../store/playlists';
 import OpenModalButton from '../OpenModalButton';
 import UpdatePlaylist from '../UpdatePlaylist';
 
@@ -17,7 +17,7 @@ export default function PlaylistPage() {
     useEffect(() => {
 
         dispatch(getAllPlaylistsThunk())
-
+        dispatch(getUserPlaylistsThunk())
     }, [dispatch])
 
     return (

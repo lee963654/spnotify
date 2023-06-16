@@ -17,9 +17,9 @@ def get_user_playlists():
 
     playlists = Playlist.query.filter(Playlist.user_id == current_user.id)
 
-    res = {current_user.id : [playlist.to_dict() for playlist in playlists]}
+    user_playlists = {playlist.id : playlist.to_dict() for playlist in playlists}
 
-    return res
+    return user_playlists
 
 
 @playlist_routes.route("/", methods=["POST"])
@@ -63,6 +63,7 @@ def update_playlist(playlist_id):
     if form.validate_on_submit():
         playlist.name = form.data["name"]
         playlist.private = form.data["private"]
+        db.session.commit()
         return playlist.to_dict()
     else:
         return {"errors": validation_errors_to_error_messages(form.errors)}

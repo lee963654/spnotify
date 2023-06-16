@@ -107,24 +107,19 @@ export default function reducer(state = initialState, action) {
             newState.userPlaylists = {...action.playlists}
             return newState
         case CREATE_PLAYLIST:
-            newState.userPlaylists[action.playlist.user_id].push(action.playlist)
+            newState.userPlaylists[action.playlist.id] = action.playlist
+            newState.allPlaylists[action.playlist.id] = action.playlist
             return newState
         case DELETE_PLAYLIST:
-            const deleteState = newState.userPlaylists[action.playlist.user_id].filter(playlist =>
-                playlist.id !== action.playlist.id
-            )
-            const returnState = {...state, allPlaylists: {...state.allPlaylists}, userPlaylists: {...deleteState}}
-            return returnState
+            delete newState.allPlaylists[action.playlist.id]
+            delete newState.userPlaylists[action.playlist.id]
+            return newState
         case GET_ALL_PLAYLISTS:
             newState.allPlaylists = {...action.playlists}
             return newState
         case UPDATE_PLAYLIST:
-            console.log("IN THE REDUCER THE NEWSTATE", newState)
-
             newState.allPlaylists[action.playlist.id] = action.playlist
-            const userState = newState.userPlaylists[action.playlist.user_id].filter(playlist => playlist.id !== action.playlist.id)
-            userState.push(action.playlist)
-            newState.userPlaylists[action.playlist.user_id] = userState
+            newState.userPlaylists[action.playlist.id] = action.playlist
             return newState
         default:
             return state

@@ -4,6 +4,7 @@ import { getArtistsThunk } from '../../store/artists';
 import { getAlbumsThunk } from '../../store/albums';
 import { Link } from "react-router-dom"
 import "./LandingPage.css";
+import { getAllPlaylistsThunk } from '../../store/playlists';
 
 export default function LandingPage() {
     const sessionUser = useSelector(state => state.session.user);
@@ -21,6 +22,7 @@ export default function LandingPage() {
     useEffect(() => {
         dispatch(getArtistsThunk())
         dispatch(getAlbumsThunk())
+        dispatch(getAllPlaylistsThunk())
     }, [dispatch])
 
     return (

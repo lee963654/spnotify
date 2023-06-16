@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { updatePlaylistThunk } from '../../store/playlists';
+import { getAllPlaylistsThunk, getUserPlaylistsThunk, updatePlaylistThunk } from '../../store/playlists';
 
 
 export default function UpdatePlaylist ({playlistName, playlistId}) {
@@ -23,10 +23,12 @@ export default function UpdatePlaylist ({playlistName, playlistId}) {
         formData.append("private", privateCheck)
 
         const updatePlaylist = await dispatch(updatePlaylistThunk(playlistId, formData))
+        console.log("THIS IS THE UPDATED PLAYLIST", updatePlaylist)
         if (updatePlaylist.errors) {
-            console.log(updatePlaylist)
+
         } else {
             closeModal()
+
         }
     }
 

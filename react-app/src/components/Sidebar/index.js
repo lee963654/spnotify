@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import "./Sidebar.css";
 import OpenModalCheck from './OpenModalCheck';
 import ConfirmLoginOrSignin from './Confirm';
-import { getUserPlaylistsThunk, createPlaylistThunk } from '../../store/playlists';
+import { getUserPlaylistsThunk, createPlaylistThunk, getAllPlaylistsThunk } from '../../store/playlists';
 import OpenModalPlaylist from './OpenModalPlaylist';
 import CreatePlaylistModal from '../CreatePlaylistModal';
 import DeletePlaylistModal from '../DeletePlaylistModal';
@@ -19,6 +19,9 @@ export default function Sidebar() {
     const userId = sessionUser?.id
 
     const userPlaylists = useSelector(state => state?.playlists?.userPlaylists)
+    // console.log("USER PALYLISTS", userPlaylists)
+    const userPlaylistObj = Object.values(userPlaylists)
+    console.log("USER OBJECT VALUES", userPlaylistObj)
 
 
 
@@ -26,7 +29,7 @@ export default function Sidebar() {
         e.preventDefault()
 
         const formData = new FormData()
-        let playlistLength = userPlaylists[userId]?.length + 1
+        let playlistLength = userPlaylistObj?.length + 1
         let playlistName = `My Playlist #${playlistLength}`
         let isPrivate = false
 
@@ -39,6 +42,7 @@ export default function Sidebar() {
 
     useEffect(() => {
         dispatch(getUserPlaylistsThunk())
+        dispatch(getAllPlaylistsThunk())
 
     }, [dispatch, sessionUser])
 
@@ -82,7 +86,7 @@ export default function Sidebar() {
                         /> */}
                         <button onClick={handleSubmit}>Create a playlist</button>
                         <div>
-                            {userPlaylists && userPlaylists[userId]?.map(playlist => (
+                            {userPlaylistObj.length && userPlaylistObj.map(playlist => (
                                 <div className="single-playlist-container" key={playlist.id}>
                                     <div onClick={() => history.push(`/playlists/${playlist.id}`)}>
                                         <p>{playlist.name}</p>
