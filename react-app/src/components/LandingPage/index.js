@@ -42,10 +42,13 @@ export default function LandingPage() {
                 <div className="albums-container">
                     <h1>Albums</h1>
                     {albumsObj.map(album => (
-                        <div className="album">
-                            <img alt="album" src={album?.album_picture}></img>
-                            <h3>{album.name}</h3>
-                        </div>
+                        <Link to={`/albums/${album.id}`} key={album.id} title={album.name}>
+                            <div className="album">
+                                <img alt="album" src={album?.album_picture}></img>
+                                <h3>{album.name}</h3>
+                            </div>
+
+                        </Link>
                     ))}
                 </div>
             </div>
