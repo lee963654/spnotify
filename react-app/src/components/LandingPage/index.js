@@ -38,6 +38,7 @@ export default function LandingPage() {
                     ))}
                 </div>
                 <div className="albums-container">
+                    <h1>Albums</h1>
                     {albumsObj.map(album => (
                         <div className="album">
                             <img alt="album" src={album?.album_picture}></img>

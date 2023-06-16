@@ -1,6 +1,7 @@
 const GET_USER_PLAYLISTS = "playlists/GET_USER_PLAYLISTS";
 const CREATE_PLAYLIST = "playlists/CREATE_PLAYLIST"
 const DELETE_PLAYLIST = "playlists/DELETE_PLAYLIST"
+const GET_ALL_PLAYLISTS = "playlists/GET_ALL_PLAYLISTS"
 
 
 const getUserPlaylists = (playlists) => ({
@@ -18,9 +19,14 @@ const deletePlaylist = (playlist) => ({
     playlist,
 })
 
+const getAllPlaylists = (playlists) => ({
+    type: GET_ALL_PLAYLISTS,
+    playlists,
+})
+
 
 export const getUserPlaylistsThunk = () => async (dispatch) => {
-    const response = await fetch("/api/playlists/")
+    const response = await fetch("/api/playlists/user")
     const playlists = await response.json()
 
     if (response.ok) {
@@ -60,11 +66,22 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
     }
 }
 
+export const getAllPlaylistsThunk = () => async (dispatch) => {
+    const response = await fetch(`/api/playlists/`)
+    const allPlaylists = await response.json()
+    if (response.ok) {
+        dispatch(getAllPlaylists(allPlaylists))
+        return allPlaylists
+    } else {
+        return allPlaylists
+    }
+}
 
-const initialState = { allPlaylists: {}, userPlaylists: {}}
+
+const initialState = { allPlaylists: [], userPlaylists: {}}
 
 export default function reducer(state = initialState, action) {
-    const newState = {...state, allPlaylists: {...state.allPlaylists}, userPlaylists: {...state.userPlaylists}}
+    const newState = {...state, allPlaylists: [...state.allPlaylists], userPlaylists: {...state.userPlaylists}}
     switch (action.type) {
         case GET_USER_PLAYLISTS:
             newState.userPlaylists = {...action.playlists}
@@ -73,14 +90,14 @@ export default function reducer(state = initialState, action) {
             newState.userPlaylists[action.playlist.user_id].push(action.playlist)
             return newState
         case DELETE_PLAYLIST:
-            console.log("THIS IS TEH DELETE REDUCER ACTION", action)
-            console.log("THIS IS TEH new state", state)
             const deleteState = newState.userPlaylists[action.playlist.user_id].filter(playlist =>
                 playlist.id !== action.playlist.id
             )
-            console.log("THIS IS THE DELETED STATE", deleteState)
             const returnState = {...state, allPlaylists: {...state.allPlaylists}, userPlaylists: {...deleteState}}
             return returnState
+        case GET_ALL_PLAYLISTS:
+            newState.allPlaylists = [action.playlists]
+            return newState
         default:
             return state
     }

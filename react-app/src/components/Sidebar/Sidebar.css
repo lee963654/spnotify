@@ -7,3 +7,7 @@
     position: fixed;
     width: 18rem;
 }
+
+.single-playlist-container {
+    border: 1px green solid
+}

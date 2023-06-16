@@ -7,19 +7,20 @@ import { getUserPlaylistsThunk, createPlaylistThunk } from '../../store/playlist
 import OpenModalPlaylist from './OpenModalPlaylist';
 import CreatePlaylistModal from '../CreatePlaylistModal';
 import DeletePlaylistModal from '../DeletePlaylistModal';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 
 export default function Sidebar() {
     const dispatch = useDispatch()
+    const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
-    // console.log("THIS IS THE SESSION USER", sessionUser)
+
     const userId = sessionUser?.id
-    // console.log("THIS IS THE SESSION USER ID", userId)
+
     const userPlaylists = useSelector(state => state?.playlists?.userPlaylists)
 
-    // console.log("userplaylists testing ===============", userPlaylists[userId])
-    // console.log("userplaylists length=================", userPlaylists[userId]?.length)
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -34,11 +35,6 @@ export default function Sidebar() {
 
         const newPlaylist = await dispatch(createPlaylistThunk(formData))
     }
-
-
-
-
-
 
 
     useEffect(() => {
@@ -87,7 +83,7 @@ export default function Sidebar() {
                         <button onClick={handleSubmit}>Create a playlist</button>
                         <div>
                             {userPlaylists && userPlaylists[userId]?.map(playlist => (
-                                <div key={playlist.id}>
+                                <div className="single-playlist-container" onClick={() => history.push(`/playlists/${playlist.id}`)} key={playlist.id}>
                                     <p>{playlist.name}</p>
                                     <div>
                                         <p>Playlist</p>

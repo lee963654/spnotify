@@ -7,7 +7,7 @@ from app.forms import PlaylistForm
 playlist_routes = Blueprint("playlists", __name__)
 
 
-@playlist_routes.route("/")
+@playlist_routes.route("/user")
 @login_required
 def get_user_playlists():
     """
@@ -46,9 +46,13 @@ def create_a_playlist():
         errors = form.errors
         return errors
 
+
 @playlist_routes.route("/<int:playlist_id>", methods=["DELETE"])
 @login_required
 def delete_users_playlist(playlist_id):
+    """
+    Deleting a single playlist
+    """
     deleted_playlist = Playlist.query.get(playlist_id)
     deleted_dict = deleted_playlist.to_dict()
     user_id = current_user.id
@@ -59,3 +63,14 @@ def delete_users_playlist(playlist_id):
         return deleted_dict
     else:
         return {"message": "Playlist was not deleted"}
+
+
+@playlist_routes.route("/")
+@login_required
+def get_all_playlist():
+    """
+    Getting all playlists
+    """
+    playlists = Playlist.query.all()
+
+    return {playlist.id : playlist.to_dict() for playlist in playlists}
