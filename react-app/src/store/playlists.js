@@ -98,10 +98,10 @@ export const updatePlaylistThunk = (playlistId, formData) => async (dispatch) =>
 }
 
 
-const initialState = { allPlaylists: [], userPlaylists: {}}
+const initialState = { allPlaylists: {}, userPlaylists: {}}
 
 export default function reducer(state = initialState, action) {
-    const newState = {...state, allPlaylists: [], userPlaylists: {...state.userPlaylists}}
+    const newState = {...state, allPlaylists: {...state.allPlaylists}, userPlaylists: {...state.userPlaylists}}
     switch (action.type) {
         case GET_USER_PLAYLISTS:
             newState.userPlaylists = {...action.playlists}
@@ -116,7 +116,7 @@ export default function reducer(state = initialState, action) {
             const returnState = {...state, allPlaylists: {...state.allPlaylists}, userPlaylists: {...deleteState}}
             return returnState
         case GET_ALL_PLAYLISTS:
-            newState.allPlaylists = action.playlists
+            newState.allPlaylists = {...action.playlists}
             return newState
         case UPDATE_PLAYLIST:
             console.log("IN THE REDUCER THE NEWSTATE", newState)
