@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
+from app.api.auth_routes import validation_errors_to_error_messages
 from app.models import User, db, Artist, Album, Song, Playlist
 from app.forms import PlaylistForm
 
@@ -45,6 +46,27 @@ def create_a_playlist():
     else:
         errors = form.errors
         return errors
+
+
+@playlist_routes.route("/<int:playlist_id>/update", methods = ["PUT"])
+@login_required
+def update_playlist(playlist_id):
+    """
+    Update a playlist
+    """
+    playlist = Playlist.query.get(playlist_id)
+    form = PlaylistForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    user_id = current_user.id
+    if playlist.user_id != user_id:
+        return {"Not Authorized"}
+    if form.validate_on_submit():
+        playlist.name = form.data["name"]
+        playlist.private = form.data["private"]
+        return playlist.to_dict()
+    else:
+        return {"errors": validation_errors_to_error_messages(form.errors)}
+
 
 
 @playlist_routes.route("/<int:playlist_id>", methods=["DELETE"])

@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deletePlaylistThunk, getUserPlaylistsThunk } from "../../store/playlists";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function DeletePlaylistModal({playlistId, playlistName}) {
     const dispatch = useDispatch()
     const {closeModal} = useModal()
     const location = useLocation()
+    const history = useHistory()
     console.log("THIS IS TEH LOCATION ", location)
 
     const handleDeleteButton = async (e) => {
         e.preventDefault()
         await dispatch(deletePlaylistThunk(playlistId))
         dispatch(getUserPlaylistsThunk())
+        if (location.pathname === `/playlists/${playlistId}`) {
+            history.push("/")
+        }
         closeModal()
     }
 

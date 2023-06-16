@@ -2,6 +2,7 @@ const GET_USER_PLAYLISTS = "playlists/GET_USER_PLAYLISTS";
 const CREATE_PLAYLIST = "playlists/CREATE_PLAYLIST"
 const DELETE_PLAYLIST = "playlists/DELETE_PLAYLIST"
 const GET_ALL_PLAYLISTS = "playlists/GET_ALL_PLAYLISTS"
+const UPDATE_PLAYLIST = "playlists/UPDATE_PLAYLIST"
 
 
 const getUserPlaylists = (playlists) => ({
@@ -22,6 +23,11 @@ const deletePlaylist = (playlist) => ({
 const getAllPlaylists = (playlists) => ({
     type: GET_ALL_PLAYLISTS,
     playlists,
+})
+
+const updatePlaylistAction = (playlist) => ({
+    type: UPDATE_PLAYLIST,
+    playlist
 })
 
 
@@ -77,11 +83,25 @@ export const getAllPlaylistsThunk = () => async (dispatch) => {
     }
 }
 
+export const updatePlaylistThunk = (playlistId, formData) => async (dispatch) => {
+    const response = await fetch(`/api/playlists/${playlistId}/update`, {
+        method: "PUT",
+        body: formData
+    })
+    const updatePlaylist = await response.json()
+    if (response.ok) {
+        dispatch(updatePlaylistAction(updatePlaylist))
+        return updatePlaylist
+    } else {
+        return updatePlaylist
+    }
+}
+
 
 const initialState = { allPlaylists: [], userPlaylists: {}}
 
 export default function reducer(state = initialState, action) {
-    const newState = {...state, allPlaylists: [...state.allPlaylists], userPlaylists: {...state.userPlaylists}}
+    const newState = {...state, allPlaylists: [], userPlaylists: {...state.userPlaylists}}
     switch (action.type) {
         case GET_USER_PLAYLISTS:
             newState.userPlaylists = {...action.playlists}
@@ -96,7 +116,15 @@ export default function reducer(state = initialState, action) {
             const returnState = {...state, allPlaylists: {...state.allPlaylists}, userPlaylists: {...deleteState}}
             return returnState
         case GET_ALL_PLAYLISTS:
-            newState.allPlaylists = [action.playlists]
+            newState.allPlaylists = action.playlists
+            return newState
+        case UPDATE_PLAYLIST:
+            console.log("IN THE REDUCER THE NEWSTATE", newState)
+
+            newState.allPlaylists[action.playlist.id] = action.playlist
+            const userState = newState.userPlaylists[action.playlist.user_id].filter(playlist => playlist.id !== action.playlist.id)
+            userState.push(action.playlist)
+            newState.userPlaylists[action.playlist.user_id] = userState
             return newState
         default:
             return state

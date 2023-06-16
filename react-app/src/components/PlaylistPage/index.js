@@ -2,13 +2,17 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { getAllPlaylistsThunk } from '../../store/playlists';
+import OpenModalButton from '../OpenModalButton';
+import UpdatePlaylist from '../UpdatePlaylist';
 
-export default function PlaylistPage () {
+export default function PlaylistPage() {
     const dispatch = useDispatch()
     const { id } = useParams()
     const allPlaylists = useSelector(state => state.playlists.allPlaylists)
     console.log("THIS IS TEH ID IN THE PLAYLIST PAGE", id)
-    console.log("TESTING, ", allPlaylists)
+
+    const currentPlaylist = allPlaylists[id]
+    console.log("THIS IS TEH CURRENT PLAYLIST", currentPlaylist)
 
     useEffect(() => {
 
@@ -17,7 +21,17 @@ export default function PlaylistPage () {
     }, [dispatch])
 
     return (
-        <h1>{id}</h1>
+        <div className="single-playlist-container">
+            <div>
+                <p>Playlist</p>
+                <OpenModalButton
+                    buttonText={currentPlaylist?.name}
+                    modalComponent={<UpdatePlaylist playlistName={currentPlaylist?.name} playlistId={id} />}
+                />
+                <p>{currentPlaylist?.user_playlist?.username}</p>
+            </div>
+
+        </div>
     )
 
 }

@@ -83,11 +83,14 @@ export default function Sidebar() {
                         <button onClick={handleSubmit}>Create a playlist</button>
                         <div>
                             {userPlaylists && userPlaylists[userId]?.map(playlist => (
-                                <div className="single-playlist-container" onClick={() => history.push(`/playlists/${playlist.id}`)} key={playlist.id}>
-                                    <p>{playlist.name}</p>
-                                    <div>
-                                        <p>Playlist</p>
-                                        <p>{playlist?.user_playlist?.username}</p>
+                                <div className="single-playlist-container" key={playlist.id}>
+                                    <div onClick={() => history.push(`/playlists/${playlist.id}`)}>
+                                        <p>{playlist.name}</p>
+                                        <div>
+                                            <p>Playlist</p>
+                                            <p>{playlist?.user_playlist?.username}</p>
+                                        </div>
+
                                     </div>
                                     <OpenModalPlaylist
                                         buttonText="Delete Playlist"
