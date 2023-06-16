@@ -86,7 +86,7 @@ export default function Sidebar() {
                         /> */}
                         <button onClick={handleSubmit}>Create a playlist</button>
                         <div>
-                            {userPlaylistObj.length && userPlaylistObj.map(playlist => (
+                            {userPlaylistObj.length ? userPlaylistObj.map(playlist => (
                                 <div className="single-playlist-container" key={playlist.id}>
                                     <div onClick={() => history.push(`/playlists/${playlist.id}`)}>
                                         <p>{playlist.name}</p>
@@ -103,7 +103,7 @@ export default function Sidebar() {
 
                                     />
                                 </div>
-                            ))}
+                            )) : <div></div>}
                         </div>
                     </div>
                 </div>}
