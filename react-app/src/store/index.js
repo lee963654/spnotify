@@ -4,12 +4,14 @@ import session from './session'
 import artists from "./artists"
 import albums from "./albums"
 import playlists from "./playlists"
+import albumReviews from "./albumReviews"
 
 const rootReducer = combineReducers({
   session,
   artists,
   albums,
-  playlists
+  playlists,
+  albumReviews
 });
 
 

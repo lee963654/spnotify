@@ -89,7 +89,6 @@ def delete_users_playlist(playlist_id):
 
 
 @playlist_routes.route("/")
-@login_required
 def get_all_playlist():
     """
     Getting all playlists

@@ -26,6 +26,6 @@ class Album(db.Model):
             "album_picture": self.album_picture,
             "release_year": self.release_year,
             # "artist": self.artist.to_dict(),
-            # "album_reviews": [review.to_dict() for review in self.album_reviews],
+            "album_reviews": [review.to_dict() for review in self.album_reviews],
             "songs": [song.to_dict() for song in self.songs]
         }

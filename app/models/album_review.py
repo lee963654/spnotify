@@ -24,5 +24,5 @@ class AlbumReview(db.Model):
             "star_review": self.star_review,
             "user_id": self.user_id,
             # "reviewed_album": self.album.to_dict(),
-            # "review_user": self.user.to_dict()
+            "review_user": self.user.to_dict()
         }

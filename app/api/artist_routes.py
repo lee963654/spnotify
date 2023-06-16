@@ -1,4 +1,5 @@
 from flask import Blueprint
+from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, db, Artist, Album, Song
 from app.forms import LoginForm
 from app.forms import SignUpForm
