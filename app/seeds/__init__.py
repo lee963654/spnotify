@@ -34,8 +34,8 @@ def seed():
     seed_users()
     seed_artists()
     seed_albums()
-    seed_songs()
-    seed_playlists()
+    song_list = seed_songs()
+    seed_playlists(song_list)
     seed_album_reviews()
     seed_playlist_reviews()
     # seed_playlist_songs()
@@ -45,7 +45,7 @@ def seed():
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
-    undo_playlist_songs()
+    # undo_playlist_songs()
     undo_playlist_reviews()
     undo_album_reviews()
     undo_playlists()
