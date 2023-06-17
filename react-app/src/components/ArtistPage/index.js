@@ -4,25 +4,24 @@ import "./ArtistPage.css"
 import { useParams } from 'react-router-dom'
 import { getSingleArtistThunk } from '../../store/artists';
 import OptionsButton from './OptionsButton';
+import OpenOptionsModalButton from './OpenOptionsModalButton';
+import SongOptionsModal from '../SongOptionsModal';
 
 export default function ArtistPage() {
     const dispatch = useDispatch()
 
-    // Options Menu
-    const [active, setActive] = useState()
-    // Options Menu
 
     const { id } = useParams()
 
     const currentArtist = useSelector(state => state.artists.singleArtist)
 
+
+
     useEffect(() => {
         dispatch(getSingleArtistThunk(id))
     }, [dispatch])
 
-    // Options
 
-    // Options
 
     return (
         <div className="single-artist-container">
@@ -41,7 +40,10 @@ export default function ArtistPage() {
                             <p>{song.name}</p>
                             <p>Number of plays {song.num_of_plays}</p>
                         </div>
-                        <OptionsButton className="options-button" key={song.id} />
+                        <OpenOptionsModalButton
+                            buttonText="Add Song To Playlist"
+                            modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
+                        />
                     </div>
                 ))}
             </div>

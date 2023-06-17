@@ -37,6 +37,7 @@ class Playlist(db.Model):
             "user_id": self.user_id,
             "private": self.private,
             "user_playlist": self.user_playlist.to_dict(),
-            "songs_in_playlist": [song.to_dict() for song in self.songs_on_playlist],
+            # "songs_in_playlist": [song.to_dict() for song in self.songs_on_playlist],
+            "songs_in_playlist": {song.id : song.to_dict() for song in self.songs_on_playlist},
             "playlist_reviews": [review.to_dict() for review in self.playlist_review]
         }

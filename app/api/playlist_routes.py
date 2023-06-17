@@ -8,6 +8,24 @@ from app.forms import PlaylistForm
 playlist_routes = Blueprint("playlists", __name__)
 
 
+
+@playlist_routes.route("/<int:playlist_id>/add/<int:song_id>", methods=["POST"])
+@login_required
+def add_song_to_playlist(playlist_id, song_id):
+    """
+    Add a song to a playlist
+    """
+    playlist = Playlist.query.get(playlist_id)
+    song = Song.query.get(song_id)
+    if request.method == "POST":
+        playlist.songs_on_playlist.append(song)
+        db.session.commit()
+        return playlist.to_dict()
+    else:
+        return {"message": "Playlist was not deleted"}
+
+
+
 @playlist_routes.route("/user")
 @login_required
 def get_user_playlists():

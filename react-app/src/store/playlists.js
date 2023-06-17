@@ -3,6 +3,7 @@ const CREATE_PLAYLIST = "playlists/CREATE_PLAYLIST"
 const DELETE_PLAYLIST = "playlists/DELETE_PLAYLIST"
 const GET_ALL_PLAYLISTS = "playlists/GET_ALL_PLAYLISTS"
 const UPDATE_PLAYLIST = "playlists/UPDATE_PLAYLIST"
+const ADD_SONG_TO_PLAYLIST = "playlists/ADD_SONG_TO_PLAYLIST"
 
 
 const getUserPlaylists = (playlists) => ({
@@ -27,6 +28,11 @@ const getAllPlaylists = (playlists) => ({
 
 const updatePlaylistAction = (playlist) => ({
     type: UPDATE_PLAYLIST,
+    playlist
+})
+
+const addSongToPlaylist = (playlist) => ({
+    type: ADD_SONG_TO_PLAYLIST,
     playlist
 })
 
@@ -94,6 +100,19 @@ export const updatePlaylistThunk = (playlistId, formData) => async (dispatch) =>
         return updatePlaylist
     } else {
         return updatePlaylist
+    }
+}
+
+export const addSongToPlaylistThunk = (songId, playlistId) => async (dispatch) => {
+    const response = await fetch(`/api/playlists/${playlistId}/add/${songId}`, {
+        method: "POST"
+    })
+    const addedSongToPlaylist = await response.json()
+    if (response.ok) {
+        dispatch(updatePlaylistAction(addedSongToPlaylist))
+        return addedSongToPlaylist
+    } else {
+        return addedSongToPlaylist
     }
 }
 
