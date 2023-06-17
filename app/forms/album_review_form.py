@@ -3,5 +3,5 @@ from wtforms import StringField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, ValidationError
 
 class AlbumReviewForm(FlaskForm):
-    review = StringField("Review", validators=[DataRequired])
+    review = StringField("Review")
     star_review = IntegerField("Stars")

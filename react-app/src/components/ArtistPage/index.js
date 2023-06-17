@@ -16,8 +16,6 @@ export default function ArtistPage() {
 
     const currentArtist = useSelector(state => state.artists.singleArtist)
 
-    console.log("THE CURRENT ARTIST", currentArtist)
-
     useEffect(() => {
         dispatch(getSingleArtistThunk(id))
     }, [dispatch])

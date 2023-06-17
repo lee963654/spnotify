@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { getAlbumsThunk } from '../../store/albums';
-import { getAlbumReviewsThunk } from '../../store/albumReviews';
+import { getAlbumReviewsThunk, getAllAlbumReviewsThunk } from '../../store/albumReviews';
 import { getArtistsThunk } from '../../store/artists';
 import OpenReviewButton from './OpenReviewButton';
 import DeleteAlbumReviewModal from '../DeleteReviewModal';
@@ -12,21 +12,15 @@ export default function AlbumPage() {
     const dispatch = useDispatch()
     const { id } = useParams()
 
-
     const albums = useSelector(state => state?.albums?.allAlbums)
     const currentAlbum = albums[id]
-    console.log("THE CURRENT ALBUM", currentAlbum)
     const songsInAlbum = currentAlbum?.songs
     const artists = useSelector(state => state?.artists?.allArtists)
     const currentArtist = artists[id]
-    console.log("THE CURRENT ARTIST", currentArtist)
     const albumReviews = currentAlbum?.album_reviews
-    console.log("THE CURRENT ALBUM REVIEWS", albumReviews)
     const currentUser = useSelector(state => state?.session?.user)
-    console.log("THE CURRENT USER", currentUser)
     const albumReviewsState = useSelector(state => state?.albumReviews?.singleAlbumReviews)
-    console.log("THE CURRENT ALBUM REVIEWS FROM STATE", albumReviewsState)
-    console.log("THE CURRENT ALBUM REVIEWS OBJECT VALUES", Object.values(albumReviewsState))
+    const allAlbumReviews = useSelector(state => state?.albumReviews?.allAlbumReviews)
 
     let hasReview;
 
@@ -36,16 +30,15 @@ export default function AlbumPage() {
         }
 
     }
-    console.log("THIS IS TEH HAS REVIEW", hasReview)
-
-
-
 
     useEffect(() => {
         dispatch(getAlbumsThunk())
         dispatch(getArtistsThunk())
         dispatch(getAlbumReviewsThunk(id))
-    }, [dispatch])
+        dispatch(getAllAlbumReviewsThunk())
+    }, [dispatch, currentUser, id, hasReview])
+
+
 
     return (
         <div className="single-album-container">
@@ -55,7 +48,7 @@ export default function AlbumPage() {
                 {!hasReview && (
                     <OpenReviewButton
                     buttonText="Write a Review"
-                    modalComponent={<CreateAlbumReviewModal currentAlbum={currentAlbum} />}
+                    modalComponent={<CreateAlbumReviewModal currentAlbumId={id} formType="new" currentAlbum={currentAlbum} />}
                 />
                 )}
             </div>
@@ -85,10 +78,10 @@ export default function AlbumPage() {
                             <p>{review?.review}</p>
                             {currentUser?.id === review?.user_id && (
                                 <div>
-                                    {/* <OpenReviewButton
+                                    <OpenReviewButton
                                         buttonText="Edit Review"
-                                        modalComponent={<UpdateReviewModal reviewId={review.id} />}
-                                    /> */}
+                                        modalComponent={<CreateAlbumReviewModal reviewId={review.id} albumReview={review} formType="edit" currentAlbum={currentAlbum} />}
+                                    />
                                     <OpenReviewButton
                                         buttonText="Delete Review"
                                         modalComponent={<DeleteAlbumReviewModal reviewId={review.id} currentAlbum={currentAlbum} />}

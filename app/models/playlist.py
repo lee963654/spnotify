@@ -27,7 +27,7 @@ class Playlist(db.Model):
     # relationship
     user_playlist = db.relationship("User", back_populates="playlists")
     # playlist_songs = db.relationship("Song", secondary=songs_in_playlist, back_populates="playlist")
-    songs_on_playlist = db.relationship("PlaylistSong", back_populates="playlist")
+    songs_on_playlist = db.relationship("PlaylistSong", back_populates="playlist", cascade="delete-orphan, all")
     playlist_review = db.relationship("PlaylistReview", back_populates="playlist", cascade="all, delete-orphan")
 
     def to_dict(self):

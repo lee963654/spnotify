@@ -14,7 +14,7 @@ class Album(db.Model):
 
     # relationships
     artist = db.relationship("Artist", back_populates="albums")
-    album_reviews = db.relationship("AlbumReview", back_populates="album")
+    album_reviews = db.relationship("AlbumReview", back_populates="album", cascade="delete-orphan, all")
     songs = db.relationship("Song", back_populates="album")
 
 

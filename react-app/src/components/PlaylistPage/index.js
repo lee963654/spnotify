@@ -9,10 +9,8 @@ export default function PlaylistPage() {
     const dispatch = useDispatch()
     const { id } = useParams()
     const allPlaylists = useSelector(state => state.playlists.allPlaylists)
-    console.log("THIS IS TEH ID IN THE PLAYLIST PAGE", id)
 
     const currentPlaylist = allPlaylists[id]
-    console.log("THIS IS TEH CURRENT PLAYLIST", currentPlaylist)
 
     useEffect(() => {
 

@@ -23,7 +23,6 @@ export default function UpdatePlaylist ({playlistName, playlistId}) {
         formData.append("private", privateCheck)
 
         const updatePlaylist = await dispatch(updatePlaylistThunk(playlistId, formData))
-        console.log("THIS IS THE UPDATED PLAYLIST", updatePlaylist)
         if (updatePlaylist.errors) {
 
         } else {

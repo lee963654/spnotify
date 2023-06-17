@@ -7,23 +7,20 @@ import "./LandingPage.css";
 import { getAllPlaylistsThunk } from '../../store/playlists';
 
 export default function LandingPage() {
+    const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user);
     const artists = useSelector(state => state.artists.allArtists)
     const albums = useSelector(state => state.albums.allAlbums)
-    console.log("THESE ARE THE ARTISTS", artists)
     const artistObj = Object.values(artists)
-    console.log("artist object===", artistObj)
     const albumsObj = Object.values(albums)
-    console.log("THESE ARE THE ALBUMS", albumsObj)
 
-
-    const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getArtistsThunk())
         dispatch(getAlbumsThunk())
         dispatch(getAllPlaylistsThunk())
     }, [dispatch])
+
 
     return (
         <div className="landing-container">

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { deleteAlbumReviewThunk, getAlbumReviewsThunk } from "../../store/albumReviews";
 
 
 export default function DeleteAlbumReviewModal({reviewId, currentAlbum}) {
@@ -10,8 +11,8 @@ export default function DeleteAlbumReviewModal({reviewId, currentAlbum}) {
 
     const handleDeleteButton = async (e) => {
         e.preventDefault()
-        // await dispatch(deleteAlbumReviewThunk(reviewId))
-
+        await dispatch(deleteAlbumReviewThunk(reviewId))
+        dispatch(getAlbumReviewsThunk(currentAlbum?.id))
         closeModal()
     }
 
