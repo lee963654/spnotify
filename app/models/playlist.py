@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
+from .playlist_song import playlist_songs
 
 # songs_in_playlist = db.Table(
 #     "songs_in_playlist",
@@ -27,7 +27,7 @@ class Playlist(db.Model):
     # relationship
     user_playlist = db.relationship("User", back_populates="playlists")
     # playlist_songs = db.relationship("Song", secondary=songs_in_playlist, back_populates="playlist")
-    songs_on_playlist = db.relationship("PlaylistSong", back_populates="playlist", cascade="delete-orphan, all")
+    songs = db.relationship("Song", secondary=playlist_songs, back_populates="playlist")
     playlist_review = db.relationship("PlaylistReview", back_populates="playlist", cascade="all, delete-orphan")
 
     def to_dict(self):
@@ -38,6 +38,6 @@ class Playlist(db.Model):
             "private": self.private,
             "user_playlist": self.user_playlist.to_dict(),
             # "songs_in_playlist": [song.to_dict() for song in self.songs_on_playlist],
-            "songs_in_playlist": {song.id : song.to_dict() for song in self.songs_on_playlist},
+            "songs_in_playlist": {song.id : song.to_dict() for song in self.songs},
             "playlist_reviews": [review.to_dict() for review in self.playlist_review]
         }

@@ -23,7 +23,13 @@ export default function Sidebar() {
     const userPlaylistObj = Object.values(userPlaylists)
     console.log("USER OBJECT VALUES", userPlaylistObj)
 
-
+    // console.log("THE user playlists ", userPlaylists)
+    // console.log("THE user playlists at the length value ", userPlaylists[1])
+    // let length = 1
+    // while(userPlaylists[length]) {
+    //     length = length + 1
+    // }
+    // console.log("THIS IS THE LENGTH", length)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -37,6 +43,7 @@ export default function Sidebar() {
         formData.append("private", isPrivate)
 
         const newPlaylist = await dispatch(createPlaylistThunk(formData))
+        // length = 1
     }
 
 

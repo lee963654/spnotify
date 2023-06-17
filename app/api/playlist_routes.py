@@ -18,7 +18,7 @@ def add_song_to_playlist(playlist_id, song_id):
     playlist = Playlist.query.get(playlist_id)
     song = Song.query.get(song_id)
     if request.method == "POST":
-        playlist.songs_on_playlist.append(song)
+        playlist.songs.append(song)
         db.session.commit()
         return playlist.to_dict()
     else:

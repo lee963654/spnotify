@@ -6,6 +6,7 @@ import { addSongToPlaylistThunk } from "../../store/playlists";
 
 export default function SongOptionsModal({songId, songName}) {
     const dispatch = useDispatch()
+    const {closeModal} = useModal()
     const userPlaylists = useSelector(state => state?.playlists?.userPlaylists)
     console.log("THE USER PALYLISTS IN THE MODAL", userPlaylists)
     const userPlaylistsObj = Object.values(userPlaylists)
@@ -13,8 +14,12 @@ export default function SongOptionsModal({songId, songName}) {
 
     const handleSubmit = async (e, playlistId) => {
         e.preventDefault()
+
+
+
         const addSongToPlaylist = await dispatch(addSongToPlaylistThunk(songId, playlistId))
-        console.log("THIS IS TEH PLAYLIST ID IN THE HANDLE SUBMIT", playlistId)
+        console.log("THIS IS THE ADDSONGTOPOLAYLIST AFTER THUNK", addSongToPlaylist)
+        closeModal()
     }
 
     return (

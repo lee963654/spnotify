@@ -91,8 +91,8 @@ def seed_songs():
     db.session.add(every)
     db.session.add(leaving)
     db.session.commit()
-
-
+    song_list = [wide, over, rusty, rain, buffalo, blue, every, leaving]
+    return song_list
 
 
 

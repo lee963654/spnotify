@@ -1,28 +1,39 @@
 from app.models import db, Playlist, environment, SCHEMA
 from sqlalchemy.sql import text
 
-def seed_playlists():
+def seed_playlists(song_list):
     play1 = Playlist(
         name="My Playlist 1",
         user_id = 10,
-        private=True
+        private = True,
+        songs_in_playlist = [song_list[0], song_list[1]]
     )
 
     play2 = Playlist(
         name="My Playlist 2",
         user_id = 9,
-        private=False
+        private=False,
+        songs_in_playlist = [song_list[2], song_list[3]]
     )
 
     play3 = Playlist(
         name="My Playlist 3",
         user_id = 7,
-        private=False
+        private=False,
+        songs_in_playlist = [song_list[1], song_list[4], song_list[5]]
+    )
+
+    play4 = Playlist(
+        name="My Playlist 4",
+        user_id = 1,
+        private=False,
+        songs_in_playlist = [song_list[1], song_list[4], song_list[2], song_list[6]]
     )
 
     db.session.add(play1)
     db.session.add(play2)
     db.session.add(play3)
+    db.session.add(play4)
     db.session.commit()
 
 
