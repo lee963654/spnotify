@@ -31,13 +31,14 @@ export default function OptionsButton({}) {
     const closeMenu = () => setShowMenu(false);
 
     return (
-        <div>
+        <div className="options-button">
             <button onClick={openMenu}>
                 Options
             </button>
             <ul className={ulClassName} ref={ulRef}>
-                <li>add to playlist</li>
-                <li>test button</li>
+                <li>Add to playlist</li>
+                <li>Go to album</li>
+                <li>Go to song page</li>
             </ul>
         </div>
     )

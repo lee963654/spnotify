@@ -1,7 +1,33 @@
 .profile-dropdown {
     position: absolute;
+    /* border: 1px black solid;
+    padding: 0;
+    right: 13.5rem;
+    top: 43rem; */
   }
 
-  .hidden {
+.hidden {
     display: none;
-  }
+}
+
+.single {
+  display: flex;
+  justify-content: space-between;
+  width: 60rem;
+}
+
+.single-song {
+  display: flex;
+}
+
+.options-button {
+  margin-right: 8rem;
+}
+
+.options-button > ul {
+  list-style-type: none;
+}
+
+/* .options-button > ul > li {
+
+} */
