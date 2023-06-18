@@ -4,6 +4,7 @@ const DELETE_PLAYLIST = "playlists/DELETE_PLAYLIST"
 const GET_ALL_PLAYLISTS = "playlists/GET_ALL_PLAYLISTS"
 const UPDATE_PLAYLIST = "playlists/UPDATE_PLAYLIST"
 const ADD_SONG_TO_PLAYLIST = "playlists/ADD_SONG_TO_PLAYLIST"
+const REMOVE_SONG_FROM_PLAYLIST = "playlists/REMOVE_SONG_FROM_PLAYLIST"
 
 
 const getUserPlaylists = (playlists) => ({
@@ -104,7 +105,7 @@ export const updatePlaylistThunk = (playlistId, formData) => async (dispatch) =>
 }
 
 export const addSongToPlaylistThunk = (songId, playlistId) => async (dispatch) => {
-    const response = await fetch(`/api/playlists/${playlistId}/add/${songId}`, {
+    const response = await fetch(`/api/playlists/${playlistId}/${songId}`, {
         method: "POST"
     })
     const addedSongToPlaylist = await response.json()
@@ -113,6 +114,19 @@ export const addSongToPlaylistThunk = (songId, playlistId) => async (dispatch) =
         return addedSongToPlaylist
     } else {
         return addedSongToPlaylist
+    }
+}
+
+export const removeSongFromPlaylistThunk = (songId, playlistId) => async (dispatch) => {
+    const response = await fetch(`/api/playlists/${playlistId}/${songId}`, {
+        method: "DELETE"
+    })
+    const removedSongFromPlaylist = await response.json()
+    if (response.ok) {
+        dispatch(updatePlaylistAction(removedSongFromPlaylist))
+        return removedSongFromPlaylist
+    } else {
+        return removedSongFromPlaylist
     }
 }
 

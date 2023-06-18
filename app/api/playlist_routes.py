@@ -9,11 +9,11 @@ playlist_routes = Blueprint("playlists", __name__)
 
 
 
-@playlist_routes.route("/<int:playlist_id>/add/<int:song_id>", methods=["POST"])
+@playlist_routes.route("/<int:playlist_id>/<int:song_id>", methods=["POST", "DELETE"])
 @login_required
 def add_song_to_playlist(playlist_id, song_id):
     """
-    Add a song to a playlist
+    Add or remove a song from a playlist
     """
     playlist = Playlist.query.get(playlist_id)
     song = Song.query.get(song_id)
@@ -21,8 +21,10 @@ def add_song_to_playlist(playlist_id, song_id):
         playlist.songs.append(song)
         db.session.commit()
         return playlist.to_dict()
-    else:
-        return {"message": "Playlist was not deleted"}
+    if request.method == "DELETE":
+        playlist.songs.remove(song)
+        db.session.commit()
+        return playlist.to_dict()
 
 
 

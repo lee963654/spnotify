@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { getAllPlaylistsThunk, getUserPlaylistsThunk } from '../../store/playlists';
+import { getAllPlaylistsThunk, getUserPlaylistsThunk, removeSongFromPlaylistThunk } from '../../store/playlists';
 import OpenModalButton from '../OpenModalButton';
 import UpdatePlaylist from '../UpdatePlaylist';
 import { getArtistsThunk } from '../../store/artists';
@@ -18,12 +18,11 @@ export default function PlaylistPage() {
     const songsInPlaylist = currentPlaylist?.songs_in_playlist
     const songObj = Object.values(songsInPlaylist || {})
 
-    // let songObj;
-    // if (songsInPlaylist) {
-    //     songObj = Object.values(songsInPlaylist)
-    // } else {
-    //     songObj = "NO VALUES"
-    // }
+    const handleSubmit = async (e, songId) => {
+        e.preventDefault()
+
+        const removeSongFromPlaylist = await dispatch(removeSongFromPlaylistThunk(songId, id))
+    }
 
 
     useEffect(() => {
@@ -34,11 +33,7 @@ export default function PlaylistPage() {
         dispatch(getAlbumsThunk())
     }, [dispatch])
 
-    // if (!songsObj) {
-    //     return (
-    //         <h1>LOADING</h1>
-    //     )
-    // }
+
 
     return (
         <div className="single-playlist-container">
@@ -60,6 +55,9 @@ export default function PlaylistPage() {
                         </div>
                         <div>
                             <p>{albums[song.album_id]?.name}</p>
+                        </div>
+                        <div>
+                            <button onClick={(e) => {handleSubmit(e, song.id)}}>Remove Song</button>
                         </div>
                     </div>
                 ))) : <div>No Songs</div>}
