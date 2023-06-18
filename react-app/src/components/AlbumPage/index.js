@@ -7,6 +7,8 @@ import { getArtistsThunk } from '../../store/artists';
 import OpenReviewButton from './OpenReviewButton';
 import DeleteAlbumReviewModal from '../DeleteReviewModal';
 import CreateAlbumReviewModal from '../CreateAlbumReviewModal';
+import OpenOptionsModalButton from '../ArtistPage/OpenOptionsModalButton';
+import SongOptionsModal from '../SongOptionsModal';
 
 export default function AlbumPage() {
     const dispatch = useDispatch()
@@ -21,11 +23,10 @@ export default function AlbumPage() {
     const currentUser = useSelector(state => state?.session?.user)
     const albumReviewsState = useSelector(state => state?.albumReviews?.singleAlbumReviews)
     const allAlbumReviews = useSelector(state => state?.albumReviews?.allAlbumReviews)
-    console.log("ALL ALBUM REVIEW STATE +++++++++++++++", allAlbumReviews)
     const allAlbumReviewsObj = Object.values(allAlbumReviews).filter(review => review.album_id == id)
 
-    console.log("THIS IS TEH FILTERED REVIEW OBJECTS", allAlbumReviewsObj)
-
+    console.log("the current artist", currentArtist)
+    console.log("the current artist", currentArtist)
 
     let hasReview;
 
@@ -43,6 +44,9 @@ export default function AlbumPage() {
         dispatch(getAllAlbumReviewsThunk())
     }, [dispatch, currentUser, id, hasReview])
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
 
 
     return (
@@ -50,6 +54,7 @@ export default function AlbumPage() {
             <div className="top-container">
                 <img style={{ width: 200 }} src={currentAlbum?.album_picture}></img>
                 <h1>{currentAlbum?.name}</h1>
+                <h2>{currentArtist?.name}</h2>
                 {!hasReview && (
                     <OpenReviewButton
                     buttonText="Write a Review"
@@ -65,6 +70,11 @@ export default function AlbumPage() {
                     <div className="song-container">
                         <p>{song?.name}</p>
                         <p>{currentArtist?.name}</p>
+                        <OpenOptionsModalButton
+                            buttonText="Add Song To Playlist"
+                            modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
+                        />
+                        <div>Play Button Here</div>
                     </div>
                 ))
                     : <div></div>}
@@ -76,29 +86,6 @@ export default function AlbumPage() {
                 <h2>Album Reviews</h2>
 
                 <div className="review-container">
-                    {/* {albumReviews && albumReviews.length ? albumReviews.map(review => (
-                        <div className="review">
-                            <h2>{review?.review_user?.username}</h2>
-                            <p>{review?.star_review} Stars</p>
-                            <p>{review?.review}</p>
-                            {currentUser?.id === review?.user_id && (
-                                <div>
-                                    <OpenReviewButton
-                                        buttonText="Edit Review"
-                                        modalComponent={<CreateAlbumReviewModal reviewId={review.id} albumReview={review} formType="edit" currentAlbum={currentAlbum} />}
-                                    />
-                                    <OpenReviewButton
-                                        buttonText="Delete Review"
-                                        modalComponent={<DeleteAlbumReviewModal reviewId={review.id} currentAlbum={currentAlbum} />}
-                                    />
-                                </div>
-                            )}
-                        </div>
-                    )) :
-                        <div>
-                            <h2>No Reviews</h2>
-                        </div>
-                    } */}
                     {allAlbumReviewsObj && allAlbumReviewsObj.length ? allAlbumReviewsObj.map(review => (
                         <div className="review">
                             <h2>{review?.review_user?.username}</h2>

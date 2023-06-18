@@ -33,6 +33,11 @@ export default function PlaylistPage() {
         dispatch(getAlbumsThunk())
     }, [dispatch])
 
+    // On a redirect, will rerender to top of the page
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+
 
 
     return (

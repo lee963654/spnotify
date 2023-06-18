@@ -6,10 +6,12 @@ import { getSingleArtistThunk } from '../../store/artists';
 import OptionsButton from './OptionsButton';
 import OpenOptionsModalButton from './OpenOptionsModalButton';
 import SongOptionsModal from '../SongOptionsModal';
+import { useHistory, Link } from 'react-router-dom/cjs/react-router-dom.min';
+
 
 export default function ArtistPage() {
     const dispatch = useDispatch()
-
+    const history = useHistory()
 
     const { id } = useParams()
 
@@ -20,6 +22,10 @@ export default function ArtistPage() {
     useEffect(() => {
         dispatch(getSingleArtistThunk(id))
     }, [dispatch])
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
 
 
 
@@ -35,7 +41,7 @@ export default function ArtistPage() {
             <div className="single-songs-container">
                 {currentArtist?.songs?.map(song => (
                     <div key={song.id} className="single">
-                        <div className="single-song">
+                        <div onClick={() => history.push(`/songs/${song.id}`)} className="single-song">
                             <img src={song.album_cover} style={{ width: 75 }}></img>
                             <p>{song.name}</p>
                             <p>Number of plays {song.num_of_plays}</p>
@@ -50,9 +56,9 @@ export default function ArtistPage() {
             <div className="single-albums-container">
                 <h2>Discography</h2>
                 {currentArtist?.albums?.map(album => (
-                    <div className="album">
-                        <img src={album.album_picture}></img>
-                        <p>{album.name}</p>
+                    <div onClick={() => history.push(`/albums/${album.id}`)} className="album">
+                            <img src={album.album_picture}></img>
+                            <p>{album.name}</p>
                     </div>
                 ))}
             </div>

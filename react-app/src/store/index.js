@@ -5,13 +5,15 @@ import artists from "./artists"
 import albums from "./albums"
 import playlists from "./playlists"
 import albumReviews from "./albumReviews"
+import songs from "./songs"
 
 const rootReducer = combineReducers({
   session,
   artists,
   albums,
   playlists,
-  albumReviews
+  albumReviews,
+  songs
 });
 
 

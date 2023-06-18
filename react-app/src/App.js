@@ -13,6 +13,7 @@ import LoginFormModal from "./components/LoginFormModal";
 import SignupFormModal from "./components/SignupFormModal";
 import PlaylistPage from "./components/PlaylistPage"
 import AlbumPage from "./components/AlbumPage";
+import SongPage from "./components/SongPage"
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,9 @@ function App() {
               </Route>
               <Route exact path="/albums/:id">
                 <AlbumPage />
+              </Route>
+              <Route exact path="/songs/:id">
+                <SongPage />
               </Route>
             </Switch>
           )}

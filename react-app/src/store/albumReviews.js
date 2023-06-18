@@ -123,7 +123,6 @@ export default function reducer(state = initialState, action) {
             return newState
         case GET_ALL_ALBUM_REVIEWS:
             newState.allAlbumReviews = {...action.reviews}
-            console.log("THIS IS THE NEW STATE FOR ALL ALBUM REVIEWS", newState)
             return newState
         default:
             return state
