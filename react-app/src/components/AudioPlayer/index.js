@@ -7,6 +7,10 @@ export default function AudioPlayer() {
     const [isPlaying, setIsPlaying] = useState(false)
     const [songLength, setSongLength] = useState(0)
     const [currentTime, setCurrentTime] = useState(0)
+    const [songUrl, setSongUrl] = useState("")
+
+    const currentSongPlay = useSelector(state => state?.audioPlayer?.currentSong[0]?.song_url)
+    console.log("THIS IS THE CURRENT SONG PLAY", currentSongPlay)
 
     const audioRef = useRef()   // reference to the audio
     const progressBarRef = useRef() // reference to the progressbar
@@ -52,11 +56,24 @@ export default function AudioPlayer() {
         progressBarRef.current.max = seconds
     }, [audioRef?.current?.loadedmetadata, audioRef?.current?.readyState])
 
+    useEffect(() => {
+        if (currentSongPlay) {
+            setSongUrl(currentSongPlay)
+        }
+    }, [currentSongPlay])
+
+    useEffect(() => {
+        if (songUrl) {
+            audioRef.current.play()
+            setIsPlaying(true)
+        }
+    }, [songUrl])
+
 
     return (
         <div className="footer-buttons-container">
             <div className="buttons-container">
-                <audio ref={audioRef} src="https://spnotify.s3.us-east-2.amazonaws.com/Day+That+I+Die+(feat.+Amos+Lee).mp3" preload="metadata"></audio>
+                <audio ref={audioRef} src={songUrl} preload="metadata"></audio>
                 <button>
                 <i class="fa-solid fa-backward-step"></i>
                 </button>

@@ -16,3 +16,19 @@ def get_all_songs():
     songs = Song.query.all()
     songs_dict = {song.id : song.to_dict() for song in songs}
     return songs_dict
+
+
+@song_routes.route("/<int:song_id>")
+@login_required
+def play_song(song_id):
+    """
+    Getting one song to play
+    """
+
+    song = Song.query.get(song_id)
+    albums = Album.query.filter(Album.id == song.album_id)
+    albums_dict = {album.id : album.to_dict() for album in albums}
+    song_dict = song.to_dict()
+    song_dict["albums"] = albums_dict
+
+    return song_dict

@@ -4,6 +4,7 @@ import { useParams, useHistory } from 'react-router-dom/cjs/react-router-dom.min
 import { getAllSongsThunk } from "../../store/songs"
 import { getArtistsThunk } from '../../store/artists';
 import { getAlbumsThunk } from '../../store/albums';
+import { playSongThunk } from '../../store/audioPlayer';
 
 
 export default function SongPage() {
@@ -22,6 +23,11 @@ export default function SongPage() {
     const currentAlbumId = currentSong?.album_id
     const currentAlbum = allAlbums[currentAlbumId]
     console.log("this is the current album", currentAlbum)
+
+    const handleClick = async (e) => {
+        e.preventDefault()
+        dispatch(playSongThunk(id))
+    }
 
 
     // on a redirect will take you to top of page
@@ -48,7 +54,9 @@ export default function SongPage() {
                     <p>{currentAlbum?.release_year}</p>
                 </div>
             </div>
-            <div>Play Button Here</div>
+            <div onClick={handleClick}>
+            <i class="fa-solid fa-play"></i>
+            </div>
             <div className="song-lyrics-container">
                 <div className="lyrics-container">
                     <h2>Lyrics</h2>
