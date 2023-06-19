@@ -9,8 +9,10 @@ import DeleteAlbumReviewModal from '../DeleteReviewModal';
 import CreateAlbumReviewModal from '../CreateAlbumReviewModal';
 import OpenOptionsModalButton from '../ArtistPage/OpenOptionsModalButton';
 import SongOptionsModal from '../SongOptionsModal';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function AlbumPage() {
+    const history = useHistory()
     const dispatch = useDispatch()
     const { id } = useParams()
 
@@ -24,6 +26,7 @@ export default function AlbumPage() {
     const albumReviewsState = useSelector(state => state?.albumReviews?.singleAlbumReviews)
     const allAlbumReviews = useSelector(state => state?.albumReviews?.allAlbumReviews)
     const allAlbumReviewsObj = Object.values(allAlbumReviews).filter(review => review.album_id == id)
+    console.log("songs in the album", songsInAlbum)
 
     console.log("the current artist", currentArtist)
     console.log("the current artist", currentArtist)
@@ -46,20 +49,27 @@ export default function AlbumPage() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-      }, []);
+    }, []);
 
 
     return (
         <div className="single-album-container">
             <div className="top-container">
                 <img style={{ width: 200 }} src={currentAlbum?.album_picture}></img>
-                <h1>{currentAlbum?.name}</h1>
-                <h2>{currentArtist?.name}</h2>
+                <div className="album-info-container">
+                    <h1>{currentAlbum?.name}</h1>
+                    <div className="album-artist-container">
+                        <img src={currentArtist?.artist_picture} style={{width: 75}}></img>
+                        <h2 onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</h2>
+                        <p>{currentAlbum?.release_year}</p>
+                        {songsInAlbum?.length === 1 ? <p>{songsInAlbum?.length} song</p> : <p>{songsInAlbum?.length} songs</p>}
+                    </div>
+                </div>
                 {!hasReview && (
                     <OpenReviewButton
-                    buttonText="Write a Review"
-                    modalComponent={<CreateAlbumReviewModal currentAlbumId={id} formType="new" currentAlbum={currentAlbum} />}
-                />
+                        buttonText="Write a Review"
+                        modalComponent={<CreateAlbumReviewModal currentAlbumId={id} formType="new" currentAlbum={currentAlbum} />}
+                    />
                 )}
             </div>
             <div className="middle-play-container">
@@ -68,8 +78,8 @@ export default function AlbumPage() {
             <div className="album-songs-container">
                 {songsInAlbum && songsInAlbum.length ? songsInAlbum.map(song => (
                     <div className="song-container">
-                        <p>{song?.name}</p>
-                        <p>{currentArtist?.name}</p>
+                        <p onClick={() => history.push(`/songs/${song?.id}`)}>{song?.name}</p>
+                        <p onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</p>
                         <OpenOptionsModalButton
                             buttonText="Add Song To Playlist"
                             modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}

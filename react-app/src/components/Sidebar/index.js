@@ -43,7 +43,7 @@ export default function Sidebar() {
         formData.append("private", isPrivate)
 
         const newPlaylist = await dispatch(createPlaylistThunk(formData))
-        // length = 1
+        await history.push(`/playlists/${newPlaylist?.id}`)
     }
 
 

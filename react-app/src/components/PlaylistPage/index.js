@@ -18,6 +18,8 @@ export default function PlaylistPage() {
     const songsInPlaylist = currentPlaylist?.songs_in_playlist
     const songObj = Object.values(songsInPlaylist || {})
 
+    const playlistPrivate = currentPlaylist?.private === true ? "private" : "public"
+
     const handleSubmit = async (e, songId) => {
         e.preventDefault()
 
@@ -46,7 +48,7 @@ export default function PlaylistPage() {
                 <p>Playlist</p>
                 <OpenModalButton
                     buttonText={currentPlaylist?.name}
-                    modalComponent={<UpdatePlaylist playlistName={currentPlaylist?.name} playlistId={id} />}
+                    modalComponent={<UpdatePlaylist playlistName={currentPlaylist?.name} playlistId={id} playlistPrivate={playlistPrivate} />}
                 />
                 <p>{currentPlaylist?.user_playlist?.username}</p>
             </div>
