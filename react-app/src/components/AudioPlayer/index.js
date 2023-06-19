@@ -5,24 +5,23 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function AudioPlayer() {
     const dispatch = useDispatch()
     const [isPlaying, setIsPlaying] = useState(false)
-    const [duration, setDuration] = useState(0)
+    const [songLength, setSongLength] = useState(0)
     const [currentTime, setCurrentTime] = useState(0)
 
     const audioRef = useRef()   // reference to the audio
-    const progressBar = useRef() // reference to the progressbar
-    console.log("THIS IS THE DURATION", duration)
-    console.log("THIS IS THE audio ref", audioRef.current)
-    console.log("checking isNaN", !isNaN(duration))
-
+    const progressBarRef = useRef() // reference to the progressbar
+    const barAnimationRef = useRef() // reference the animation bar
 
     const togglePlayPause = () => {
-        // the current.play() comes with the html dom element
+        // the current.play() and current.pause() comes with the html dom element
         const previousValue = isPlaying
         setIsPlaying(!previousValue)
         if (!previousValue) {
             audioRef.current.play()
+            barAnimationRef.current = requestAnimationFrame(whilePlaying) // requestAnimationFrame is a JS function
         } else {
             audioRef.current.pause()
+            cancelAnimationFrame(barAnimationRef.current)
         }
     }
 
@@ -36,17 +35,23 @@ export default function AudioPlayer() {
     }
 
     const changeRange = () => {
-        audioRef.current.currentTime = progressBar.current.value
+        audioRef.current.currentTime = progressBarRef.current.value
+        setCurrentTime(progressBarRef.current.value)
+    }
 
+    const whilePlaying = () => {
+        progressBarRef.current.value = audioRef.current.currentTime
+        setCurrentTime(progressBarRef.current.value)
+        barAnimationRef.current = requestAnimationFrame(whilePlaying)
     }
 
 
     useEffect(() => {
         const seconds = Math.floor(audioRef.current.duration)
-        console.log("the seconds in the useeffect before set duration", seconds)
-        setDuration(seconds)
-        progressBar.current.max = seconds
+        setSongLength(seconds)
+        progressBarRef.current.max = seconds
     }, [audioRef?.current?.loadedmetadata, audioRef?.current?.readyState])
+
 
     return (
         <div className="footer-buttons-container">
@@ -72,12 +77,12 @@ export default function AudioPlayer() {
 
                 {/* progress bar*/}
                 <div>
-                    <input className="progress-bar" type="range" defaultValue="0" ref={progressBar} onChange={changeRange}/>
+                    <input className="progress-bar" type="range" defaultValue="0" ref={progressBarRef} onChange={changeRange}/>
                 </div>
 
-                {/* duration */}
+                {/* song length */}
                 <div>
-                    {duration && !isNaN(duration) ? time(duration) : `00:00`}
+                    {songLength && !isNaN(songLength) ? time(songLength) : `00:00`}
                 </div>
 
             </div>
