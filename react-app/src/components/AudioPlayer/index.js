@@ -66,6 +66,7 @@ export default function AudioPlayer() {
         if (songUrl) {
             audioRef.current.play()
             setIsPlaying(true)
+            barAnimationRef.current = requestAnimationFrame(whilePlaying)
         }
     }, [songUrl])
 
