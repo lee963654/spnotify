@@ -4,4 +4,20 @@
     bottom: 0;
     left: 0;
     width: 100%;
+    background-color: black;
+    color: white;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.footer-buttons-container {
+    width: 7rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* .progress-bar {
+
+} */

@@ -1,0 +1,17 @@
+.footer-buttons-container {
+    width: 15rem;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer-tracker-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
