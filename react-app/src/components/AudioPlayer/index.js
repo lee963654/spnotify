@@ -1,21 +1,28 @@
 import React, { useEffect, useState, useRef } from 'react';
 import "./AudioPlayer.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { nextSongThunk } from '../../store/audioPlayer';
+import { nextSongThunk, prevSongThunk } from '../../store/audioPlayer';
 
 export default function AudioPlayer() {
     const dispatch = useDispatch()
+    const audioPlayer = useSelector(state => state?.audioPlayer)
+
+
     const [isPlaying, setIsPlaying] = useState(false)
     const [songLength, setSongLength] = useState(0)
     const [currentTime, setCurrentTime] = useState(0)
     const [songUrl, setSongUrl] = useState("")
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [trackCurrentSong, setTrackCurrentSong] = useState(audioPlayer?.songList[currentIndex])
 
     const currentSongPlay = useSelector(state => state?.audioPlayer?.currentSong[0]?.song_url)
-    console.log("THIS IS THE CURRENT SONG PLAY", currentSongPlay)
+    console.log("THIS IS THE CURRENT SONG URL", currentSongPlay)
     const currentSong = useSelector(state => state?.audioPlayer?.currentSong[0])
     console.log("THIS IS THE CURRENT SONG INFO", currentSong)
-    const audioPlayer = useSelector(state => state?.audioPlayer)
-    console.log("THIS IS THE AUDIO PLAYER INFO", audioPlayer)
+
+
+    console.log("THIS IS THE TRACK CURRENT SONG", trackCurrentSong)
+    console.log("THIS IS THE CURRENT INDEX", currentIndex)
 
 
     const audioRef = useRef()   // reference to the audio
@@ -56,6 +63,38 @@ export default function AudioPlayer() {
         barAnimationRef.current = requestAnimationFrame(whilePlaying)
     }
 
+    const nextSong = (e) => {
+        e.preventDefault()
+        if (!audioPlayer?.queue.length) {
+            // setCurrentIndex(0)
+            // setTrackCurrentSong("")
+            return
+        }
+        if ((currentIndex >= audioPlayer?.songList.length - 1)) {
+            // setCurrentIndex(0)
+            setTrackCurrentSong(audioPlayer?.songList[currentIndex])
+
+            dispatch(nextSongThunk())
+        } else {
+            setCurrentIndex((prev) => prev + 1)
+            setTrackCurrentSong(audioPlayer?.songList[currentIndex + 1])
+            dispatch(nextSongThunk())
+        }
+    }
+
+    const prevSong = (e) => {
+        e.preventDefault()
+        if (currentIndex === 0) {
+            setTrackCurrentSong(audioPlayer?.songList[currentIndex])
+            dispatch(prevSongThunk(currentIndex))
+        } else {
+            setCurrentIndex((prev) => prev - 1)
+            const newIndex = currentIndex - 1
+            setTrackCurrentSong(audioPlayer?.songList[newIndex])
+            dispatch(prevSongThunk(newIndex))
+        }
+    }
+
 
     useEffect(() => {
         const seconds = Math.floor(audioRef.current.duration)
@@ -68,22 +107,20 @@ export default function AudioPlayer() {
 
             setSongUrl(currentSongPlay)
         }
-    }, [currentSongPlay])
+    }, [currentSongPlay, trackCurrentSong])
 
     useEffect(() => {
         if (songUrl) {
             audioRef.current.play()
             setIsPlaying(true)
             barAnimationRef.current = requestAnimationFrame(whilePlaying)
-
+            setTrackCurrentSong(audioPlayer?.songList[currentIndex])
         }
     }, [songUrl])
 
     useEffect(() => {
-
         if (songLength == currentTime) {
             const nextSong = dispatch(nextSongThunk())
-
         }
     }, [currentTime])
 
@@ -102,13 +139,13 @@ export default function AudioPlayer() {
             <div className="middle-section">
                 <div className="buttons-container">
                     <audio ref={audioRef} src={songUrl} preload="metadata"></audio>
-                    <button>
+                    <button onClick={(e) => prevSong(e)}>
                         <i class="fa-solid fa-backward-step"></i>
                     </button>
                     <button onClick={togglePlayPause}>
                         {isPlaying ? <i class="fa-solid fa-pause"></i> : <i class="fa-solid fa-play"></i>}
                     </button>
-                    <button>
+                    <button onClick={(e) => nextSong(e)}>
                         <i class="fa-solid fa-forward-step"></i>
                     </button>
 

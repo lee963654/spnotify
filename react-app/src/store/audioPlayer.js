@@ -3,6 +3,7 @@ const NEXT_SONG = "audioPlayer/NEXT_SONG"
 const PLAY_ALBUM = "audioPlayer/PLAY_ALBUM"
 const PLAY_ARTIST = "audioPlayer/PLAY_ARTIST"
 const PLAY_PLAYLIST = "audioPlayer/PLAY_PLAYLIST"
+const PREV_SONG = "audioPlayer/PREV_SONG"
 
 
 const playSongAction = (song) => ({
@@ -12,6 +13,11 @@ const playSongAction = (song) => ({
 
 const nextSongAction = () => ({
     type: NEXT_SONG,
+})
+
+const prevSongAction = (currentIndex) => ({
+    type: PREV_SONG,
+    currentIndex
 })
 
 const playAlbumAction = (songsInAlbum) => ({
@@ -28,6 +34,8 @@ const playPlaylistAction = (songsOnPlaylist) => ({
     type: PLAY_PLAYLIST,
     songsOnPlaylist,
 })
+
+
 
 
 export const playSongThunk = (songId, albumId, artistId) => async (dispatch) => {
@@ -78,32 +86,34 @@ export const playPlaylistThunk = (playlistId) => async (dispatch) => {
 }
 
 export const nextSongThunk = () => async (dispatch) => {
-    console.log("IN THE NEXTSONGTHUNK")
     dispatch(nextSongAction())
+}
+
+export const prevSongThunk = (currentIndex) => async (dispatch) => {
+    dispatch(prevSongAction(currentIndex))
 }
 
 
 const initialState = { currentSong : [], queue: [], songList: []}
 
 export default function reducer(state = initialState, action) {
-    const newState = {...state, currentSong:[], queue : [...state.queue], songList: [...state.songList]}
+    const newState = {...state, currentSong:[...state.currentSong], queue : [...state.queue], songList: [...state.songList]}
     switch (action.type) {
         case PLAY_SONG:
             newState.currentSong = [action.song]
+            newState.queue = []
             newState.songList = [action.song]
             return newState
         case NEXT_SONG:
             if (newState.queue.length === 0) {
-                newState.currentSong = []
+                newState.currentSong = [...state.currentSong]
                 newState.queue = []
                 newState.songList = [...state.songList]
-
                 return newState
             } else {
                 newState.currentSong = [state.queue[0]]
                 newState.queue = [...state.queue.slice(1)]
                 newState.songList = [...state.songList]
-
                 return newState
             }
         case PLAY_ALBUM:
@@ -117,11 +127,16 @@ export default function reducer(state = initialState, action) {
             newState.songList = [...action.songsByArtist]
             return newState
         case PLAY_PLAYLIST:
-
             newState.currentSong = [action.songsOnPlaylist[0]]
-                newState.queue = [...action.songsOnPlaylist.slice(1)]
-                newState.songList = [...action.songsOnPlaylist]
-                return newState
+            newState.queue = [...action.songsOnPlaylist.slice(1)]
+            newState.songList = [...action.songsOnPlaylist]
+            return newState
+        case PREV_SONG:
+            newState.currentSong = [state.songList[action.currentIndex]]
+            newState.queue = [...state.songList.slice(action.currentIndex + 1)]
+            newState.songList = [...state.songList]
+            return newState
+
         default:
             return state
     }
