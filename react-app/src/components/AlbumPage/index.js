@@ -10,6 +10,7 @@ import CreateAlbumReviewModal from '../CreateAlbumReviewModal';
 import OpenOptionsModalButton from '../ArtistPage/OpenOptionsModalButton';
 import SongOptionsModal from '../SongOptionsModal';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { playAlbumThunk, playSongThunk } from '../../store/audioPlayer';
 
 export default function AlbumPage() {
     const history = useHistory()
@@ -26,10 +27,7 @@ export default function AlbumPage() {
     const albumReviewsState = useSelector(state => state?.albumReviews?.singleAlbumReviews)
     const allAlbumReviews = useSelector(state => state?.albumReviews?.allAlbumReviews)
     const allAlbumReviewsObj = Object.values(allAlbumReviews).filter(review => review.album_id == id)
-    console.log("songs in the album", songsInAlbum)
 
-    console.log("the current artist", currentArtist)
-    console.log("the current artist", currentArtist)
 
     let hasReview;
 
@@ -38,6 +36,16 @@ export default function AlbumPage() {
             hasReview = true
         }
 
+    }
+
+    const handleClickAlbum = async (e) => {
+        e.preventDefault()
+        dispatch(playAlbumThunk(id, currentAlbum?.id, currentArtist?.id))
+    }
+
+    const handleClickSingle = async (e, songId) => {
+        e.preventDefault()
+        dispatch(playSongThunk(songId, currentAlbum?.id, currentArtist?.id))
     }
 
     useEffect(() => {
@@ -59,7 +67,7 @@ export default function AlbumPage() {
                 <div className="album-info-container">
                     <h1>{currentAlbum?.name}</h1>
                     <div className="album-artist-container">
-                        <img src={currentArtist?.artist_picture} style={{width: 75}}></img>
+                        <img src={currentArtist?.artist_picture} style={{ width: 75 }}></img>
                         <h2 onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</h2>
                         <p>{currentAlbum?.release_year}</p>
                         {songsInAlbum?.length === 1 ? <p>{songsInAlbum?.length} song</p> : <p>{songsInAlbum?.length} songs</p>}
@@ -72,8 +80,8 @@ export default function AlbumPage() {
                     />
                 )}
             </div>
-            <div className="middle-play-container">
-                <div>Play Button Here</div>
+            <div onClick={handleClickAlbum} className="middle-play-container">
+                <i class="fa-solid fa-play"></i>
             </div>
             <div className="album-songs-container">
                 {songsInAlbum && songsInAlbum.length ? songsInAlbum.map(song => (
@@ -84,7 +92,7 @@ export default function AlbumPage() {
                             buttonText="Add Song To Playlist"
                             modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
                         />
-                        <div>Play Button Here</div>
+                        <div onClick={(e) => handleClickSingle(e, song?.id)}>Play Button Here</div>
                     </div>
                 ))
                     : <div></div>}

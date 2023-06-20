@@ -6,6 +6,7 @@ import OpenModalButton from '../OpenModalButton';
 import UpdatePlaylist from '../UpdatePlaylist';
 import { getArtistsThunk } from '../../store/artists';
 import { getAlbumsThunk } from '../../store/albums';
+import { playPlaylistThunk } from '../../store/audioPlayer';
 
 export default function PlaylistPage() {
     const dispatch = useDispatch()
@@ -24,6 +25,11 @@ export default function PlaylistPage() {
         e.preventDefault()
 
         const removeSongFromPlaylist = await dispatch(removeSongFromPlaylistThunk(songId, id))
+    }
+
+    const handleClickPlaylist = async (e) => {
+        e.preventDefault()
+        dispatch(playPlaylistThunk(id))
     }
 
 
@@ -51,6 +57,7 @@ export default function PlaylistPage() {
                     modalComponent={<UpdatePlaylist playlistName={currentPlaylist?.name} playlistId={id} playlistPrivate={playlistPrivate} />}
                 />
                 <p>{currentPlaylist?.user_playlist?.username}</p>
+                <div onClick={handleClickPlaylist}>PLAY PLAYLIST BUTTON</div>
             </div>
             <div className="playlist-song-container">
                 {songObj && songObj.length > 0 && Array.isArray(songObj) ? (songObj.map(song => (

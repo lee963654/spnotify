@@ -12,21 +12,18 @@ export default function SongPage() {
     const dispatch = useDispatch()
     const { id } = useParams()
     const allSongs = useSelector(state => state?.songs?.allSongs)
-    console.log("THESE ARE THE SONGS========", allSongs)
     const currentSong = allSongs[id]
-    console.log("this is the target song", currentSong)
     const currentArtistId = currentSong?.artist_id
     const allArtists = useSelector(state => state?.artists?.allArtists)
     const currentArtist = allArtists[currentArtistId]
-    console.log("this is the current artist", currentArtist)
     const allAlbums = useSelector(state => state?.albums?.allAlbums)
     const currentAlbumId = currentSong?.album_id
     const currentAlbum = allAlbums[currentAlbumId]
-    console.log("this is the current album", currentAlbum)
+
 
     const handleClick = async (e) => {
         e.preventDefault()
-        dispatch(playSongThunk(id))
+        dispatch(playSongThunk(id, currentAlbumId, currentArtistId))
     }
 
 
