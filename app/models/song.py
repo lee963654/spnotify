@@ -12,6 +12,8 @@ class Song(db.Model):
     album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("albums.id")), nullable=False)
     artist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("artists.id")), nullable=False)
     lyrics = db.Column(db.String, nullable=False)
+    artist_name = db.Column(db.String)
+    album_name = db.Column(db.String)
     song_url = db.Column(db.String)
     num_of_plays = db.Column(db.Integer, default=0)
     album_cover=db.Column(db.String)
@@ -29,6 +31,8 @@ class Song(db.Model):
             "name": self.name,
             "album_id": self.album_id,
             "artist_id": self.artist_id,
+            "artist_name": self.artist_name,
+            "album_name": self.album_name,
             "lyrics": self.lyrics,
             "song_url": self.song_url,
             "num_of_plays": self.num_of_plays,
