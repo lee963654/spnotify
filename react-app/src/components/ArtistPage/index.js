@@ -7,7 +7,7 @@ import OptionsButton from './OptionsButton';
 import OpenOptionsModalButton from './OpenOptionsModalButton';
 import SongOptionsModal from '../SongOptionsModal';
 import { useHistory, Link } from 'react-router-dom/cjs/react-router-dom.min';
-import { playSongThunk } from '../../store/audioPlayer';
+import { playArtistThunk, playSongThunk } from '../../store/audioPlayer';
 
 
 export default function ArtistPage() {
@@ -23,6 +23,11 @@ export default function ArtistPage() {
     const handleClickSingle = async (e, songId, albumId) => {
         e.preventDefault()
         dispatch(playSongThunk(songId, albumId, id))
+    }
+
+    const handleClickArtistSongs = async (e) => {
+        e.preventDefault()
+        dispatch(playArtistThunk(id))
     }
 
 
@@ -43,7 +48,7 @@ export default function ArtistPage() {
                 <img src={currentArtist.artist_picture} style={{ width: 800 }}></img>
             </div>
             <div className="middle-play-container">
-                <div>PLAY BUTTON HERE</div>
+                <div onClick={handleClickArtistSongs}>PLAY ARTIST SONGS BUTTON HERE</div>
             </div>
             <div className="single-songs-container">
                 {currentArtist?.songs?.map(song => (

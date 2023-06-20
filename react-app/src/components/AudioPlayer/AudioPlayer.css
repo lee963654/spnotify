@@ -1,8 +1,12 @@
 .footer-buttons-container {
-    width: 15rem;
+
     display: flex;
     justify-content: space-around;
-    flex-direction: column;
+    width: 60rem;
+    margin-right: 25rem;
+
+    flex-direction: row;
+    align-items: center;
 }
 
 .buttons-container {
@@ -13,5 +17,11 @@
 .footer-tracker-container {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.song-info {
+    display: flex;
+    width: 10rem;
     align-items: center;
 }

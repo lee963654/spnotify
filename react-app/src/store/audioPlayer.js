@@ -1,5 +1,5 @@
 const PLAY_SONG = "audioPlayer/PLAY_SONG"
-const SKIP_SONG = "audioPlayer/SKIP_SONG"
+const NEXT_SONG = "audioPlayer/NEXT_SONG"
 const PLAY_ALBUM = "audioPlayer/PLAY_ALBUM"
 const PLAY_ARTIST = "audioPlayer/PLAY_ARTIST"
 const PLAY_PLAYLIST = "audioPlayer/PLAY_PLAYLIST"
@@ -10,8 +10,8 @@ const playSongAction = (song) => ({
     song,
 })
 
-const skipSongAction = () => ({
-    type: SKIP_SONG,
+const nextSongAction = () => ({
+    type: NEXT_SONG,
 })
 
 const playAlbumAction = (songsInAlbum) => ({
@@ -53,51 +53,57 @@ export const playAlbumThunk = (songId, albumId, artistId) => async (dispatch) =>
 }
 
 export const playArtistThunk = (artistId) => async (dispatch) => {
-    const response = await fetch(`/api/songs/artist/${artistId}`)
+    const response = await fetch(`/api/artists/${artistId}`)
     const playArtist = await response.json()
     if (response.ok) {
-        dispatch(playArtistAction(playArtist))
-        return playArtist
+        const playArtistSongs = Object.values(playArtist?.songs || {})
+        dispatch(playArtistAction(playArtistSongs))
+        return playArtistSongs
     } else {
         return playArtist
     }
 }
 
 export const playPlaylistThunk = (playlistId) => async (dispatch) => {
-    const response = await fetch(`/api/songs/playlist/${playlistId}`)
+    const response = await fetch("/api/playlists/user")
     const playPlaylist = await response.json()
     if (response.ok) {
-        dispatch(playPlaylistAction(playPlaylist))
+        const currentPlaylist = playPlaylist[playlistId]
+        const songsInPlaylist = Object.values(currentPlaylist?.songs_in_playlist || {})
+        dispatch(playPlaylistAction(songsInPlaylist))
         return playPlaylist
     } else {
         return playPlaylist
     }
 }
 
-export const skipSongThunk = () => async (dispatch) => {
-    dispatch(skipSongAction())
+export const nextSongThunk = () => async (dispatch) => {
+    console.log("IN THE NEXTSONGTHUNK")
+    dispatch(nextSongAction())
 }
 
 
 const initialState = { currentSong : [], queue: [], songList: []}
 
 export default function reducer(state = initialState, action) {
-    const newState = {...state, currentSong:[], queue : [], songList: [...state.songList]}
+    const newState = {...state, currentSong:[], queue : [...state.queue], songList: [...state.songList]}
     switch (action.type) {
         case PLAY_SONG:
             newState.currentSong = [action.song]
             newState.songList = [action.song]
             return newState
-        case SKIP_SONG:
+        case NEXT_SONG:
             if (newState.queue.length === 0) {
                 newState.currentSong = []
                 newState.queue = []
                 newState.songList = [...state.songList]
+
                 return newState
             } else {
                 newState.currentSong = [state.queue[0]]
                 newState.queue = [...state.queue.slice(1)]
                 newState.songList = [...state.songList]
+
                 return newState
             }
         case PLAY_ALBUM:
@@ -111,17 +117,7 @@ export default function reducer(state = initialState, action) {
             newState.songList = [...action.songsByArtist]
             return newState
         case PLAY_PLAYLIST:
-            // if (Object.values(action.songsOnPlaylist).length <= 1) {
-            //     newState.currentSong = [action.songsOnPlaylist[0]]
-            //     newState.queue = []
-            //     newState.songList = [...action.songsOnPlaylist]
-            //     return newState
-            // } else {
-            //     newState.currentSong = [action.songsOnPlaylist[0]]
-            //     newState.queue = [...action.songsOnPlaylist.slice(1)]
-            //     newState.songList = [...action.songsOnPlaylist]
-            //     return newState
-            // }
+
             newState.currentSong = [action.songsOnPlaylist[0]]
                 newState.queue = [...action.songsOnPlaylist.slice(1)]
                 newState.songList = [...action.songsOnPlaylist]

@@ -6,7 +6,7 @@ import OpenModalButton from '../OpenModalButton';
 import UpdatePlaylist from '../UpdatePlaylist';
 import { getArtistsThunk } from '../../store/artists';
 import { getAlbumsThunk } from '../../store/albums';
-import { playPlaylistThunk } from '../../store/audioPlayer';
+import { playPlaylistThunk, playSongThunk } from '../../store/audioPlayer';
 
 export default function PlaylistPage() {
     const dispatch = useDispatch()
@@ -30,6 +30,11 @@ export default function PlaylistPage() {
     const handleClickPlaylist = async (e) => {
         e.preventDefault()
         dispatch(playPlaylistThunk(id))
+    }
+
+    const handleClickSong = async (e, songId, albumId, artistId) => {
+        e.preventDefault()
+        dispatch(playSongThunk(songId, albumId, artistId))
     }
 
 
@@ -71,6 +76,7 @@ export default function PlaylistPage() {
                             <p>{albums[song.album_id]?.name}</p>
                         </div>
                         <div>
+                            <button onClick={(e) => {handleClickSong(e, song.id, song.album_id, song.artist_id)}}>PLAY SONG</button>
                             <button onClick={(e) => {handleSubmit(e, song.id)}}>Remove Song</button>
                         </div>
                     </div>
