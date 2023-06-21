@@ -75,7 +75,7 @@ export default function AlbumPage() {
                         {songsInAlbum?.length === 1 ? <p>{songsInAlbum?.length} song</p> : <p>{songsInAlbum?.length} songs</p>}
                     </div>
                 </div>
-                {!hasReview && (
+                {!hasReview && currentUser && (
                     <OpenReviewButton
                         buttonText="Write a Review"
                         modalComponent={<CreateAlbumReviewModal currentAlbumId={id} formType="new" currentAlbum={currentAlbum} />}
@@ -101,9 +101,7 @@ export default function AlbumPage() {
                             buttonText="Add Song To Playlist"
                             modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
                         />
-                        {/* <div onClick={(e) => handleClickSingle(e, song?.id)}>
-                            <i class="fa-solid fa-play"></i>
-                            </div> */}
+
                             {currentUser ?
                             <div onClick={(e) => handleClickSingle(e, song?.id)}>
                             <i class="fa-solid fa-play"></i>

@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import "./AudioPlayer.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { nextSongThunk, prevSongThunk } from '../../store/audioPlayer';
+import { clearAudioThunk, nextSongThunk, prevSongThunk } from '../../store/audioPlayer';
 
 export default function AudioPlayer() {
     const dispatch = useDispatch()
     const audioPlayer = useSelector(state => state?.audioPlayer)
-
+    const sessionUser = useSelector(state => state.session.user)
+    console.log("THIS IS THE SESSION USER", sessionUser)
 
     const [isPlaying, setIsPlaying] = useState(false)
     const [songLength, setSongLength] = useState(0)
@@ -14,7 +15,7 @@ export default function AudioPlayer() {
     const [songUrl, setSongUrl] = useState("")
     const [currentIndex, setCurrentIndex] = useState(0)
     const [trackCurrentSong, setTrackCurrentSong] = useState(audioPlayer?.songList[currentIndex])
-    const [volume, setVolume] = useState(60)
+    const [volume, setVolume] = useState(50)
 
     const currentSongPlay = useSelector(state => state?.audioPlayer?.currentSong[0]?.song_url)
     console.log("THIS IS THE CURRENT SONG URL", currentSongPlay)
@@ -54,14 +55,17 @@ export default function AudioPlayer() {
     }
 
     const changeRange = () => {
-        audioRef.current.currentTime = progressBarRef.current.value
+        audioRef.current.currentTime = progressBarRef?.current.value
         setCurrentTime(progressBarRef.current.value)
     }
 
     const whilePlaying = () => {
-        progressBarRef.current.value = audioRef.current.currentTime
-        setCurrentTime(progressBarRef.current.value)
-        barAnimationRef.current = requestAnimationFrame(whilePlaying)
+        if (progressBarRef.current) {
+            progressBarRef.current.value = audioRef?.current?.currentTime
+            setCurrentTime(progressBarRef?.current?.value)
+            barAnimationRef.current = requestAnimationFrame(whilePlaying)
+
+        }
     }
 
     const volumeChange = (e) => {
@@ -118,6 +122,7 @@ export default function AudioPlayer() {
 
     useEffect(() => {
         if (songUrl) {
+            audioRef.current.volume = volume / 100
             audioRef.current.play()
             setIsPlaying(true)
             barAnimationRef.current = requestAnimationFrame(whilePlaying)
@@ -130,6 +135,13 @@ export default function AudioPlayer() {
             const nextSong = dispatch(nextSongThunk())
         }
     }, [currentTime])
+
+    useEffect(() => {
+
+        if (!sessionUser) {
+            dispatch(clearAudioThunk())
+        }
+    }, [dispatch, sessionUser])
 
 
     return (

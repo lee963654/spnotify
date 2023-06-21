@@ -4,6 +4,7 @@ const PLAY_ALBUM = "audioPlayer/PLAY_ALBUM"
 const PLAY_ARTIST = "audioPlayer/PLAY_ARTIST"
 const PLAY_PLAYLIST = "audioPlayer/PLAY_PLAYLIST"
 const PREV_SONG = "audioPlayer/PREV_SONG"
+const CLEAR_AUDIO = "audioPlayer/CLEAR"
 
 
 const playSongAction = (song) => ({
@@ -35,6 +36,9 @@ const playPlaylistAction = (songsOnPlaylist) => ({
     songsOnPlaylist,
 })
 
+const clearAudioAction = () => ({
+    type: CLEAR_AUDIO,
+})
 
 
 
@@ -93,6 +97,10 @@ export const prevSongThunk = (currentIndex) => async (dispatch) => {
     dispatch(prevSongAction(currentIndex))
 }
 
+export const clearAudioThunk = () => async (dispatch) => {
+    dispatch(clearAudioAction())
+}
+
 
 const initialState = { currentSong : [], queue: [], songList: []}
 
@@ -136,7 +144,11 @@ export default function reducer(state = initialState, action) {
             newState.queue = [...state.songList.slice(action.currentIndex + 1)]
             newState.songList = [...state.songList]
             return newState
-
+        case CLEAR_AUDIO:
+            newState.currentSong = []
+            newState.queue = []
+            newState.songList = []
+            return newState
         default:
             return state
     }

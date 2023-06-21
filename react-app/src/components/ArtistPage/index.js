@@ -8,7 +8,8 @@ import OpenOptionsModalButton from './OpenOptionsModalButton';
 import SongOptionsModal from '../SongOptionsModal';
 import { useHistory, Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { playArtistThunk, playSongThunk } from '../../store/audioPlayer';
-
+import OpenModalAuthCheck from '../OpenModalAuthCheck';
+import ConfirmLoginOrSignin from '../Sidebar/Confirm';
 
 
 export default function ArtistPage() {
@@ -50,7 +51,12 @@ export default function ArtistPage() {
                 <img src={currentArtist.artist_picture} style={{ width: 800 }}></img>
             </div>
             <div className="middle-play-container">
-                <div onClick={handleClickArtistSongs}>PLAY ARTIST SONGS BUTTON HERE</div>
+                {/* <div onClick={handleClickArtistSongs}>PLAY ARTIST SONGS BUTTON HERE</div> */}
+                {sessionUser ?
+                <div onClick={handleClickArtistSongs}><i class="fa-solid fa-play"></i></div>
+                :
+                <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
+                }
             </div>
             <div className="single-songs-container">
                 {currentArtist?.songs?.map(song => (
@@ -60,14 +66,28 @@ export default function ArtistPage() {
                             <p>{song.name}</p>
                             <p>Number of plays {song.num_of_plays}</p>
                         </div>
-                        <div onClick={(e) => handleClickSingle(e, song?.id, song.album_id)}>
+                        {/* <div onClick={(e) => handleClickSingle(e, song?.id, song.album_id)}>
                             PLAY BUTTON HERE
+                        </div> */}
+                        {sessionUser ?
+                        <div onClick={(e) => handleClickSingle(e, song?.id, song.album_id)}>
+                        <i class="fa-solid fa-play"></i>
                         </div>
+                        :
+                        <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />}/>
+                        }
                         <div className="song-to-playlist">
+                            {sessionUser ?
                             <OpenOptionsModalButton
                                 buttonText="Add Song To Playlist"
                                 modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
                             />
+                            :
+                            <OpenOptionsModalButton
+                                buttonText="Add Song To Playlist"
+                                modalComponent={<ConfirmLoginOrSignin />}
+                            />
+                            }
                         </div>
                     </div>
                 ))}
