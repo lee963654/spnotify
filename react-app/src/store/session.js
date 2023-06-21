@@ -87,6 +87,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
 	} else if (response.status < 500) {
 		const data = await response.json();
 		if (data.errors) {
+			console.log("THIS IS THE DATA IN THE THUNK ERRORS", data)
 			return data.errors;
 		}
 	} else {
