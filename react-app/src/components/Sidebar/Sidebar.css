@@ -14,7 +14,7 @@
 .sidebar-container {
     background-color: #121212;
     color: #353535;
-    height: 5rem;
+    height: 10rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

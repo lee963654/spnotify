@@ -14,6 +14,9 @@ import SignupFormModal from "./components/SignupFormModal";
 import PlaylistPage from "./components/PlaylistPage"
 import AlbumPage from "./components/AlbumPage";
 import SongPage from "./components/SongPage"
+import AllSongsPage from "./components/AllSongsPage";
+import AllAlbumsPage from "./components/AllAlbumsPage";
+import AllArtistsPage from "./components/AllArtistsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +53,15 @@ function App() {
               </Route>
               <Route exact path="/songs/:id">
                 <SongPage />
+              </Route>
+              <Route exact path="/songs">
+                <AllSongsPage />
+              </Route>
+              <Route exact path="/albums">
+                <AllAlbumsPage />
+              </Route>
+              <Route exact path="/artists">
+                <AllArtistsPage />
               </Route>
             </Switch>
           )}
