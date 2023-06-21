@@ -19,11 +19,11 @@ function Navigation({ isLoaded }){
 		// 	)}
 		// </ul>
 		<div className="nav-container">
-			<div>
+			{/* <div>
 				<NavLink exact to="/">Home</NavLink>
-			</div>
+			</div> */}
 			{isLoaded && (
-				<div>
+				<div className="profile-container">
 					<ProfileButton user={sessionUser} />
 				</div>
 			)}

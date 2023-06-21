@@ -14,12 +14,13 @@ export default function AudioPlayer() {
     const [songUrl, setSongUrl] = useState("")
     const [currentIndex, setCurrentIndex] = useState(0)
     const [trackCurrentSong, setTrackCurrentSong] = useState(audioPlayer?.songList[currentIndex])
+    const [volume, setVolume] = useState(60)
 
     const currentSongPlay = useSelector(state => state?.audioPlayer?.currentSong[0]?.song_url)
     console.log("THIS IS THE CURRENT SONG URL", currentSongPlay)
     const currentSong = useSelector(state => state?.audioPlayer?.currentSong[0])
     console.log("THIS IS THE CURRENT SONG INFO", currentSong)
-
+    const audioPlayerState = useSelector(state => state?.audioPlayer)
 
     console.log("THIS IS THE TRACK CURRENT SONG", trackCurrentSong)
     console.log("THIS IS THE CURRENT INDEX", currentIndex)
@@ -61,6 +62,12 @@ export default function AudioPlayer() {
         progressBarRef.current.value = audioRef.current.currentTime
         setCurrentTime(progressBarRef.current.value)
         barAnimationRef.current = requestAnimationFrame(whilePlaying)
+    }
+
+    const volumeChange = (e) => {
+        e.preventDefault()
+        setVolume(e.target.value)
+        audioRef.current.volume = volume / 100
     }
 
     const nextSong = (e) => {
@@ -107,7 +114,7 @@ export default function AudioPlayer() {
 
             setSongUrl(currentSongPlay)
         }
-    }, [currentSongPlay, trackCurrentSong])
+    }, [currentSongPlay, trackCurrentSong, audioPlayerState])
 
     useEffect(() => {
         if (songUrl) {
@@ -168,6 +175,17 @@ export default function AudioPlayer() {
                     </div>
                 </div>
 
+            </div>
+            <div className = "volume-container">
+                <div>
+                    <input
+                        type="range"
+                        min={0}
+                        max={100}
+                        value={volume}
+                        onChange={volumeChange}
+                    />
+                </div>
             </div>
         </div>
     )

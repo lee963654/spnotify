@@ -10,4 +10,12 @@
   border: 1px black solid;
   position:sticky;
   top:0;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.profile-container {
+  display: flex;
 }

@@ -10,12 +10,14 @@ import { useHistory, Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { playArtistThunk, playSongThunk } from '../../store/audioPlayer';
 
 
+
 export default function ArtistPage() {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const { id } = useParams()
 
+    const { id } = useParams()
+    const sessionUser = useSelector(state => state.session.user)
     const currentArtist = useSelector(state => state.artists.singleArtist)
 
 
