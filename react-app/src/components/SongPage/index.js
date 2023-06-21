@@ -6,10 +6,15 @@ import { getArtistsThunk } from '../../store/artists';
 import { getAlbumsThunk } from '../../store/albums';
 import { playSongThunk } from '../../store/audioPlayer';
 
+import LoginFormModal from '../LoginFormModal';
+import OpenModalAuthCheck from '../OpenModalAuthCheck';
+import ConfirmLoginOrSignin from '../Sidebar/Confirm';
+
 
 export default function SongPage() {
     const history = useHistory()
     const dispatch = useDispatch()
+    const sessionUser = useSelector(state => state?.session?.user)
     const { id } = useParams()
     const allSongs = useSelector(state => state?.songs?.allSongs)
     const currentSong = allSongs[id]
@@ -51,9 +56,13 @@ export default function SongPage() {
                     <p>{currentAlbum?.release_year}</p>
                 </div>
             </div>
+
+            {sessionUser ?
             <div onClick={handleClick}>
             <i class="fa-solid fa-play"></i>
-            </div>
+            </div> :
+            <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />}/>
+            }
             <div className="song-lyrics-container">
                 <div className="lyrics-container">
                     <h2>Lyrics</h2>

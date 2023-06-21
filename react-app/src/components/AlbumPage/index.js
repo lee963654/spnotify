@@ -11,6 +11,8 @@ import OpenOptionsModalButton from '../ArtistPage/OpenOptionsModalButton';
 import SongOptionsModal from '../SongOptionsModal';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { playAlbumThunk, playSongThunk } from '../../store/audioPlayer';
+import OpenModalAuthCheck from '../OpenModalAuthCheck';
+import ConfirmLoginOrSignin from '../Sidebar/Confirm';
 
 export default function AlbumPage() {
     const history = useHistory()
@@ -80,9 +82,16 @@ export default function AlbumPage() {
                     />
                 )}
             </div>
-            <div onClick={handleClickAlbum} className="middle-play-container">
+            {/* <div onClick={handleClickAlbum} className="middle-play-container">
                 <i class="fa-solid fa-play"></i>
-            </div>
+            </div> */}
+            {currentUser ?
+                <div onClick={handleClickAlbum} className="middle-play-container">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                :
+                <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />}/>
+            }
             <div className="album-songs-container">
                 {songsInAlbum && songsInAlbum.length ? songsInAlbum.map(song => (
                     <div className="song-container">
@@ -92,7 +101,16 @@ export default function AlbumPage() {
                             buttonText="Add Song To Playlist"
                             modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
                         />
-                        <div onClick={(e) => handleClickSingle(e, song?.id)}>Play Button Here</div>
+                        {/* <div onClick={(e) => handleClickSingle(e, song?.id)}>
+                            <i class="fa-solid fa-play"></i>
+                            </div> */}
+                            {currentUser ?
+                            <div onClick={(e) => handleClickSingle(e, song?.id)}>
+                            <i class="fa-solid fa-play"></i>
+                            </div>
+                            :
+                            <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />}/>
+                            }
                     </div>
                 ))
                     : <div></div>}
