@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import "./Footer.css"
 import { useDispatch, useSelector } from 'react-redux';
 import AudioPlayer from '../AudioPlayer';
+import OpenModalButton from '../OpenModalButton';
+import LoginFormModal from '../LoginFormModal';
+import SignupFormModal from '../SignupFormModal';
 
 export default function Footer() {
     const dispatch = useDispatch()
@@ -17,7 +20,28 @@ export default function Footer() {
         <div className="footer-container">
             {sessionUser ?
             <AudioPlayer />
-            : <h1>footer without session user</h1>}
+            :
+            <div className="no-session-user">
+                <div className="banner-left">
+                    <div>
+                        PREVIEW OF SPNOTIFY
+                    </div>
+                    <div>
+                        Sign up or Log in to listen to songs!
+                    </div>
+                </div>
+                <div className="banner-right">
+                    <OpenModalButton
+                        buttonText="Log In"
+                        modalComponent={<LoginFormModal />}
+                    />
+                    <OpenModalButton
+                        buttonText="Sign Up"
+                        modalComponent={<SignupFormModal />}
+                    />
+                </div>
+            </div>
+            }
         </div>
     )
 }

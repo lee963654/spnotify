@@ -67,7 +67,7 @@ export default function AudioPlayer() {
     const volumeChange = (e) => {
         e.preventDefault()
         setVolume(e.target.value)
-        audioRef.current.volume = volume / 100
+        audioRef.current.volume = e.target.value / 100
     }
 
     const nextSong = (e) => {
