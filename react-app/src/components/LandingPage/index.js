@@ -30,23 +30,30 @@ export default function LandingPage() {
                     {artistObj.map(artist => (
                         <Link to={`/artists/${artist.id}`} key={artist.id} title={artist.name} className="artist-link">
                             <div key={artist.id} className="artist">
-                                <img alt="artist" src={artist?.artist_picture}></img>
-                                <h3>{artist.name}</h3>
+                                <div className="artist-inside">
+                                    <img alt="artist" src={artist?.artist_picture}></img>
+                                    <h3>{artist.name}</h3>
+                                    <p>Artist</p>
+                                </div>
                             </div>
                         </Link>
                     ))}
                 </div>
-                <div className="albums-container">
+                <div className="all-albums-container">
                     <h1>Albums</h1>
-                    {albumsObj.map(album => (
-                        <Link to={`/albums/${album.id}`} key={album.id} title={album.name}>
-                            <div className="album">
-                                <img alt="album" src={album?.album_picture}></img>
-                                <h3>{album.name}</h3>
-                            </div>
+                    <div className="albums-container">
+                        {albumsObj.map(album => (
+                            <Link to={`/albums/${album.id}`} key={album.id} title={album.name}>
+                                <div className="album">
+                                    <div className="album-inside">
+                                        <img alt="album" src={album?.album_picture}></img>
+                                        <h3>{album.name}</h3>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
 
-                        </Link>
-                    ))}
+                    </div>
                 </div>
             </div>
 

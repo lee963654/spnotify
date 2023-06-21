@@ -59,14 +59,14 @@ export default function Sidebar() {
             {!sessionUser ?
                 <div className="sidebar-main-container">
                     <div className="sidebar-container">
-                        <p>Home</p>
-                        <p>Search</p>
+                        <div className="home-text" onClick={() => history.push("/")}>Home</div>
+                        <div className="home-text">Search</div>
                     </div>
-                    <div>
-                        <p>Your Library</p>
+                    <div className="sidebar-container-bottom">
+                        <div className="home-text">Your Library</div>
                         <div>
-                            <p>Create your first playlist</p>
-                            <p>It's easy, we'll help you</p>
+                            <div>Create your first playlist</div>
+                            <div>It's easy, we'll help you</div>
                             <OpenModalCheck
                                 buttonText="Create Playlist"
                                 // onItemClick={closeMenu}
@@ -75,18 +75,18 @@ export default function Sidebar() {
                             />
                         </div>
                         <div>
-                            <p>Let's find some artists to follow</p>
+                            <div>Let's find some artists to follow</div>
                             <button>Browse Artists</button>
                         </div>
                     </div>
                 </div> :
                 <div className="sidebar-main-container">
                     <div className="sidebar-container">
-                        <p>Home</p>
-                        <p>Search</p>
+                        <div className="home-text" onClick={() => history.push("/")}>Home</div>
+                        <div className="home-text">Search</div>
                     </div>
-                    <div>
-                        <p>Your Library</p>
+                    <div className="sidebar-container-bottom">
+                        <div className="home-text">Your Library</div>
                         {/* <OpenModalPlaylist
                             buttonText="Create Playlist"
                             modalComponent={<CreatePlaylistModal userId={userId} />}
@@ -96,10 +96,10 @@ export default function Sidebar() {
                             {userPlaylistObj.length ? userPlaylistObj.map(playlist => (
                                 <div className="single-playlist-container" key={playlist.id}>
                                     <div onClick={() => history.push(`/playlists/${playlist.id}`)}>
-                                        <p>{playlist.name}</p>
+                                        <div className="home-text">{playlist.name}</div>
                                         <div>
-                                            <p>Playlist</p>
-                                            <p>{playlist?.user_playlist?.username}</p>
+                                            <div className="home-text">Playlist</div>
+                                            <div className="home-text">{playlist?.user_playlist?.username}</div>
                                         </div>
 
                                     </div>

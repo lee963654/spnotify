@@ -8,10 +8,16 @@
 
 .side-landing-container {
     display: flex;
+    width: 100%;
+    margin: 6px;
+}
+
+.sidebar-container-bottom {
+    background-color: #121212;
 }
 
 .main-container {
-    border: purple solid 1px;
+    display: flex;
 }
 
 body {
