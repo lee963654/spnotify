@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import "./AudioPlayer.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { clearAudioThunk, nextSongThunk, prevSongThunk, shuffleSongsThunk } from '../../store/audioPlayer';
+import { clearAudioThunk, nextSongThunk, prevSongThunk, shuffleSongsThunk, playFromStartThunk } from '../../store/audioPlayer';
 
 export default function AudioPlayer() {
     const dispatch = useDispatch()
@@ -15,14 +15,16 @@ export default function AudioPlayer() {
     const [songUrl, setSongUrl] = useState("")
     const [currentIndex, setCurrentIndex] = useState(0)
     const [trackCurrentSong, setTrackCurrentSong] = useState(audioPlayer?.songList[currentIndex])
-    const [volume, setVolume] = useState(50)
+    const [volume, setVolume] = useState(10)
     const [shuffle, setShuffle] = useState(false)
+    const [loopOne, setLoopOne] = useState(false)
+    const [loop, setLoop] = useState(false)
 
     const currentSongPlay = useSelector(state => state?.audioPlayer?.currentSong[0]?.song_url)
     console.log("THIS IS THE CURRENT SONG URL", currentSongPlay)
     const currentSong = useSelector(state => state?.audioPlayer?.currentSong[0])
     console.log("THIS IS THE CURRENT SONG INFO", currentSong)
-    const audioPlayerState = useSelector(state => state?.audioPlayer)
+
 
     console.log("THIS IS THE TRACK CURRENT SONG", trackCurrentSong)
     console.log("THIS IS THE CURRENT INDEX", currentIndex)
@@ -97,8 +99,9 @@ export default function AudioPlayer() {
     const prevSong = (e) => {
         e.preventDefault()
         if (currentIndex === 0) {
+            audioRef.current.currentTime = 0
             setTrackCurrentSong(audioPlayer?.songList[currentIndex])
-            dispatch(prevSongThunk(currentIndex))
+            // dispatch(prevSongThunk(currentIndex))
         } else {
             setCurrentIndex((prev) => prev - 1)
             const newIndex = currentIndex - 1
@@ -110,6 +113,19 @@ export default function AudioPlayer() {
     const shuffleSongs = (e) => {
         e.preventDefault()
         setShuffle(!shuffle)
+    }
+
+    const handleLoop = (e) => {
+        e.preventDefault()
+        if (!loopOne && !loop) {
+            setLoopOne(true)
+        } else if (loopOne && !loop) {
+            setLoopOne(false)
+            setLoop(true)
+        } else {
+            setLoopOne(false)
+            setLoop(false)
+        }
     }
 
 
@@ -124,7 +140,7 @@ export default function AudioPlayer() {
 
             setSongUrl(currentSongPlay)
         }
-    }, [currentSongPlay, trackCurrentSong, audioPlayerState])
+    }, [currentSongPlay, trackCurrentSong, audioPlayer])
 
     useEffect(() => {
         if (songUrl) {
@@ -136,21 +152,31 @@ export default function AudioPlayer() {
         }
     }, [songUrl])
 
-    // useEffect(() => {
-    //     if (songLength == currentTime) {
-    //         const nextSong = dispatch(nextSongThunk())
-    //     }
-    // }, [currentTime])
     useEffect(() => {
         if (songLength == currentTime) {
-            if (shuffle) {
-                dispatch(shuffleSongsThunk())
-                const nextSong = dispatch(nextSongThunk())
+            if (loopOne) {
+                audioRef.current.currentTime = 0
+                return
+            } else if (loop && audioPlayer.queue.length === 0) {
+                dispatch(playFromStartThunk())
+                setCurrentIndex(0)
+                setTrackCurrentSong(audioPlayer?.songList[0])
                 return
             }
+            setCurrentIndex((prev) => prev + 1)
+            setTrackCurrentSong(audioPlayer?.songList[currentIndex + 1])
+            console.log("INSIDE THE USEEFFECT FOR INDEX CHANGE")
             const nextSong = dispatch(nextSongThunk())
         }
     }, [currentTime])
+    // useEffect(() => {
+    //     if (songLength == currentTime && audioPlayer.queue.length > 0) {
+    //         // if (shuffle) {
+    //         //     const shuffleIndex = Math.floor(Math.random() * audioPlayer.queue.length)
+    //         // }
+    //         const nextSong = dispatch(nextSongThunk())
+    //     }
+    // }, [currentTime])
     console.log("THE SHUFFLE", shuffle)
 
     useEffect(() => {
@@ -160,6 +186,9 @@ export default function AudioPlayer() {
         }
     }, [dispatch, sessionUser])
 
+    // TESTING
+
+    // TESTING
 
     return (
         <div className="footer-buttons-container">
@@ -186,6 +215,9 @@ export default function AudioPlayer() {
                     </button>
                     <button onClick={(e) => nextSong(e)}>
                         <i class="fa-solid fa-forward-step"></i>
+                    </button>
+                    <button onClick={(e) => handleLoop(e)}>
+                        <i class="fa-solid fa-repeat">{loopOne ? "one loop" : loop ? "whole loop" : "no loop"}</i>
                     </button>
 
                 </div>

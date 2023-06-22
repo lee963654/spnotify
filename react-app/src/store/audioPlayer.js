@@ -6,9 +6,9 @@ const PLAY_PLAYLIST = "audioPlayer/PLAY_PLAYLIST"
 const PREV_SONG = "audioPlayer/PREV_SONG"
 const CLEAR_AUDIO = "audioPlayer/CLEAR"
 const SHUFFLE_SONGS = "audioPlayer/SHUFFLE_SONGS"
+const PLAY_FROM_START = "audioPlayer/PLAY_FROM_START"
 
-
-function shuffle(array) {
+const shuffle = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -52,6 +52,10 @@ const clearAudioAction = () => ({
 
 const shuffleSongsAction = () => ({
     type: SHUFFLE_SONGS,
+})
+
+const playFromStartAction = () => ({
+    type: PLAY_FROM_START,
 })
 
 
@@ -119,11 +123,15 @@ export const shuffleSongsThunk = () => async (dispatch) => {
     dispatch(shuffleSongsAction())
 }
 
+export const playFromStartThunk = () => async (dispatch) => {
+    dispatch(playFromStartAction())
+}
 
-const initialState = { currentSong : [], queue: [], songList: []}
+
+const initialState = { currentSong : [], queue: [], songList: [], shuffleOrder: []}
 
 export default function reducer(state = initialState, action) {
-    const newState = {...state, currentSong:[...state.currentSong], queue : [...state.queue], songList: [...state.songList]}
+    const newState = {...state, currentSong:[...state.currentSong], queue : [...state.queue], songList: [...state.songList], shuffleOrder: [...state.shuffleOrder]}
     switch (action.type) {
         case PLAY_SONG:
             newState.currentSong = [action.song]
@@ -167,10 +175,10 @@ export default function reducer(state = initialState, action) {
             newState.queue = []
             newState.songList = []
             return newState
-        case SHUFFLE_SONGS:
-            const shuffledQueue = shuffle(newState.queue)
-            newState.queue = shuffledQueue
-            console.log("THIS IS TEH NEW STATE", newState)
+        case PLAY_FROM_START:
+            newState.currentSong = [state.songList[0]]
+            newState.queue = [...state.songList.slice(1)]
+            newState.songList = [...state.songList]
             return newState
         default:
             return state
