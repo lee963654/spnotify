@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -9,7 +9,7 @@ function LoginFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   const demoUserLogin = () => {
@@ -29,18 +29,27 @@ function LoginFormModal() {
         closeModal()
     }
   };
+  console.log("THE ERRORS IN THE LOG IN ", errors)
+
+  // useEffect(() => {
+
+  // }, [email])
+  // useEffect(() => {
+
+  // }, [password])
 
   return (
     <>
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <ul>
-          {errors.map((error, idx) => (
+          {/* {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
-          ))}
+          ))} */}
         </ul>
         <label>
           Email
+          {errors.email && <p>{errors.email}</p>}
           <input
             type="text"
             value={email}
@@ -50,6 +59,7 @@ function LoginFormModal() {
         </label>
         <label>
           Password
+          {errors.password && <p>{errors.password}</p>}
           <input
             type="password"
             value={password}

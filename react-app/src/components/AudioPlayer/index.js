@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import "./AudioPlayer.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { clearAudioThunk, nextSongThunk, prevSongThunk } from '../../store/audioPlayer';
+import { clearAudioThunk, nextSongThunk, prevSongThunk, shuffleSongsThunk } from '../../store/audioPlayer';
 
 export default function AudioPlayer() {
     const dispatch = useDispatch()
@@ -16,6 +16,7 @@ export default function AudioPlayer() {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [trackCurrentSong, setTrackCurrentSong] = useState(audioPlayer?.songList[currentIndex])
     const [volume, setVolume] = useState(50)
+    const [shuffle, setShuffle] = useState(false)
 
     const currentSongPlay = useSelector(state => state?.audioPlayer?.currentSong[0]?.song_url)
     console.log("THIS IS THE CURRENT SONG URL", currentSongPlay)
@@ -106,6 +107,11 @@ export default function AudioPlayer() {
         }
     }
 
+    const shuffleSongs = (e) => {
+        e.preventDefault()
+        setShuffle(!shuffle)
+    }
+
 
     useEffect(() => {
         const seconds = Math.floor(audioRef.current.duration)
@@ -130,11 +136,22 @@ export default function AudioPlayer() {
         }
     }, [songUrl])
 
+    // useEffect(() => {
+    //     if (songLength == currentTime) {
+    //         const nextSong = dispatch(nextSongThunk())
+    //     }
+    // }, [currentTime])
     useEffect(() => {
         if (songLength == currentTime) {
+            if (shuffle) {
+                dispatch(shuffleSongsThunk())
+                const nextSong = dispatch(nextSongThunk())
+                return
+            }
             const nextSong = dispatch(nextSongThunk())
         }
     }, [currentTime])
+    console.log("THE SHUFFLE", shuffle)
 
     useEffect(() => {
 
@@ -148,7 +165,7 @@ export default function AudioPlayer() {
         <div className="footer-buttons-container">
             <div className="song-info-container">
                 <div className="song-info">
-                    <img src={currentSong?.album_cover} style={{width: 75}}></img>
+                    <img src={currentSong?.album_cover} style={{ width: 75 }}></img>
                     <div>
                         <p>{currentSong?.name}</p>
                         <p>{currentSong?.artist_name}</p>
@@ -158,6 +175,9 @@ export default function AudioPlayer() {
             <div className="middle-section">
                 <div className="buttons-container">
                     <audio ref={audioRef} src={songUrl} preload="metadata"></audio>
+                    <button onClick={(e) => shuffleSongs(e)}>
+                        <i class="fa-solid fa-shuffle"></i>
+                    </button>
                     <button onClick={(e) => prevSong(e)}>
                         <i class="fa-solid fa-backward-step"></i>
                     </button>
@@ -188,7 +208,7 @@ export default function AudioPlayer() {
                 </div>
 
             </div>
-            <div className = "volume-container">
+            <div className="volume-container">
                 <div>
                     <input
                         type="range"

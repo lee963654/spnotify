@@ -5,6 +5,16 @@ const PLAY_ARTIST = "audioPlayer/PLAY_ARTIST"
 const PLAY_PLAYLIST = "audioPlayer/PLAY_PLAYLIST"
 const PREV_SONG = "audioPlayer/PREV_SONG"
 const CLEAR_AUDIO = "audioPlayer/CLEAR"
+const SHUFFLE_SONGS = "audioPlayer/SHUFFLE_SONGS"
+
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array
+  }
 
 
 const playSongAction = (song) => ({
@@ -38,6 +48,10 @@ const playPlaylistAction = (songsOnPlaylist) => ({
 
 const clearAudioAction = () => ({
     type: CLEAR_AUDIO,
+})
+
+const shuffleSongsAction = () => ({
+    type: SHUFFLE_SONGS,
 })
 
 
@@ -101,6 +115,10 @@ export const clearAudioThunk = () => async (dispatch) => {
     dispatch(clearAudioAction())
 }
 
+export const shuffleSongsThunk = () => async (dispatch) => {
+    dispatch(shuffleSongsAction())
+}
+
 
 const initialState = { currentSong : [], queue: [], songList: []}
 
@@ -148,6 +166,11 @@ export default function reducer(state = initialState, action) {
             newState.currentSong = []
             newState.queue = []
             newState.songList = []
+            return newState
+        case SHUFFLE_SONGS:
+            const shuffledQueue = shuffle(newState.queue)
+            newState.queue = shuffledQueue
+            console.log("THIS IS TEH NEW STATE", newState)
             return newState
         default:
             return state
