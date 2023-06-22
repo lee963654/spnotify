@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import "./ArtistPage.css"
 
 
-export default function OptionsButton({}) {
+export default function OptionsButton() {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();

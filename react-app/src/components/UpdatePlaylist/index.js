@@ -33,12 +33,20 @@ export default function UpdatePlaylist ({playlistName, playlistId, playlistPriva
     }
     console.log("this is the isprivate before handle sub", isPrivate)
 
+    useEffect(() => {
+        const errors = {}
+        if (name.length > 30) errors.name = "Name must be under 30 characters"
+        if (name.length === 0) errors.name = "You must provide a name for your playlist"
+        setErrors(errors)
+    }, [name])
+
     return (
         <div className="update-playlist-container">
             <h1>Edit details</h1>
             <form onSubmit={handleSubmit}>
                 <label>
                     Name
+                    {errors.name && <p>{errors.name}</p>}
                     <input
                         type="text"
                         value={name}
@@ -53,7 +61,7 @@ export default function UpdatePlaylist ({playlistName, playlistId, playlistPriva
                         <option value="public">Public</option>
                     </select>
                 </label>
-                <button>
+                <button disabled={name.length > 30 || name.length === 0}>
                     Save
                 </button>
             </form>

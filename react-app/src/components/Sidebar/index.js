@@ -55,11 +55,13 @@ export default function Sidebar() {
 
 
     return (
-        <div>
+        <div className="sidebar">
             {!sessionUser ?
                 <div className="sidebar-main-container">
                     <div className="sidebar-container">
-                        <div className="home-text" onClick={() => history.push("/")}>Home</div>
+                        <div className="home-text" onClick={() => history.push("/")}>
+                            Home
+                            </div>
                         <div className="home-text">Search</div>
                         <div onClick={() => history.push("/songs")} className="home-text">All Songs</div>
                         <div onClick={() => history.push("/albums")} className="home-text">All Albums</div>

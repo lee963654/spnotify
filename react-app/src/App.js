@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="main-container">
-      <div className="side-landing-container">
+      {/* <div className="side-landing-container"> */}
         <Sidebar />
         <div className="nav-landing-container">
           <Navigation isLoaded={isLoaded} />
@@ -72,7 +72,7 @@ function App() {
 
         </div>
 
-      </div>
+      {/* </div> */}
 
       <Footer />
     </div>

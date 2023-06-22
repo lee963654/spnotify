@@ -82,6 +82,7 @@ export default function ArtistPage() {
                                 buttonText="Add Song To Playlist"
                                 modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
                             />
+                            // <OptionsButton />
                             :
                             <OpenOptionsModalButton
                                 buttonText="Add Song To Playlist"
@@ -96,7 +97,7 @@ export default function ArtistPage() {
                 <h2>Discography</h2>
                 {currentArtist?.albums?.map(album => (
                     <div onClick={() => history.push(`/albums/${album.id}`)} className="album">
-                        <img src={album.album_picture}></img>
+                        <img src={album.album_picture} style={{width: 400}}></img>
                         <p>{album.name}</p>
                     </div>
                 ))}
