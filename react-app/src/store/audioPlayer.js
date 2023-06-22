@@ -180,6 +180,15 @@ export default function reducer(state = initialState, action) {
             newState.queue = [...state.songList.slice(1)]
             newState.songList = [...state.songList]
             return newState
+        case SHUFFLE_SONGS:
+            // newState.shuffleOrder = [...state.songList]
+            // const shuffled = shuffle(state.songList)
+            // newState.currentSong = [shuffled[0]]
+            // newState.queue = [...shuffled.slice(1)]
+            // newState.songList = [...shuffled]
+            // console.log("THIS IS THE SHUFFLED NEW STATE", newState)
+            // WORKING ON THE SHUFFLE
+            return newState
         default:
             return state
     }

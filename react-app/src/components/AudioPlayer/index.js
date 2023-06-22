@@ -33,7 +33,7 @@ export default function AudioPlayer() {
     const audioRef = useRef()   // reference to the audio
     const progressBarRef = useRef() // reference to the progressbar
     const barAnimationRef = useRef() // reference the animation bar
-    const songListRef = useRef()
+    const songListRef = useRef() // reference the list of songs
 
 
 
@@ -147,11 +147,15 @@ export default function AudioPlayer() {
     }, [audioRef?.current?.loadedmetadata, audioRef?.current?.readyState])
 
     useEffect(() => {
+        // if (shuffle) {
+        //     dispatch(shuffleSongsThunk())
+        // } WORKING ON THE SHUFFLE
         if (currentSongPlay) {
 
             setSongUrl(currentSongPlay)
         }
-    }, [currentSongPlay, trackCurrentSong, audioPlayer])
+    }, [currentSongPlay])
+    // , trackCurrentSong, audioPlayer
 
     useEffect(() => {
         if (songUrl) {
@@ -164,7 +168,7 @@ export default function AudioPlayer() {
     }, [songUrl])
 
     useEffect(() => {
-        if (songLength == currentTime && audioPlayer.queue.length > 0) {
+        if (songLength == currentTime) {
             if (loopOne) {
                 audioRef.current.currentTime = 0
                 return
@@ -181,7 +185,7 @@ export default function AudioPlayer() {
         }
     }, [currentTime])
 
-    // console.log("THE SHUFFLE", shuffle)
+
 
     useEffect(() => {
 
@@ -190,18 +194,30 @@ export default function AudioPlayer() {
         }
     }, [dispatch, sessionUser])
 
-    // TESTING
+    // Checking to see if a different set of songs are playing.
     useEffect(() => {
         if (!songListCheck(audioPlayer.songList, songListRef.current)) {
             setCurrentIndex(0)
             setTrackCurrentSong(audioPlayer?.songList[0])
         }
         songListRef.current = audioPlayer.songList
-        console.log("THIS IS TEH AUDIO PLAYER SONG LIST USEREF IN THE USEEFFECT", songListRef)
-    }, [audioPlayer.songList])
-    // TESTING
-    console.log("THIS IS THE AUDIO PLAYER SONG LIST", audioPlayer.songList)
-    console.log("THIS IS THE AUDIO PLAYER SONG LIST USEREF", songListRef.current)
+    }, [audioPlayer?.songList])
+
+    // Shuffle testing
+
+
+
+    // useEffect(() => {
+    //     if (shuffle) {
+    //         console.log("IN SIDE THE SHUFFLE USEEFFECT")
+    //         dispatch(shuffleSongsThunk())
+
+    //     }
+    // }, [currentSongPlay])
+    // Shuffle testing
+
+
+
 
     return (
         <div className="footer-buttons-container">
@@ -218,7 +234,7 @@ export default function AudioPlayer() {
                 <div className="buttons-container">
                     <audio ref={audioRef} src={songUrl} preload="metadata"></audio>
                     <button onClick={(e) => shuffleSongs(e)}>
-                        <i class="fa-solid fa-shuffle"></i>
+                        <i class="fa-solid fa-shuffle">{shuffle ? "On" : "Off"}</i>
                     </button>
                     <button onClick={(e) => prevSong(e)}>
                         <i class="fa-solid fa-backward-step"></i>
