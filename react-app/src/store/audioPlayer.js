@@ -7,6 +7,7 @@ const PREV_SONG = "audioPlayer/PREV_SONG"
 const CLEAR_AUDIO = "audioPlayer/CLEAR"
 const SHUFFLE_SONGS = "audioPlayer/SHUFFLE_SONGS"
 const PLAY_FROM_START = "audioPlayer/PLAY_FROM_START"
+const ORIGINAL_SONG_ORDER = "audioPlayer/ORIGINAL_SONG_ORDER"
 
 const shuffle = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -50,12 +51,16 @@ const clearAudioAction = () => ({
     type: CLEAR_AUDIO,
 })
 
-const shuffleSongsAction = () => ({
+const shuffleSongsAction = (currentIndex) => ({
     type: SHUFFLE_SONGS,
 })
 
 const playFromStartAction = () => ({
     type: PLAY_FROM_START,
+})
+
+const originalSongOrderAction = (currentIndex) => ({
+    type: ORIGINAL_SONG_ORDER,
 })
 
 
@@ -119,19 +124,23 @@ export const clearAudioThunk = () => async (dispatch) => {
     dispatch(clearAudioAction())
 }
 
-export const shuffleSongsThunk = () => async (dispatch) => {
-    dispatch(shuffleSongsAction())
+export const shuffleSongsThunk = (currentIndex) => async (dispatch) => {
+    dispatch(shuffleSongsAction(currentIndex))
 }
 
 export const playFromStartThunk = () => async (dispatch) => {
     dispatch(playFromStartAction())
 }
 
+export const originalSongOrderThunk = () => async (dispatch) => {
+    dispatch(originalSongOrderAction())
+}
 
-const initialState = { currentSong : [], queue: [], songList: [], shuffleOrder: []}
+
+const initialState = { currentSong : [], queue: [], songList: [], preShuffleOrder: []}
 
 export default function reducer(state = initialState, action) {
-    const newState = {...state, currentSong:[...state.currentSong], queue : [...state.queue], songList: [...state.songList], shuffleOrder: [...state.shuffleOrder]}
+    const newState = {...state, currentSong:[...state.currentSong], queue : [...state.queue], songList: [...state.songList], preShuffleOrder: [...state.preShuffleOrder]}
     switch (action.type) {
         case PLAY_SONG:
             newState.currentSong = [action.song]
@@ -181,13 +190,17 @@ export default function reducer(state = initialState, action) {
             newState.songList = [...state.songList]
             return newState
         case SHUFFLE_SONGS:
-            // newState.shuffleOrder = [...state.songList]
-            // const shuffled = shuffle(state.songList)
-            // newState.currentSong = [shuffled[0]]
-            // newState.queue = [...shuffled.slice(1)]
-            // newState.songList = [...shuffled]
-            // console.log("THIS IS THE SHUFFLED NEW STATE", newState)
+            newState.preShuffleOrder = [...state.songList]
+            const shuffled = shuffle(state.songList)
+            // newState.currentSong = []
+            newState.queue = [...shuffled]
+            newState.songList = [...shuffled]
+            return newState
             // WORKING ON THE SHUFFLE
+        case ORIGINAL_SONG_ORDER:
+
+            newState.queue = [...state.preShuffleOrder]
+            newState.songList = [...state.preShuffleOrder]
             return newState
         default:
             return state

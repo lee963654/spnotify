@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import "./AudioPlayer.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { clearAudioThunk, nextSongThunk, prevSongThunk, shuffleSongsThunk, playFromStartThunk } from '../../store/audioPlayer';
+import { clearAudioThunk, nextSongThunk, prevSongThunk, shuffleSongsThunk, playFromStartThunk, originalSongOrderThunk } from '../../store/audioPlayer';
 
 export default function AudioPlayer() {
     const dispatch = useDispatch()
@@ -21,7 +21,7 @@ export default function AudioPlayer() {
     const [loop, setLoop] = useState(false)
 
     const currentSongPlay = useSelector(state => state?.audioPlayer?.currentSong[0]?.song_url)
-    // console.log("THIS IS THE CURRENT SONG URL", currentSongPlay)
+    console.log("THIS IS THE CURRENT SONG URL", currentSongPlay)
     const currentSong = useSelector(state => state?.audioPlayer?.currentSong[0])
     // console.log("THIS IS THE CURRENT SONG INFO", currentSong)
 
@@ -62,6 +62,7 @@ export default function AudioPlayer() {
     const changeRange = () => {
         audioRef.current.currentTime = progressBarRef?.current.value
         setCurrentTime(progressBarRef.current.value)
+        //updating the progress bar
     }
 
     const whilePlaying = () => {
@@ -81,17 +82,59 @@ export default function AudioPlayer() {
 
     const nextSong = (e) => {
         e.preventDefault()
-        if (!audioPlayer?.queue.length) {
-            // setCurrentIndex(0)
-            // setTrackCurrentSong("")
-            return
-        }
+        // if (!audioPlayer?.queue.length) {
+        //     console.log("IN THE NO AUDIO PLAYER")
+        //     // setCurrentIndex(0)
+        //     // setTrackCurrentSong("")
+        //     return
+        // }
+
+
         if ((currentIndex >= audioPlayer?.songList.length - 1)) {
             // setCurrentIndex(0)
+            //TEST loop
+            if (loop) {
+                console.log("IN THE LOOP")
+                dispatch(playFromStartThunk())
+                setCurrentIndex(0)
+                setTrackCurrentSong(audioPlayer?.songList[0])
+                // dispatch(nextSongThunk())
+                return
+            }
+            //TEST loop
+            if (shuffle && (audioPlayer?.songList?.length === audioPlayer?.queue?.length)) {
+                console.log("IN THE CURRENT INDEX >= audioplayer songlist length")
+                setCurrentIndex(0)
+                setTrackCurrentSong(audioPlayer?.songList[0])
+                dispatch(nextSongThunk())
+                return
+            }
+            if (!shuffle && (audioPlayer?.songList?.length === audioPlayer?.queue?.length)) {
+                setCurrentIndex(0)
+                setTrackCurrentSong(audioPlayer?.songList[0])
+                dispatch(nextSongThunk())
+                return
+            }
             setTrackCurrentSong(audioPlayer?.songList[currentIndex])
 
             dispatch(nextSongThunk())
         } else {
+            // TESTING shuffle
+            if (shuffle && (audioPlayer?.songList?.length === audioPlayer?.queue?.length)) {
+                setCurrentIndex(0)
+                setTrackCurrentSong(audioPlayer?.songList[0])
+                dispatch(nextSongThunk())
+                return
+            }
+            // TESTING shuffle
+            // TESTING ORIGINAL SONG ORDER
+            if (!shuffle && (audioPlayer?.songList?.length === audioPlayer?.queue?.length)) {
+                setCurrentIndex(0)
+                setTrackCurrentSong(audioPlayer?.songList[0])
+                dispatch(nextSongThunk())
+                return
+            }
+            // TESTING ORIGINAL SONG ORDER
             setCurrentIndex((prev) => prev + 1)
             setTrackCurrentSong(audioPlayer?.songList[currentIndex + 1])
             dispatch(nextSongThunk())
@@ -147,17 +190,25 @@ export default function AudioPlayer() {
     }, [audioRef?.current?.loadedmetadata, audioRef?.current?.readyState])
 
     useEffect(() => {
-        // if (shuffle) {
+        // TESTING SHUFFLE
+        // if (shuffle && (audioPlayer?.songList?.length - 1 === audioPlayer?.queue?.length)) {
+        //     console.log("INSIDE THE IF STATEMENT")
         //     dispatch(shuffleSongsThunk())
-        // } WORKING ON THE SHUFFLE
+        //     dispatch(nextSongThunk())
+        // }
+        // console.log("IN THE USEEFFECT FOR CURRENT SONG PLAY")
+        // console.log("IN THE USEEFFECT FOR CURRENT SONG PLAY", audioPlayer)
+        // TESTING SHUFFLE
+        console.log("THE CURRENTSONG PLAY OUTSIDE THE IF CONDITION", audioPlayer)
         if (currentSongPlay) {
-
+            console.log("THE CURRENTSONG PLAY INSIDE THE IF CONDITION", audioPlayer)
             setSongUrl(currentSongPlay)
         }
     }, [currentSongPlay])
     // , trackCurrentSong, audioPlayer
 
     useEffect(() => {
+        console.log("IN THE USEEFFECT FOR THE SONG URL")
         if (songUrl) {
             audioRef.current.volume = volume / 100
             audioRef.current.play()
@@ -178,6 +229,22 @@ export default function AudioPlayer() {
                 setTrackCurrentSong(audioPlayer?.songList[0])
                 return
             }
+            //TESTING shuffle
+            if (shuffle && (audioPlayer?.queue?.length === audioPlayer?.songList?.length)) {
+                setCurrentIndex(0)
+                setTrackCurrentSong(audioPlayer?.songList[0])
+                dispatch(nextSongThunk())
+                return
+            }
+            //TESTING shuffle
+            // TESTING ORIGINAL SONG LIST
+            if (!shuffle && (audioPlayer?.queue?.length === audioPlayer?.songList?.length)) {
+                setCurrentIndex(0)
+                setTrackCurrentSong(audioPlayer?.songList[0])
+                dispatch(nextSongThunk())
+                return
+            }
+            // TESTING ORIGINAL SONG LIST
             setCurrentIndex((prev) => prev + 1)
             setTrackCurrentSong(audioPlayer?.songList[currentIndex + 1])
 
@@ -197,6 +264,12 @@ export default function AudioPlayer() {
     // Checking to see if a different set of songs are playing.
     useEffect(() => {
         if (!songListCheck(audioPlayer.songList, songListRef.current)) {
+            // TESTING FOR SHUFFLE
+            if (shuffle) {
+                dispatch(shuffleSongsThunk())
+            }
+
+            // TESTING FOR SHUFFLE
             setCurrentIndex(0)
             setTrackCurrentSong(audioPlayer?.songList[0])
         }
@@ -207,13 +280,16 @@ export default function AudioPlayer() {
 
 
 
-    // useEffect(() => {
-    //     if (shuffle) {
-    //         console.log("IN SIDE THE SHUFFLE USEEFFECT")
-    //         dispatch(shuffleSongsThunk())
+    useEffect(() => {
 
-    //     }
-    // }, [currentSongPlay])
+        if (shuffle) {
+            // console.log("IN SIDE THE SHUFFLE USEEFFECT")
+            dispatch(shuffleSongsThunk())
+        }
+        if (!shuffle) {
+            dispatch(originalSongOrderThunk(currentIndex))
+        }
+    }, [shuffle])
     // Shuffle testing
 
 
