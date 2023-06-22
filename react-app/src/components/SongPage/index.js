@@ -9,6 +9,7 @@ import { playSongThunk } from '../../store/audioPlayer';
 import LoginFormModal from '../LoginFormModal';
 import OpenModalAuthCheck from '../OpenModalAuthCheck';
 import ConfirmLoginOrSignin from '../Sidebar/Confirm';
+import "./SongPage.css"
 
 
 export default function SongPage() {
@@ -45,23 +46,24 @@ export default function SongPage() {
 
     return (
         <div className="song-container">
-            <div className="album-picture-container">
+            <div className="song-info-container">
                 <img src={currentAlbum?.album_picture} style={{ width: 200 }}></img>
-            </div>
-            <div className="song-title-container">
-                <h1>{currentSong?.name}</h1>
-                <div className="bottom-song-title-container">
-                    <p onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</p>
-                    <p onClick={() => history.push(`/albums/${currentAlbum?.id}`)}>{currentAlbum?.name}</p>
-                    <p>{currentAlbum?.release_year}</p>
+                <div className="song-title-container">
+                    <h1>{currentSong?.name}</h1>
+                    <div className="bottom-song-title-container">
+                        <p onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</p>
+                        <p onClick={() => history.push(`/albums/${currentAlbum?.id}`)}>{currentAlbum?.name}</p>
+                        <p>{currentAlbum?.release_year}</p>
+                    </div>
                 </div>
+
             </div>
 
             {sessionUser ?
-            <div onClick={handleClick}>
-            <i class="fa-solid fa-play"></i>
-            </div> :
-            <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />}/>
+                <div onClick={handleClick}>
+                    <i class="fa-solid fa-play"></i>
+                </div> :
+                <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
             }
             <div className="song-lyrics-container">
                 <div className="lyrics-container">
@@ -69,7 +71,7 @@ export default function SongPage() {
                     {currentSong?.lyrics}
                 </div>
                 <div className="lyrics-artist-container" onClick={() => history.push(`/artists/${currentArtist?.id}`)}>
-                    <img src={currentArtist?.artist_picture} style={{width: 75}}></img>
+                    <img src={currentArtist?.artist_picture} style={{ width: 75 }}></img>
                     <div className="artist-name-container">
                         <p>Artist</p>
                         <h3>{currentArtist?.name}</h3>

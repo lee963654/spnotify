@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="main-container">
-      {/* <div className="side-landing-container"> */}
+      {/* <div className="body-container"> */}
         <Sidebar />
         <div className="nav-landing-container">
           <Navigation isLoaded={isLoaded} />
