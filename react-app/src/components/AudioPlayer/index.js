@@ -7,7 +7,7 @@ export default function AudioPlayer() {
     const dispatch = useDispatch()
     const audioPlayer = useSelector(state => state?.audioPlayer)
     const sessionUser = useSelector(state => state.session.user)
-    console.log("THIS IS THE SESSION USER", sessionUser)
+    // console.log("THIS IS THE SESSION USER", sessionUser)
 
     const [isPlaying, setIsPlaying] = useState(false)
     const [songLength, setSongLength] = useState(0)
@@ -21,9 +21,9 @@ export default function AudioPlayer() {
     const [loop, setLoop] = useState(false)
 
     const currentSongPlay = useSelector(state => state?.audioPlayer?.currentSong[0]?.song_url)
-    console.log("THIS IS THE CURRENT SONG URL", currentSongPlay)
+    // console.log("THIS IS THE CURRENT SONG URL", currentSongPlay)
     const currentSong = useSelector(state => state?.audioPlayer?.currentSong[0])
-    console.log("THIS IS THE CURRENT SONG INFO", currentSong)
+    // console.log("THIS IS THE CURRENT SONG INFO", currentSong)
 
 
     console.log("THIS IS THE TRACK CURRENT SONG", trackCurrentSong)
@@ -33,6 +33,8 @@ export default function AudioPlayer() {
     const audioRef = useRef()   // reference to the audio
     const progressBarRef = useRef() // reference to the progressbar
     const barAnimationRef = useRef() // reference the animation bar
+    const songListRef = useRef()
+
 
 
     const togglePlayPause = () => {
@@ -129,6 +131,15 @@ export default function AudioPlayer() {
     }
 
 
+
+    // Function to help check if two array of objects have the same values. We will use this to check if a different set of songs is playing so we can reset the current index back to 0
+    const songListCheck = (arr1, arr2) => {
+        return (arr1?.length === arr2?.length && arr1.every((first) => arr2.some((second) => Object.keys(first).every((key) => first[key] === second[key]))))
+    }
+
+
+
+
     useEffect(() => {
         const seconds = Math.floor(audioRef.current.duration)
         setSongLength(seconds)
@@ -153,7 +164,7 @@ export default function AudioPlayer() {
     }, [songUrl])
 
     useEffect(() => {
-        if (songLength == currentTime) {
+        if (songLength == currentTime && audioPlayer.queue.length > 0) {
             if (loopOne) {
                 audioRef.current.currentTime = 0
                 return
@@ -165,19 +176,12 @@ export default function AudioPlayer() {
             }
             setCurrentIndex((prev) => prev + 1)
             setTrackCurrentSong(audioPlayer?.songList[currentIndex + 1])
-            console.log("INSIDE THE USEEFFECT FOR INDEX CHANGE")
+
             const nextSong = dispatch(nextSongThunk())
         }
     }, [currentTime])
-    // useEffect(() => {
-    //     if (songLength == currentTime && audioPlayer.queue.length > 0) {
-    //         // if (shuffle) {
-    //         //     const shuffleIndex = Math.floor(Math.random() * audioPlayer.queue.length)
-    //         // }
-    //         const nextSong = dispatch(nextSongThunk())
-    //     }
-    // }, [currentTime])
-    console.log("THE SHUFFLE", shuffle)
+
+    // console.log("THE SHUFFLE", shuffle)
 
     useEffect(() => {
 
@@ -187,8 +191,17 @@ export default function AudioPlayer() {
     }, [dispatch, sessionUser])
 
     // TESTING
-
+    useEffect(() => {
+        if (!songListCheck(audioPlayer.songList, songListRef.current)) {
+            setCurrentIndex(0)
+            setTrackCurrentSong(audioPlayer?.songList[0])
+        }
+        songListRef.current = audioPlayer.songList
+        console.log("THIS IS TEH AUDIO PLAYER SONG LIST USEREF IN THE USEEFFECT", songListRef)
+    }, [audioPlayer.songList])
     // TESTING
+    console.log("THIS IS THE AUDIO PLAYER SONG LIST", audioPlayer.songList)
+    console.log("THIS IS THE AUDIO PLAYER SONG LIST USEREF", songListRef.current)
 
     return (
         <div className="footer-buttons-container">
