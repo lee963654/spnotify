@@ -46,50 +46,57 @@ export default function ArtistPage() {
 
     return (
         <div className="single-artist-container">
-            <div className="top-header-container">
-                <h1>{currentArtist.name}</h1>
-                <img src={currentArtist.artist_picture} style={{ width: 800 }}></img>
+            {/* <img className="test-background" src={currentArtist.artist_picture} style={{ width: 800 }}></img> */}
+            <div className="top-header-container" style={{
+                backgroundImage: `url(${currentArtist.artist_picture})`
+            }}>
+                <div className="header-artist-name">{currentArtist.name}</div>
+                {/* <img src={currentArtist.artist_picture} style={{ width: 800 }}></img> */}
             </div>
-            <div className="middle-play-container">
-                {/* <div onClick={handleClickArtistSongs}>PLAY ARTIST SONGS BUTTON HERE</div> */}
-                {sessionUser ?
-                <div onClick={handleClickArtistSongs}><i class="fa-solid fa-play"></i></div>
+            {/* <div className="middle-play-container"> */}
+            {sessionUser ?
+                <div className="middle-play-container" onClick={handleClickArtistSongs}><i class="fa-solid fa-play fa-lg"></i></div>
                 :
                 <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
-                }
-            </div>
+            }
+            {/* </div> */}
             <div className="single-songs-container">
+                <h2>Songs</h2>
                 {currentArtist?.songs?.map(song => (
                     <div key={song.id} className="single">
-                        <div onClick={() => history.push(`/songs/${song.id}`)} className="single-song">
-                            <img src={song.album_cover} style={{ width: 75 }}></img>
-                            <p>{song.name}</p>
-                            <p>Number of plays {song.num_of_plays}</p>
-                        </div>
-                        {/* <div onClick={(e) => handleClickSingle(e, song?.id, song.album_id)}>
+
+                            <div onClick={() => history.push(`/songs/${song.id}`)} className="single-song">
+                                <div className="album-and-song">
+                                    <img src={song.album_cover} style={{ width: 75, cursor: "pointer" }}></img>
+                                    <p>{song.name}</p>
+                                </div>
+                                <p>{song.num_of_plays}</p>
+                            </div>
+                            {/* <div onClick={(e) => handleClickSingle(e, song?.id, song.album_id)}>
                             PLAY BUTTON HERE
                         </div> */}
-                        {sessionUser ?
-                        <div onClick={(e) => handleClickSingle(e, song?.id, song.album_id)}>
-                        <i class="fa-solid fa-play"></i>
-                        </div>
-                        :
-                        <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />}/>
-                        }
-                        <div className="song-to-playlist">
                             {sessionUser ?
-                            <OpenOptionsModalButton
-                                buttonText="Add Song To Playlist"
-                                modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
-                            />
-                            // <OptionsButton />
-                            :
-                            <OpenOptionsModalButton
-                                buttonText="Add Song To Playlist"
-                                modalComponent={<ConfirmLoginOrSignin />}
-                            />
+                                <div className="artist-page-play-button" onClick={(e) => handleClickSingle(e, song?.id, song.album_id)}>
+                                    <i class="fa-solid fa-play"></i>
+                                </div>
+                                :
+                                <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
                             }
-                        </div>
+                            <div className="song-to-playlist">
+                                {sessionUser ?
+                                    <OpenOptionsModalButton
+                                        buttonText="Add Song To Playlist"
+                                        modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
+                                    />
+                                    // <OptionsButton />
+                                    :
+                                    <OpenOptionsModalButton
+                                        buttonText="Add Song To Playlist"
+                                        modalComponent={<ConfirmLoginOrSignin />}
+                                    />
+                                }
+                            </div>
+
                     </div>
                 ))}
             </div>
@@ -97,8 +104,16 @@ export default function ArtistPage() {
                 <h2>Discography</h2>
                 {currentArtist?.albums?.map(album => (
                     <div onClick={() => history.push(`/albums/${album.id}`)} className="album">
-                        <img src={album.album_picture} style={{width: 400}}></img>
-                        <p>{album.name}</p>
+                        <div className="album-inside">
+                            <div className="album-image">
+                                <img src={album.album_picture}></img>
+
+                            </div>
+                            <div className="album-info-bottom">
+                                <h3>{album.name}</h3>
+                                <p>{album.artist_name}</p>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>

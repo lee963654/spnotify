@@ -5,6 +5,7 @@ def seed_albums():
     hometown_kid = Album(
         name="The Hometown Kid",
         artist_id = 1,
+        artist_name = "Gabe Lee",
         album_picture="https://spnotify.s3.us-east-2.amazonaws.com/hometownkid.jpg",
         release_year = 2022
     )
@@ -12,6 +13,7 @@ def seed_albums():
     what_you_see = Album(
         name="What You See Ain't Always What You Get (Deluxe Edition)",
         artist_id = 2,
+        artist_name = "Luke Combs",
         album_picture="https://spnotify.s3.us-east-2.amazonaws.com/whatyouseeis.jpg",
         release_year = 2020
     )

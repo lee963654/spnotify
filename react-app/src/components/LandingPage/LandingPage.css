@@ -2,19 +2,92 @@
     border: 1px solid red;
 } */
 
-.artist-inside > img {
-    width: 10rem;
-
+.body-container {
+    margin-left: 2rem;
 }
 
-.album-inside > img {
-    width: 10rem;
+.artist {
+    width: 12rem;
+    height: 17rem;
+    background-color: #1d1d1d;
+    border-radius: 6px;
 }
 
-.artist-container {
+.album {
+    width: 12rem;
+    height: 17rem;
+    background-color: #1d1d1d;
+    border-radius: 6px;
+}
+
+.artist-info-bottom {
+    margin-left: 1rem;
+}
+
+.artist-info-bottom > h3 {
+    color: white;
+}
+
+.artist-info-bottom > p {
+    color: #686565;;
+}
+
+.album-info-bottom {
+    margin-left: 1rem;
+}
+
+.album-info-bottom > h3 {
+    color: white;
+}
+
+.album-info-bottom > p {
+    color: #686565;
+}
+
+.artist-image {
     display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+.album-image {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+.artist-image > img {
+    width: 9rem;
+    height: 9rem;
+    border-radius: 75px;
+}
+
+.artist-link {
+    text-decoration: none;
+}
+
+.album-link {
+    text-decoration: none;
+}
+
+.album-image > img {
+    width: 10rem;
+    width: 10rem;
+
+    border-radius: 4px;
+}
+
+.artists-container {
+    display: flex;
+    gap: 2rem;
 }
 
 .albums-container {
     display: flex;
+    gap:2rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: white;
 }

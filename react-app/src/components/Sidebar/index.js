@@ -107,7 +107,7 @@ export default function Sidebar() {
                                 <div className="single-playlist-container" key={playlist.id}>
                                     <div className="playlist-info" onClick={() => history.push(`/playlists/${playlist.id}`)}>
                                         <div className="home-text playlist-name">{playlist.name}</div>
-                                        <div classname="not-working">
+                                        <div className="not-working">
                                             <div className="home-text">Playlist</div>
                                             <div className="home-text">{playlist?.user_playlist?.username}</div>
                                         </div>

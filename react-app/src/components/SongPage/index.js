@@ -61,7 +61,7 @@ export default function SongPage() {
 
             {sessionUser ?
                 <div className="middle-play-container" onClick={handleClick}>
-                    <i class="fa-solid fa-play"></i>
+                    <i class="fa-solid fa-play fa-lg"></i>
                 </div> :
                 <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
             }

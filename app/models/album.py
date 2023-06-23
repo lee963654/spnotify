@@ -11,6 +11,8 @@ class Album(db.Model):
     artist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("artists.id")), nullable=False)
     album_picture = db.Column(db.String(255))
     release_year = db.Column(db.Integer)
+    artist_name = db.Column(db.String)
+
 
     # relationships
     artist = db.relationship("Artist", back_populates="albums")
@@ -23,6 +25,7 @@ class Album(db.Model):
             "id": self.id,
             "name": self.name,
             "artist_id": self.artist_id,
+            "artist_name": self.artist_name,
             "album_picture": self.album_picture,
             "release_year": self.release_year,
             # "artist": self.artist.to_dict(),

@@ -1,23 +1,28 @@
-.profile-dropdown {
-    position: absolute;
-    /* border: 1px black solid;
-    padding: 0;
-    right: 13.5rem;
-    top: 43rem; */
-  }
+.album-and-song {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.album-and-song > p {
+  cursor: pointer;
+}
+
+.artist-page-play-button {
+  margin: 0 5rem;
+  cursor: pointer;
+}
+
+.header-artist-name {
+  color: white;
+  font-size: 6rem;
+  font-weight: bold;
+  margin-top: 10rem;
+  margin-left: 1rem;
+}
 
 .hidden {
     display: none;
-}
-
-.single {
-  display: flex;
-  justify-content: space-between;
-  width: 60rem;
-}
-
-.single-song {
-  display: flex;
 }
 
 .options-button {
@@ -28,6 +33,40 @@
   list-style-type: none;
 }
 
-/* .options-button > ul > li {
+.profile-dropdown {
+    position: absolute;
 
-} */
+  }
+
+.single {
+  display: flex;
+  margin-left: 2rem;
+  /* margin-top: .5rem;
+  margin-bottom: .5rem; */
+  width: 60rem;
+  color: white;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.single:hover {
+  background-color: rgb(75, 75, 75);
+  border-radius: 5px;
+}
+
+.single-song {
+  display: flex;
+  align-items: center;
+  width: 35rem;
+  justify-content: space-between;
+}
+
+.single-songs-container > h2 {
+  margin-left: 1rem;
+}
+
+.top-header-container {
+  height: 25rem;
+  display: flex;
+  align-items: center;
+}

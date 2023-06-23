@@ -1,6 +1,7 @@
 import React from 'react';
 import { useModal } from '../../context/Modal';
 
+
 function OpenModalAuthCheck({
     modalComponent, // component to render inside the modal
     buttonText, // text of the button that opens the modal
@@ -16,7 +17,7 @@ function OpenModalAuthCheck({
     };
 
     return (
-        <div onClick={onClick}>
+        <div className="artist-page-play-button" onClick={onClick}>
             <i class="fa-solid fa-play"></i>
         </div>
     );
