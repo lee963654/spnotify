@@ -100,22 +100,26 @@ export default function Sidebar() {
                             buttonText="Create Playlist"
                             modalComponent={<CreatePlaylistModal userId={userId} />}
                         /> */}
-                        <button onClick={handleSubmit}><i class="fa-solid fa-plus"></i></button>
+                        <div className="create-playlist" onClick={handleSubmit}><i class="fa-solid fa-plus"></i></div>
                         </div>
-                        <div>
+                        <div className="side-playlist-container">
                             {userPlaylistObj.length ? userPlaylistObj.map(playlist => (
                                 <div className="single-playlist-container" key={playlist.id}>
-                                    <div onClick={() => history.push(`/playlists/${playlist.id}`)}>
-                                        <div className="home-text">{playlist.name}</div>
-                                        <div>
+                                    <div className="playlist-info" onClick={() => history.push(`/playlists/${playlist.id}`)}>
+                                        <div className="home-text playlist-name">{playlist.name}</div>
+                                        <div classname="not-working">
                                             <div className="home-text">Playlist</div>
                                             <div className="home-text">{playlist?.user_playlist?.username}</div>
                                         </div>
 
                                     </div>
-                                    <OpenModalPlaylist
+                                    {/* <OpenModalPlaylist
                                         buttonText="Delete Playlist"
 
+                                        modalComponent={<DeletePlaylistModal playlistId={playlist.id} playlistName={playlist.name} />}
+
+                                    /> */}
+                                    <OpenModalPlaylist
                                         modalComponent={<DeletePlaylistModal playlistId={playlist.id} playlistName={playlist.name} />}
 
                                     />

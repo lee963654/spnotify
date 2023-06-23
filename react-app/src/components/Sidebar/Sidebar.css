@@ -5,8 +5,7 @@
 
 .create-playlist {
     margin-right: 1rem;
-    border-radius: 16px;
-    background-color: #011719;
+    cursor: pointer;
 }
 
 .home-text {
@@ -18,27 +17,63 @@
     margin-left: 1rem;
 }
 
+.not-working {
+    display: flex;
+    width: 15rem;
+}
+
+.playlist-name {
+    font-size: 1.2rem;
+}
+
 .sidebar-bottom-header {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
 .sidebar-container {
     background-color: #121212;
     padding: 1rem;
+    border-radius: 10px;
 }
 
 .sidebar-container-bottom {
     background-color: #121212;
     padding: 1rem;
+    height: 40.1rem;
+    overflow: auto;
+    border-radius: 10px;
+}
+
+.sidebar-container-bottom::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.sidebar-container-bottom::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
 }
 
 .sidebar-main-container {
     width: 20rem;
     position: sticky;
     top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
- /* .single-playlist-container {
-    border: 1px green solid
-}  */
+.single-playlist-container {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.trash-can {
+    color: white;
+    margin-right: 1rem;
+    cursor: pointer;
+}

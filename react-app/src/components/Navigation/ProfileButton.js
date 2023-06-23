@@ -7,6 +7,7 @@ import SignupFormModal from "../SignupFormModal";
 import LoginFormPage from "../LoginFormPage";
 import "./Navigation.css"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import OpenModalUser from "./OpenModalUser";
 
 function ProfileButton({ user }) {
   const history = useHistory()
@@ -67,7 +68,7 @@ function ProfileButton({ user }) {
           </>
         ) : (
           <>
-            <OpenModalButton
+            {/* <OpenModalButton
               buttonText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
@@ -76,6 +77,16 @@ function ProfileButton({ user }) {
             />
 
             <OpenModalButton
+              buttonText="Sign Up"
+              onItemClick={closeMenu}
+              modalComponent={<SignupFormModal />}
+            /> */}
+            <OpenModalUser
+              buttonText="Log In"
+              onItemClick={closeMenu}
+              modalComponent={<LoginFormModal />}
+            />
+            <OpenModalUser
               buttonText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
