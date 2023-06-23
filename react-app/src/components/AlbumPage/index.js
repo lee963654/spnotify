@@ -13,6 +13,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { playAlbumThunk, playSongThunk } from '../../store/audioPlayer';
 import OpenModalAuthCheck from '../OpenModalAuthCheck';
 import ConfirmLoginOrSignin from '../Sidebar/Confirm';
+import "./AlbumPage.css"
 
 export default function AlbumPage() {
     const history = useHistory()
@@ -65,14 +66,16 @@ export default function AlbumPage() {
     return (
         <div className="single-album-container">
             <div className="top-container">
-                <img style={{ width: 200 }} src={currentAlbum?.album_picture}></img>
-                <div className="album-info-container">
-                    <h1>{currentAlbum?.name}</h1>
-                    <div className="album-artist-container">
-                        <img src={currentArtist?.artist_picture} style={{ width: 75 }}></img>
-                        <h2 onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</h2>
-                        <p>{currentAlbum?.release_year}</p>
-                        {songsInAlbum?.length === 1 ? <p>{songsInAlbum?.length} song</p> : <p>{songsInAlbum?.length} songs</p>}
+                <div className="top-container-album">
+                    <img src={currentAlbum?.album_picture}></img>
+                    <div className="album-info-container">
+                        <h1>{currentAlbum?.name}</h1>
+                        <div className="album-artist-container">
+                            <img src={currentArtist?.artist_picture}></img>
+                            <h2 onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</h2>
+                            <p>{currentAlbum?.release_year}</p>
+                            {songsInAlbum?.length === 1 ? <p>{songsInAlbum?.length} song</p> : <p>{songsInAlbum?.length} songs</p>}
+                        </div>
                     </div>
                 </div>
                 {!hasReview && currentUser && (
@@ -90,7 +93,7 @@ export default function AlbumPage() {
                     <i class="fa-solid fa-play"></i>
                 </div>
                 :
-                <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />}/>
+                <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
             }
             <div className="album-songs-container">
                 {songsInAlbum && songsInAlbum.length ? songsInAlbum.map(song => (
@@ -102,13 +105,13 @@ export default function AlbumPage() {
                             modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
                         />
 
-                            {currentUser ?
+                        {currentUser ?
                             <div onClick={(e) => handleClickSingle(e, song?.id)}>
-                            <i class="fa-solid fa-play"></i>
+                                <i class="fa-solid fa-play"></i>
                             </div>
                             :
-                            <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />}/>
-                            }
+                            <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
+                        }
                     </div>
                 ))
                     : <div></div>}

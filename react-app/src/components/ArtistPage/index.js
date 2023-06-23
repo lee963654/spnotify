@@ -10,6 +10,8 @@ import { useHistory, Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { playArtistThunk, playSongThunk } from '../../store/audioPlayer';
 import OpenModalAuthCheck from '../OpenModalAuthCheck';
 import ConfirmLoginOrSignin from '../Sidebar/Confirm';
+import OpenAboutModal from './OpenAboutModal';
+import AboutPageModal from './AboutPageModal';
 
 
 export default function ArtistPage() {
@@ -110,7 +112,8 @@ export default function ArtistPage() {
 
                             </div>
                             <div className="album-info-bottom">
-                                <h3>{album.name}</h3>
+                                {/* <h3>{album.name}</h3> */}
+                                {album?.name?.length > 16 ? <h3>{`${album?.name?.slice(0, 16)}...`}</h3> : <h3>{album.name}</h3>}
                                 <p>{album.artist_name}</p>
                             </div>
                         </div>
@@ -119,8 +122,13 @@ export default function ArtistPage() {
             </div>
             <div className="artist-about-container">
                 <h2>About</h2>
-                <img src={currentArtist.artist_picture} style={{ width: 800 }}></img>
-                <p>{currentArtist.about}</p>
+                {/* <img src={currentArtist.artist_picture} style={{ width: 800 }}></img>
+                <p>{currentArtist.about}</p> */}
+                <OpenAboutModal
+                modalComponent={<AboutPageModal aboutPicture={currentArtist?.artist_picture} aboutContent={currentArtist?.about}/>}
+                aboutPicture={currentArtist?.artist_picture}
+                aboutContent={currentArtist?.about}
+                />
             </div>
         </div>
     )

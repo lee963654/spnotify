@@ -1,0 +1,48 @@
+.album-artist-container {
+    display: flex;
+    color: white;
+    align-items: center;
+    gap: 1rem;
+}
+
+.album-artist-container > p {
+    margin-right: 1.5rem;
+}
+
+.album-artist-container > h2 {
+    font-size: 1rem;
+}
+
+.album-artist-container > img {
+    width: 70px;
+    height: 70px;
+    border-radius: 40px;
+}
+
+.album-info-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    width: 100%;
+    cursor: default;
+}
+
+.album-info-container > h1 {
+    color: white;
+    font-size: 2rem;
+}
+
+.top-container {
+    display: flex;
+    margin-left: 3rem;
+    margin-top: 3rem;
+}
+
+.top-container-album {
+    display: flex;
+}
+
+.top-container-album > img {
+    width: 15rem;
+    height: 15rem;
+}

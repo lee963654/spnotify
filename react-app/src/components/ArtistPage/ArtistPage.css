@@ -1,3 +1,29 @@
+.about-info-container {
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+  margin-right: 10rem;
+  color: white;
+}
+
+.about-modal-container {
+  width: 35rem;
+  height: 45rem;
+  background-color: #121212;
+  color: #686565;
+  overflow: auto;
+  scrollbar-gutter: stable both-edges;
+}
+
+.about-modal-container::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.about-modal-container::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
+}
+
 .album-and-song {
   display: flex;
   align-items: center;
@@ -6,6 +32,21 @@
 
 .album-and-song > p {
   cursor: pointer;
+}
+
+.artist-about-container {
+  margin-bottom: 5rem;
+
+  margin-left: 1rem;
+}
+
+.artist-page-about-section {
+  height: 30rem;
+  width: 45rem;
+  background-position: center top;
+  display: flex;
+  align-items: end;
+  border-radius: 10px;
 }
 
 .artist-page-play-button {
@@ -23,6 +64,19 @@
 
 .hidden {
     display: none;
+}
+
+.modal-about-info {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-about-info > p {
+  width: 25rem;
+}
+
+.modal-picture {
+  width: 33rem;
 }
 
 .options-button {
@@ -52,6 +106,10 @@
 .single:hover {
   background-color: rgb(75, 75, 75);
   border-radius: 5px;
+}
+
+.single-albums-container {
+  margin-left: 1rem;
 }
 
 .single-song {
