@@ -47,12 +47,12 @@ export default function SongPage() {
     return (
         <div className="song-container">
             <div className="song-info-container">
-                <img src={currentAlbum?.album_picture} style={{ width: 200 }}></img>
+                <img src={currentAlbum?.album_picture}></img>
                 <div className="song-title-container">
                     <h1>{currentSong?.name}</h1>
                     <div className="bottom-song-title-container">
-                        <p onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</p>
-                        <p onClick={() => history.push(`/albums/${currentAlbum?.id}`)}>{currentAlbum?.name}</p>
+                        <p style={{cursor: "pointer"}} onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</p>
+                        <p style={{cursor: "pointer"}} onClick={() => history.push(`/albums/${currentAlbum?.id}`)}>{currentAlbum?.name}</p>
                         <p>{currentAlbum?.release_year}</p>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ export default function SongPage() {
             </div>
 
             {sessionUser ?
-                <div onClick={handleClick}>
+                <div className="middle-play-container" onClick={handleClick}>
                     <i class="fa-solid fa-play"></i>
                 </div> :
                 <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
@@ -68,9 +68,9 @@ export default function SongPage() {
             <div className="song-lyrics-container">
                 <div className="lyrics-container">
                     <h2>Lyrics</h2>
-                    {currentSong?.lyrics}
+                    <p>{currentSong?.lyrics}</p>
                 </div>
-                <div className="lyrics-artist-container" onClick={() => history.push(`/artists/${currentArtist?.id}`)}>
+                <div style={{cursor: "pointer"}} className="lyrics-artist-container" onClick={() => history.push(`/artists/${currentArtist?.id}`) }>
                     <img src={currentArtist?.artist_picture} style={{ width: 75 }}></img>
                     <div className="artist-name-container">
                         <p>Artist</p>

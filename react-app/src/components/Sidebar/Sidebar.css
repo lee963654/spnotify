@@ -3,6 +3,12 @@
     position: fixed;
 } */
 
+.create-playlist {
+    margin-right: 1rem;
+    border-radius: 16px;
+    background-color: #011719;
+}
+
 .home-text {
     height: 30px;
     display: flex;
@@ -12,12 +18,19 @@
     margin-left: 1rem;
 }
 
+.sidebar-bottom-header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .sidebar-container {
     background-color: #121212;
+    padding: 1rem;
 }
 
 .sidebar-container-bottom {
     background-color: #121212;
+    padding: 1rem;
 }
 
 .sidebar-main-container {

@@ -1,3 +1,91 @@
+.bottom-song-title-container {
+    display: flex;
+    color: white;
+}
+
+.bottom-song-title-container > p {
+    margin-right: 1.5rem;
+
+}
+
+.lyrics-artist-container {
+    margin-right: 15rem;
+    display: flex;
+    height: 5rem;
+}
+
+.lyrics-artist-container > img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 40px;
+}
+
+.lyrics-container {
+    width: 20rem;
+    margin-left: 3rem;
+}
+
+.lyrics-container > h2 {
+    color: white;
+    font-size: 2rem;
+}
+
+.lyrics-container > p {
+    color: #b3b2b2;
+    font-size: 1.2rem;
+}
+
+.middle-play-container {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.middle-play-container > .fa-solid {
+    margin-left: 3rem;
+    border: 1px black solid;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    background-color: #1FDF64;
+
+}
+
+.song-container {
+    height: 100%;
+}
+
+.song-lyrics-container {
+    display: flex;
+    padding-bottom: 2rem;
+    justify-content: space-between;
+}
+
+.song-title-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    width: 100%;
+    cursor: default;
+}
+
+.song-title-container > h1 {
+    color: white;
+    font-size: 4rem;
+}
+
 .song-info-container {
     display: flex;
+    margin-left: 3rem;
+    margin-top: 3rem;
+}
+
+.song-info-container > img {
+    width: 15rem;
+
 }

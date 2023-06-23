@@ -94,12 +94,14 @@ export default function Sidebar() {
                         <div onClick={() => history.push("/artists")} className="home-text">All Artists</div>
                     </div>
                     <div className="sidebar-container-bottom">
+                        <div className="sidebar-bottom-header">
                         <div className="home-text">Your Library</div>
                         {/* <OpenModalPlaylist
                             buttonText="Create Playlist"
                             modalComponent={<CreatePlaylistModal userId={userId} />}
                         /> */}
-                        <button onClick={handleSubmit}>Create a playlist</button>
+                        <button onClick={handleSubmit}><i class="fa-solid fa-plus"></i></button>
+                        </div>
                         <div>
                             {userPlaylistObj.length ? userPlaylistObj.map(playlist => (
                                 <div className="single-playlist-container" key={playlist.id}>
