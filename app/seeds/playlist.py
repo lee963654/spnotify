@@ -5,8 +5,8 @@ def seed_playlists(song_list):
     play1 = Playlist(
         name="My Playlist 1",
         user_id = 10,
-        private = True,
-        songs = [song_list[0], song_list[1]]
+        private = False,
+        songs = [song_list[0], song_list[1], song_list[2], song_list[3], song_list[4], song_list[5]]
     )
 
     play2 = Playlist(
@@ -20,20 +20,28 @@ def seed_playlists(song_list):
         name="My Playlist 3",
         user_id = 7,
         private=False,
-        songs= [song_list[1], song_list[4], song_list[5]]
+        songs= [song_list[10], song_list[4], song_list[15]]
     )
 
     play4 = Playlist(
         name="My Playlist 4",
         user_id = 1,
         private=False,
-        songs= [song_list[1], song_list[4], song_list[2], song_list[6]]
+        songs= [song_list[11], song_list[4], song_list[12], song_list[6]]
+    )
+
+    play5 = Playlist(
+        name="My Playlist 5",
+        user_id = 8,
+        private=False,
+        songs= [song_list[10], song_list[20], song_list[25], song_list[17], song_list[14], song_list[16], song_list[26]]
     )
 
     db.session.add(play1)
     db.session.add(play2)
     db.session.add(play3)
     db.session.add(play4)
+    db.session.add(play5)
     db.session.commit()
 
 

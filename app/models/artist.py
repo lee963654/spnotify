@@ -10,6 +10,7 @@ class Artist(db.Model):
     name = db.Column(db.String(50), nullable=False, unique=True)
     about = db.Column(db.String, nullable=False)
     artist_picture = db.Column(db.String(255))
+    artist_icon_picture = db.Column(db.String(255))
     about_picture = db.Column(db.String(255))
 
 
@@ -25,6 +26,7 @@ class Artist(db.Model):
             "about": self.about,
             "artist_picture": self.artist_picture,
             "about_picture": self.about_picture,
+            "artist_icon_picture": self.artist_icon_picture,
             "users_following": [user.to_dict() for user in self.user_followers],
             "albums": [album.to_dict() for album in self.albums]
         }
