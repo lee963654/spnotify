@@ -11,8 +11,8 @@ export default function CreateAlbumReviewModal({ formType, currentAlbumId, curre
     const {closeModal} = useModal()
     const dispatch = useDispatch()
     const [review, setReview] = useState(albumReview?.review || "")
-    const [stars, setStars] = useState(albumReview?.star_review)
-    const [activeStars, setActiveStars] = useState(stars)
+    // const [stars, setStars] = useState(albumReview?.star_review)
+    // const [activeStars, setActiveStars] = useState(stars)
     const [errors, setErrors] = useState({})
     const [hasSubmitted, setHasSubmitted] = useState(false)
 
@@ -22,7 +22,7 @@ export default function CreateAlbumReviewModal({ formType, currentAlbumId, curre
         const formData = new FormData()
         formData.append("album_id", currentAlbumId)
         formData.append("review", review)
-        formData.append("star_review", stars)
+        // formData.append("star_review", stars)
 
         if (formType === "new") {
             const newAlbumReview = await dispatch(createAlbumReviewThunk(formData, currentAlbumId))
@@ -72,7 +72,7 @@ export default function CreateAlbumReviewModal({ formType, currentAlbumId, curre
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
                 />
-                <div className="stars-container">
+                {/* <div className="stars-container">
                     <div
                         className={activeStars >= 1 ? "filled" : "empty"}
                         onMouseEnter={() => setActiveStars(1)}
@@ -119,8 +119,8 @@ export default function CreateAlbumReviewModal({ formType, currentAlbumId, curre
 
                     </div>
                     <div>Stars</div>
-                </div>
-                <button disabled={review.length < 10 || stars === 0}>Submit Your Review</button>
+                </div> */}
+                <button disabled={review.length < 10}>Submit Your Review</button>
             </form>
         </div>
     )

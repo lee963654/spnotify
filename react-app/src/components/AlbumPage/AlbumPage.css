@@ -32,10 +32,48 @@
     font-size: 2rem;
 }
 
+.album-review-container {
+    margin-bottom: 5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.album-songs-container {
+    margin-left: 1rem;
+}
+
+.review > p {
+    color: rgb(190, 186, 186);
+}
+
+.review > h3 {
+    color: rgb(238, 232, 232);
+}
+
+.review-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.song-container-album {
+    display: flex;
+    align-items: center;
+    width: 50rem;
+    color: white;
+    justify-content: space-between;
+}
+
+.song-container-info-bottom {
+    display: flex;
+    gap: 10rem;
+}
+
 .top-container {
     display: flex;
     margin-left: 3rem;
     margin-top: 3rem;
+    flex-direction: column;
 }
 
 .top-container-album {

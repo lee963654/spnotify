@@ -9,6 +9,7 @@ import * as sessionActions from "./store/session";
 import App from "./App";
 
 import "./index.css";
+import StartAtTop from "./components/ScrollToTop";
 
 const store = configureStore();
 
@@ -25,6 +26,7 @@ function Root() {
 		<ModalProvider>
 			<Provider store={store}>
 				<BrowserRouter>
+					<StartAtTop />
 					<App />
 					<Modal />
 				</BrowserRouter>

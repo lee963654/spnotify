@@ -9,7 +9,7 @@ class AlbumReview(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("albums.id")), nullable=False)
     review = db.Column(db.String, nullable=False)
-    star_review = db.Column(db.Integer, nullable=False)
+    # star_review = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
 
     # relationships
@@ -21,7 +21,7 @@ class AlbumReview(db.Model):
             "id": self.id,
             "album_id": self.album_id,
             "review": self.review,
-            "star_review": self.star_review,
+            # "star_review": self.star_review,
             "user_id": self.user_id,
             # "reviewed_album": self.album.to_dict(),
             "review_user": self.user.to_dict()

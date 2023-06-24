@@ -16,6 +16,7 @@ import ConfirmLoginOrSignin from '../Sidebar/Confirm';
 import "./AlbumPage.css"
 
 export default function AlbumPage() {
+
     const history = useHistory()
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -63,6 +64,8 @@ export default function AlbumPage() {
     }, []);
 
 
+
+
     return (
         <div className="single-album-container">
             <div className="top-container">
@@ -75,15 +78,21 @@ export default function AlbumPage() {
                             <h2 onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</h2>
                             <p>{currentAlbum?.release_year}</p>
                             {songsInAlbum?.length === 1 ? <p>{songsInAlbum?.length} song</p> : <p>{songsInAlbum?.length} songs</p>}
+                            {!hasReview && currentUser && (
+                                <OpenReviewButton
+                                    buttonText="Write a Review"
+                                    modalComponent={<CreateAlbumReviewModal currentAlbumId={id} formType="new" currentAlbum={currentAlbum} />}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
-                {!hasReview && currentUser && (
+                {/* {!hasReview && currentUser && (
                     <OpenReviewButton
                         buttonText="Write a Review"
                         modalComponent={<CreateAlbumReviewModal currentAlbumId={id} formType="new" currentAlbum={currentAlbum} />}
                     />
-                )}
+                )} */}
             </div>
             {/* <div onClick={handleClickAlbum} className="middle-play-container">
                 <i class="fa-solid fa-play"></i>
@@ -96,22 +105,38 @@ export default function AlbumPage() {
                 <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
             }
             <div className="album-songs-container">
+                <h2>Songs</h2>
                 {songsInAlbum && songsInAlbum.length ? songsInAlbum.map(song => (
-                    <div className="song-container">
-                        <p onClick={() => history.push(`/songs/${song?.id}`)}>{song?.name}</p>
-                        <p onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</p>
-                        <OpenOptionsModalButton
-                            buttonText="Add Song To Playlist"
-                            modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
-                        />
+                    <div className="song-container-album">
+                        <div className="song-container-info">
+                            <p onClick={() => history.push(`/songs/${song?.id}`)}>{song?.name}</p>
+                            <p onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</p>
+                        </div>
+                        <div className="song-container-info-bottom">
+                            {currentUser ?
+                                <div onClick={(e) => handleClickSingle(e, song?.id)}>
+                                    <i class="fa-solid fa-play"></i>
+                                </div>
+                                :
+                                <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
+                            }
+                            {currentUser ?
+                                <OpenOptionsModalButton
+                                    buttonText="Add Song To Playlist"
+                                    modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
+                                />
+                                :
+                                <OpenOptionsModalButton
+                                    buttonText="Add Song To Playlist"
+                                    modalComponent={<ConfirmLoginOrSignin />}
+                                />
+                            }
+                        </div>
+                        {/* // <OpenOptionsModalButton
+                        //     buttonText="Add Song To Playlist"
+                        //     modalComponent={<SongOptionsModal songId={song.id} songName={song.name} />}
+                        // /> */}
 
-                        {currentUser ?
-                            <div onClick={(e) => handleClickSingle(e, song?.id)}>
-                                <i class="fa-solid fa-play"></i>
-                            </div>
-                            :
-                            <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
-                        }
                     </div>
                 ))
                     : <div></div>}
@@ -125,8 +150,8 @@ export default function AlbumPage() {
                 <div className="review-container">
                     {allAlbumReviewsObj && allAlbumReviewsObj.length ? allAlbumReviewsObj.map(review => (
                         <div className="review">
-                            <h2>{review?.review_user?.username}</h2>
-                            <p>{review?.star_review} Stars</p>
+                            <h3>{review?.review_user?.username}</h3>
+                            {/* <p>{review?.star_review} Stars</p> */}
                             <p>{review?.review}</p>
                             {currentUser?.id === review?.user_id && (
                                 <div>
