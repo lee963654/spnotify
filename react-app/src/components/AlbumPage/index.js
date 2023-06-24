@@ -99,11 +99,11 @@ export default function AlbumPage() {
                 <i class="fa-solid fa-play"></i>
             </div> */}
             {currentUser ?
-                <div onClick={handleClickAlbum} className="middle-play-container">
-                    <i class="fa-solid fa-play"></i>
+                <div className="middle-play-container">
+                    <i onClick={handleClickAlbum} class="fa-solid fa-play fa-lg"></i>
                 </div>
                 :
-                <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
+                <OpenModalAuthCheck mainButtonTest={true} modalComponent={<ConfirmLoginOrSignin />} />
             }
             <div className="album-songs-container">
                 <h2>Songs</h2>

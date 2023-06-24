@@ -1,0 +1,7 @@
+.all-albums-container {
+    margin-left: 1rem;
+}
+
+.all-albums-container > h1 {
+    color: white;
+}

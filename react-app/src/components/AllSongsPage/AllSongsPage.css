@@ -1,0 +1,68 @@
+/* .all-songs-artist-name {
+    max-width: 10rem;
+    color: #686565;
+} */
+
+.all-songs-container {
+    margin-left: 1rem;
+} /* */
+
+.all-songs-song {
+    width: 12rem;
+    height: 17rem;
+    background-color: #1d1d1d;
+    border-radius: 6px;
+} /* */
+
+.all-songs-info-bottom {
+    margin-left: 1rem;
+} /* */
+
+.all-songs-info-bottom > h3 {
+    color: white;
+} /* */
+
+.all-songs-info-bottom > p {
+    color: #686565;
+} /* */
+
+.all-songs-song-image {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+} /* */
+
+.all-songs-song-image > img {
+    width: 10rem;
+
+    border-radius: 4px;
+} /* */
+
+/* .all-songs-song-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+
+}  */
+
+/* .all-songs-song-info > img {
+    width: 10rem;
+} */
+
+/* .all-songs-song-text {
+    display: flex;
+    text-align: center;
+    max-width: 10rem;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bolder;
+} */
+
+.songs-container-only {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+} /* */

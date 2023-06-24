@@ -71,7 +71,7 @@
 }
 
 .album-image > img {
-    width: 10rem;
+
     width: 10rem;
 
     border-radius: 4px;
@@ -80,11 +80,13 @@
 .artists-container {
     display: flex;
     gap: 2rem;
+    flex-wrap: wrap;
 }
 
 .albums-container {
     display: flex;
     gap:2rem;
+    flex-wrap: wrap;
 }
 
 h2 {

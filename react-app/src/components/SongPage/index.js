@@ -60,10 +60,10 @@ export default function SongPage() {
             </div>
 
             {sessionUser ?
-                <div className="middle-play-container" onClick={handleClick}>
-                    <i class="fa-solid fa-play fa-lg"></i>
+                <div className="middle-play-container">
+                    <i onClick={handleClick} class="fa-solid fa-play fa-lg"></i>
                 </div> :
-                <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
+                <OpenModalAuthCheck mainButtonTest={true} modalComponent={<ConfirmLoginOrSignin />} />
             }
             <div className="song-lyrics-container">
                 <div className="lyrics-container">

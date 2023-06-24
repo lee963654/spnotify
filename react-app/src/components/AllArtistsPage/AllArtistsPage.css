@@ -1,0 +1,7 @@
+.all-artists-container {
+    margin-left: 1rem;
+}
+
+.all-artists-container > h1 {
+    color: white;
+}

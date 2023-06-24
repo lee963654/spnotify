@@ -58,9 +58,9 @@ export default function ArtistPage() {
             </div>
             {/* <div className="middle-play-container"> */}
             {sessionUser ?
-                <div className="middle-play-container" onClick={handleClickArtistSongs}><i class="fa-solid fa-play fa-lg"></i></div>
+                <div className="middle-play-container"><i onClick={handleClickArtistSongs} class="fa-solid fa-play fa-lg"></i></div>
                 :
-                <OpenModalAuthCheck modalComponent={<ConfirmLoginOrSignin />} />
+                <OpenModalAuthCheck mainButtonTest={true} modalComponent={<ConfirmLoginOrSignin />} />
             }
             {/* </div> */}
             <div className="single-songs-container">

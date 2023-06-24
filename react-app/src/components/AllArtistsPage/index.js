@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { getArtistsThunk } from '../../store/artists';
+import "./AllArtistsPage.css"
 
 
 export default function AllArtistsPage() {
@@ -21,9 +22,16 @@ export default function AllArtistsPage() {
             <div className="artists-container">
                 {allArtistsObj && allArtistsObj.map(artist => (
                     <div onClick={() => history.push(`/artists/${artist.id}`)} className="artist">
-                        <div className="artist-info">
-                            <img src={artist.about_picture} style={{width: 75}}></img>
-                            <div>{artist.name}</div>
+                        <div className="artist">
+                            <div className="artist-inside">
+                                <div className="artist-image">
+                                    <img src={artist.about_picture}></img>
+                                </div>
+                                <div className="artist-info-bottom">
+                                    <h3>{artist.name}</h3>
+                                    <p>Artist</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 ))}
