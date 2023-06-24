@@ -35,7 +35,7 @@ export default function SongPage() {
 
     // on a redirect will take you to top of page
     useEffect(() => {
-        window.scrollTo(0, 0);
+        document.getElementById("scroll-to-top").scroll(0,0)
     }, []);
 
     useEffect(() => {

@@ -38,10 +38,11 @@ export default function ArtistPage() {
 
     useEffect(() => {
         dispatch(getSingleArtistThunk(id))
+
     }, [dispatch])
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        document.getElementById("scroll-to-top").scroll(0,0)
     }, []);
 
 

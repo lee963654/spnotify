@@ -57,10 +57,11 @@ export default function AlbumPage() {
         dispatch(getArtistsThunk())
         dispatch(getAlbumReviewsThunk(id))
         dispatch(getAllAlbumReviewsThunk())
+
     }, [dispatch, currentUser, id, hasReview])
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        document.getElementById("scroll-to-top").scroll(0,0)
     }, []);
 
 

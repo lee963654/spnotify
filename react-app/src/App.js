@@ -30,7 +30,7 @@ function App() {
     <div className="main-container">
       {/* <div className="body-container"> */}
         <Sidebar />
-        <div className="nav-landing-container">
+        <div id="scroll-to-top" className="nav-landing-container">
           <Navigation isLoaded={isLoaded} />
           {isLoaded && (
             <Switch>
