@@ -1,0 +1,77 @@
+.fa-solid {
+    cursor: pointer;
+}
+
+.fa-regular {
+    cursor: pointer;
+}
+
+.playlist-album-name {
+    /* margin-right: 5rem; */
+    width: 15rem;
+}
+
+.playlist-album-name > p {
+    width: fit-content;
+    cursor: pointer;
+}
+
+.playlist-bar-right {
+    display: flex;
+
+}
+
+.playlist-controls-container {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
+
+.playlist-header-container>p {
+    color: white;
+}
+
+.playlist-name-modal {
+    font-size: 5rem;
+    font-weight: bolder;
+    color: white;
+    cursor: pointer;
+}
+
+.playlist-song {
+
+    display: flex;
+    margin-left: 2rem;
+    max-width: 52rem;
+    color: white;
+    align-items: center;
+    padding: 0.5rem;
+
+}
+
+.playlist-song:hover {
+    background-color: rgb(75, 75, 75);
+  border-radius: 5px;
+}
+
+.playlist-song-artist {
+    margin-left: 1rem;
+}
+
+.playlist-song-artist > p {
+    cursor: pointer;
+}
+
+.single-playlist-page-container {
+    flex-direction: column;
+    margin-left: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    width: 30rem;
+
+}

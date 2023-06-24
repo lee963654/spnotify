@@ -59,7 +59,7 @@
 .song-container-album {
     display: flex;
     align-items: center;
-    /* width: 50rem; */
+    max-width: 60rem;
     color: white;
     justify-content: space-between;
     padding: 0.5rem;

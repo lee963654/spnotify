@@ -58,7 +58,7 @@
     justify-content: center;
     border-radius: 30px;
     background-color: #1FDF64;
-
+    cursor: pointer;
 }
 
 .song-container {
