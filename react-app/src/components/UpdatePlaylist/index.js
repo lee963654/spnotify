@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { getAllPlaylistsThunk, getUserPlaylistsThunk, updatePlaylistThunk } from '../../store/playlists';
-
+import "./UpdatePlaylist.css"
 
 export default function UpdatePlaylist ({playlistName, playlistId, playlistPrivate}) {
 
@@ -35,25 +35,25 @@ export default function UpdatePlaylist ({playlistName, playlistId, playlistPriva
 
     useEffect(() => {
         const errors = {}
-        if (name.length > 30) errors.name = "Name must be under 30 characters"
+        if (name.length > 25) errors.name = "Name must be under 25 characters"
         if (name.length === 0) errors.name = "You must provide a name for your playlist"
         setErrors(errors)
     }, [name])
 
     return (
         <div className="update-playlist-container">
-            <h1>Edit details</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Name
-                    {errors.name && <p>{errors.name}</p>}
+            <h1>Edit Playlist</h1>
+            <form className="update-playlist-form-container" onSubmit={handleSubmit}>
+                <label className="update-playlist-label">
+                <div className="update-playlist-label-name">Name {errors.name && <span className="errors">{errors.name}</span>}</div>
                     <input
+                        className="update-playlist-input"
                         type="text"
                         value={name}
                         onChange={e => setName(e.target.value)}
                     />
                 </label>
-                <label>
+                <label className="update-playlist-label">
                     Playlist
                     <select value={isPrivate} onChange={e => setIsPrivate(e.target.value)}>
                         {/* <option value="" disabled></option> */}
@@ -61,7 +61,7 @@ export default function UpdatePlaylist ({playlistName, playlistId, playlistPriva
                         <option value="public">Public</option>
                     </select>
                 </label>
-                <button disabled={name.length > 30 || name.length === 0}>
+                <button className="update-playlist-button" disabled={name.length > 25 || name.length === 0}>
                     Save
                 </button>
             </form>

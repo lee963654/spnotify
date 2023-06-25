@@ -7,11 +7,16 @@
     margin-left: 1rem;
 } /* */
 
+.all-songs-container > h1 {
+    color: white;
+}
+
 .all-songs-song {
     width: 12rem;
     height: 17rem;
     background-color: #1d1d1d;
     border-radius: 6px;
+    cursor: pointer;
 } /* */
 
 .all-songs-info-bottom {
@@ -65,4 +70,5 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
+    margin-bottom: 2rem;
 } /* */

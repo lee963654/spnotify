@@ -69,7 +69,7 @@ export default function Sidebar() {
                     </div>
                     <div className="sidebar-container-bottom">
                         <div className="home-text">Your Library</div>
-                        <div>
+                        {/* <div>
                             <div>Create your first playlist</div>
                             <div>It's easy, we'll help you</div>
                             <OpenModalCheck
@@ -78,11 +78,11 @@ export default function Sidebar() {
                                 modalComponent={<ConfirmLoginOrSignin />}
 
                             />
-                        </div>
-                        <div>
+                        </div> */}
+                        {/* <div>
                             <div>Let's find some artists to follow</div>
                             <button>Browse Artists</button>
-                        </div>
+                        </div> */}
                     </div>
                 </div> :
                 <div className="sidebar-main-container">

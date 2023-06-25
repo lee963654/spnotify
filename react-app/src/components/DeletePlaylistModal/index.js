@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deletePlaylistThunk, getUserPlaylistsThunk } from "../../store/playlists";
 import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import "./DeletePlaylistModal.css"
+
 
 export default function DeletePlaylistModal({playlistId, playlistName}) {
     const dispatch = useDispatch()
@@ -30,8 +32,10 @@ export default function DeletePlaylistModal({playlistId, playlistName}) {
         <div className="delete-playlist-container">
             <h1>Delete from Library?</h1>
             <p>This will delete {playlistName} from <span>Your Library</span></p>
-            <button onClick={e => handleCancelButton(e)}>Cancel</button>
-            <button onClick={e => handleDeleteButton(e)}>Delete</button>
+            <div className="delete-playlist-buttons-container">
+            <button className="delete-playlist-button" onClick={e => handleCancelButton(e)}>Cancel</button>
+            <button className="delete-playlist-button" onClick={e => handleDeleteButton(e)}>Delete</button>
+            </div>
         </div>
     )
 }

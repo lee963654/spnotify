@@ -87,7 +87,7 @@ export default function PlaylistPage() {
                             </div>
                         </div>
                     </div>
-                ))) : <div>No Songs</div>}
+                ))) : <div style={{fontSize: 50, color: "white"}}>No Songs</div>}
             </div>
         </div>
     )

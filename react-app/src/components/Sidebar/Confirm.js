@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import LoginFormModal from '../LoginFormModal';
 import OpenModalCheck from './OpenModalCheck';
 import SignupFormModal from '../SignupFormModal';
+import "./Sidebar.css"
 
 
 export default function ConfirmLoginOrSignin() {
@@ -10,8 +11,9 @@ export default function ConfirmLoginOrSignin() {
 
 
     return (
-        <div>
-            <p>Login or sign up to create and share playlists</p>
+        <div className="auth-confirm-container">
+            <p>Login or sign up to continue</p>
+            <div className="auth-modal-buttons">
             <OpenModalCheck
                 buttonText="Login"
                 // onItemClick={closeMenu}
@@ -22,6 +24,7 @@ export default function ConfirmLoginOrSignin() {
                 // onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
             />
+            </div>
         </div>
     )
 }

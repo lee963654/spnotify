@@ -297,33 +297,45 @@ export default function AudioPlayer() {
 
     return (
         <div className="footer-buttons-container">
-            <div className="song-info-container">
-                <div className="song-info">
-                    <img src={currentSong?.album_cover} style={{ width: 75 }}></img>
+            <div className="audio-song-info-container">
+                {currentSong ?
+                <div className="audio-song-info">
+                    <img src={currentSong?.album_cover}></img>
                     <div>
                         <p>{currentSong?.name}</p>
                         <p>{currentSong?.artist_name}</p>
                     </div>
                 </div>
+                :
+                <div>No Song Selected</div>
+                }
+                {/* <div className="audio-song-info">
+                    <img src={currentSong?.album_cover}></img>
+                    <div>
+                        <p>{currentSong?.name}</p>
+                        <p>{currentSong?.artist_name}</p>
+                    </div>
+                </div> */}
             </div>
             <div className="middle-section">
                 <div className="buttons-container">
                     <audio ref={audioRef} src={songUrl} preload="metadata"></audio>
-                    <button onClick={(e) => shuffleSongs(e)}>
-                        <i class="fa-solid fa-shuffle">{shuffle ? "On" : "Off"}</i>
-                    </button>
-                    <button onClick={(e) => prevSong(e)}>
+                    <div onClick={(e) => shuffleSongs(e)}>
+                        {/* <i class="fa-solid fa-shuffle">{shuffle ? "On" : "Off"}</i> */}
+                        <i class={shuffle ? `fa-solid on fa-shuffle` : `fa-solid fa-shuffle`}></i>
+                    </div>
+                    <div onClick={(e) => prevSong(e)}>
                         <i class="fa-solid fa-backward-step"></i>
-                    </button>
-                    <button onClick={togglePlayPause}>
+                    </div>
+                    <div onClick={togglePlayPause}>
                         {isPlaying ? <i class="fa-solid fa-pause"></i> : <i class="fa-solid fa-play"></i>}
-                    </button>
-                    <button onClick={(e) => nextSong(e)}>
+                    </div>
+                    <div onClick={(e) => nextSong(e)}>
                         <i class="fa-solid fa-forward-step"></i>
-                    </button>
-                    <button onClick={(e) => handleLoop(e)}>
-                        <i class="fa-solid fa-repeat">{loopOne ? "one loop" : loop ? "whole loop" : "no loop"}</i>
-                    </button>
+                    </div>
+                    <div onClick={(e) => handleLoop(e)}>
+                        <i class="fa-solid fa-repeat">{loopOne ? "loop 1" : loop ? "loop" : ""}</i>
+                    </div>
 
                 </div>
 

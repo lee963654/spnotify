@@ -1,13 +1,52 @@
-.review-form {
+.album-edit-delete-buttons {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: fit-content;
+    gap: 2rem;
+    color: white;
 }
 
 .album-review-textarea {
     width: 18rem;
     height: 8rem;
     resize: none;
+}
+
+.fa-regular {
+    cursor: pointer;
+}
+
+.fa-solid {
+    cursor: pointer;
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.review-form-container {
+
+    width: 20rem;
+    height: 22rem;
+    padding: 1rem;
+}
+
+.review-form-submit-button {
+    height: 2.5rem;
+    border-radius: 25px;
+    background-color:#1FDF64;
+    font-weight: bolder;
+    width: 8rem;
+    align-self: center;
+    color: black;
+    cursor: pointer;
+}
+
+.review-form-submit-button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
 }
 
 .stars-container .filled {

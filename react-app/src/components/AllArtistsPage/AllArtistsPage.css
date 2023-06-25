@@ -1,7 +1,12 @@
 .all-artists-container {
     margin-left: 1rem;
+    margin-bottom: 2rem;
 }
 
 .all-artists-container > h1 {
     color: white;
+}
+
+.artist {
+    cursor: pointer;
 }

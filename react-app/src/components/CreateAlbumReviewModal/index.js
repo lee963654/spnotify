@@ -48,7 +48,7 @@ export default function CreateAlbumReviewModal({ formType, currentAlbumId, curre
         }
     }
 
-    console.log("THE ALBUM IN THE EDIT MODAL", currentAlbum)
+
 
     useEffect(() => {
         dispatch(getAllAlbumReviewsThunk())
@@ -59,14 +59,19 @@ export default function CreateAlbumReviewModal({ formType, currentAlbumId, curre
     const updateReview = "update-album-review-form-container"
 
     return (
-        <div>
+        <div className="review-form-container">
             <form className="review-form" onSubmit={handleSubmit}>
+                {/* <h1>Write a review for the album <span>{currentAlbum.name}</span></h1> */}
+                {formType === "new" ?
                 <h1>Write a review for the album <span>{currentAlbum.name}</span></h1>
+                :
+                <h1>Edit a review for the album <span>{currentAlbum.name}</span></h1>
+                }
                 <textarea
                     className="album-review-textarea"
                     minLength="10"
-                    rows="4"
-                    cols="50"
+                    rows="10"
+                    cols="60"
                     type="text"
                     placeholder="Leave your review here..."
                     value={review}
@@ -120,7 +125,7 @@ export default function CreateAlbumReviewModal({ formType, currentAlbumId, curre
                     </div>
                     <div>Stars</div>
                 </div> */}
-                <button disabled={review.length < 10}>Submit Your Review</button>
+                <button className="review-form-submit-button" disabled={review.length < 10}>Submit Your Review</button>
             </form>
         </div>
     )

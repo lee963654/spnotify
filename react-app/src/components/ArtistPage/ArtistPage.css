@@ -24,6 +24,10 @@
   border-radius: 10px;
 }
 
+.album {
+  cursor: pointer;
+}
+
 .album-and-song {
   display: flex;
   align-items: center;
@@ -32,6 +36,15 @@
 
 .album-and-song > p {
   cursor: pointer;
+}
+
+.album-artist-container > h2 {
+  cursor: pointer;
+}
+
+.artist-albums-container {
+  gap: 1rem;
+  display: flex;
 }
 
 .artist-about-container {
@@ -47,6 +60,7 @@
   display: flex;
   align-items: end;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .artist-page-play-button {
@@ -77,6 +91,7 @@
 
 .modal-picture {
   width: 33rem;
+  background-repeat: no-repeat;
 }
 
 .options-button {
@@ -119,6 +134,10 @@
 
 .single-songs-container > h2 {
   margin-left: 1rem;
+}
+
+.song-container-info > p {
+  cursor: pointer;
 }
 
 .top-header-container {

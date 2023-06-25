@@ -25,7 +25,7 @@ export default function AllArtistsPage() {
                         <div className="artist">
                             <div className="artist-inside">
                                 <div className="artist-image">
-                                    <img src={artist.about_picture}></img>
+                                    <img src={artist.artist_icon_picture}></img>
                                 </div>
                                 <div className="artist-info-bottom">
                                     <h3>{artist.name}</h3>

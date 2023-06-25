@@ -22,7 +22,7 @@ def create_album_review(album_id):
         user_id = current_user.id
         new_album_review = AlbumReview(
             review = form.data["review"],
-            star_review = form.data["star_review"],
+
             album_id = album_id,
             user_id = int(user_id)
         )
@@ -47,7 +47,7 @@ def update_album_review(review_id):
 
     if form.validate_on_submit():
         review.review = form.data["review"]
-        review.star_review = form.data["star_review"]
+
         db.session.commit()
         return review.to_dict()
     else:

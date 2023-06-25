@@ -4,4 +4,3 @@ from wtforms.validators import DataRequired, ValidationError
 
 class AlbumReviewForm(FlaskForm):
     review = StringField("Review")
-    # star_review = IntegerField("Stars")

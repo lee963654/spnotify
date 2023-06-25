@@ -105,6 +105,7 @@ export default function ArtistPage() {
             </div>
             <div className="single-albums-container">
                 <h2>Discography</h2>
+                <div className="artist-albums-container">
                 {currentArtist?.albums?.map(album => (
                     <div onClick={() => history.push(`/albums/${album.id}`)} className="album">
                         <div className="album-inside">
@@ -120,14 +121,15 @@ export default function ArtistPage() {
                         </div>
                     </div>
                 ))}
+                </div>
             </div>
             <div className="artist-about-container">
                 <h2>About</h2>
                 {/* <img src={currentArtist.artist_picture} style={{ width: 800 }}></img>
                 <p>{currentArtist.about}</p> */}
                 <OpenAboutModal
-                modalComponent={<AboutPageModal aboutPicture={currentArtist?.artist_picture} aboutContent={currentArtist?.about}/>}
-                aboutPicture={currentArtist?.artist_picture}
+                modalComponent={<AboutPageModal aboutPicture={currentArtist?.about_picture} aboutContent={currentArtist?.about}/>}
+                aboutPicture={currentArtist?.about_picture}
                 aboutContent={currentArtist?.about}
                 />
             </div>

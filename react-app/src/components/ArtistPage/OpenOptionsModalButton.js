@@ -16,7 +16,7 @@ function OpenOptionsModalButton({
   };
 
   return (
-    <button onClick={onClick}>{buttonText}</button>
+    <div onClick={onClick}><i class="fa-regular fa-rectangle-list fa-lg"></i></div>
   );
 }
 

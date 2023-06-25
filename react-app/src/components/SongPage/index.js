@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom/cjs/react-router-dom.min
 import { getAllSongsThunk } from "../../store/songs"
 import { getArtistsThunk } from '../../store/artists';
 import { getAlbumsThunk } from '../../store/albums';
-import { playSongThunk } from '../../store/audioPlayer';
+import { clearAudioThunk, playSongThunk } from '../../store/audioPlayer';
 
 import LoginFormModal from '../LoginFormModal';
 import OpenModalAuthCheck from '../OpenModalAuthCheck';
@@ -29,6 +29,7 @@ export default function SongPage() {
 
     const handleClick = async (e) => {
         e.preventDefault()
+
         dispatch(playSongThunk(id, currentAlbumId, currentArtistId))
     }
 
@@ -71,7 +72,7 @@ export default function SongPage() {
                     <p>{currentSong?.lyrics}</p>
                 </div>
                 <div style={{cursor: "pointer"}} className="lyrics-artist-container" onClick={() => history.push(`/artists/${currentArtist?.id}`) }>
-                    <img src={currentArtist?.artist_picture} style={{ width: 75 }}></img>
+                    <img src={currentArtist?.artist_icon_picture} style={{ width: 75 }}></img>
                     <div className="artist-name-container">
                         <p>Artist</p>
                         <h3>{currentArtist?.name}</h3>

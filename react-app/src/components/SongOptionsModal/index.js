@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { addSongToPlaylistThunk } from "../../store/playlists";
+import "./SongOptionsModal.css"
 
 
 export default function SongOptionsModal({songId, songName}) {
@@ -25,7 +26,7 @@ export default function SongOptionsModal({songId, songName}) {
     return (
         <div className="song-options-container">
             <h1>Which playlist would you like to add {songName} to?</h1>
-            {userPlaylistsObj && userPlaylistsObj.length && (userPlaylistsObj.map(playlist => (
+            {/* {userPlaylistsObj && userPlaylistsObj.length && (userPlaylistsObj.map(playlist => (
                 <div className="playlists-container-modal">
                     <div className="playlist" onClick={(e) => {handleSubmit(e, playlist.id)}}>
                         {playlist.name}
@@ -33,7 +34,21 @@ export default function SongOptionsModal({songId, songName}) {
                 </div>
 
             ))
-            )}
+            )} */}
+            {userPlaylistsObj && userPlaylistsObj.length ?
+            (userPlaylistsObj.map(playlist => (
+                <div className="playlists-container-modal">
+                    <div className="playlist" onClick={(e) => {handleSubmit(e, playlist.id)}}>
+                        {playlist.name}
+                    </div>
+                </div>
+
+            ))
+            )
+            :
+            <p>Create a playlist to add songs!</p>
+            }
+
         </div>
     )
 }

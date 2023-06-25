@@ -25,13 +25,14 @@ export default function AlbumPage() {
     const currentAlbum = albums[id]
     const songsInAlbum = currentAlbum?.songs
     const artists = useSelector(state => state?.artists?.allArtists)
-    const currentArtist = artists[id]
+    const currentArtist = artists[currentAlbum?.artist_id]
     const albumReviews = currentAlbum?.album_reviews
     const currentUser = useSelector(state => state?.session?.user)
     const albumReviewsState = useSelector(state => state?.albumReviews?.singleAlbumReviews)
     const allAlbumReviews = useSelector(state => state?.albumReviews?.allAlbumReviews)
     const allAlbumReviewsObj = Object.values(allAlbumReviews).filter(review => review.album_id == id)
-
+    console.log("THIS IS THE CURRENT ARTIST", currentArtist)
+    console.log("THIS IS THE CURRENT album", currentAlbum)
 
     let hasReview;
 
@@ -75,12 +76,13 @@ export default function AlbumPage() {
                     <div className="album-info-container">
                         <h1>{currentAlbum?.name}</h1>
                         <div className="album-artist-container">
-                            <img src={currentArtist?.artist_picture}></img>
+                            <img src={currentArtist?.artist_icon_picture}></img>
                             <h2 onClick={() => history.push(`/artists/${currentArtist?.id}`)}>{currentArtist?.name}</h2>
                             <p>{currentAlbum?.release_year}</p>
                             {songsInAlbum?.length === 1 ? <p>{songsInAlbum?.length} song</p> : <p>{songsInAlbum?.length} songs</p>}
                             {!hasReview && currentUser && (
                                 <OpenReviewButton
+                                    type="new"
                                     buttonText="Write a Review"
                                     modalComponent={<CreateAlbumReviewModal currentAlbumId={id} formType="new" currentAlbum={currentAlbum} />}
                                 />
@@ -155,12 +157,14 @@ export default function AlbumPage() {
                             {/* <p>{review?.star_review} Stars</p> */}
                             <p>{review?.review}</p>
                             {currentUser?.id === review?.user_id && (
-                                <div>
+                                <div className="album-edit-delete-buttons">
                                     <OpenReviewButton
+                                        type="edit"
                                         buttonText="Edit Review"
                                         modalComponent={<CreateAlbumReviewModal reviewId={review.id} albumReview={review} formType="edit" currentAlbum={currentAlbum} />}
                                     />
                                     <OpenReviewButton
+                                        type="delete"
                                         buttonText="Delete Review"
                                         modalComponent={<DeleteAlbumReviewModal reviewId={review.id} currentAlbum={currentAlbum} />}
                                     />

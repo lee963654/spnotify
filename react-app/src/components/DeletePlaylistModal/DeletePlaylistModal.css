@@ -1,0 +1,23 @@
+.delete-playlist-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20rem;
+    padding: 1rem;
+}
+
+.delete-playlist-buttons-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.delete-playlist-button {
+    height: 2.5rem;
+    border-radius: 25px;
+    background-color:#1FDF64;
+    font-weight: bolder;
+    width: 6rem;
+    align-self: center;
+    color: black;
+    cursor: pointer;
+}

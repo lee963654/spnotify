@@ -1,0 +1,43 @@
+.link-to-signup {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.signup-modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 30rem;
+    width: 30rem;
+}
+
+.signup-form-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.signup-input {
+    height: 2rem;
+
+    border-radius: 5px;
+    width: 25rem;
+
+}
+
+.signup-input-label {
+    width: 26rem;
+}
+
+.signup-modal-button {
+    height: 2.5rem;
+    border-radius: 25px;
+    background-color:#1FDF64;
+    font-weight: bolder;
+    width: 6rem;
+    align-self: center;
+}
+
+.signup-to-login-link {
+    color: black;
+}
