@@ -301,7 +301,7 @@ export default function AudioPlayer() {
                 {currentSong ?
                 <div className="audio-song-info">
                     <img src={currentSong?.album_cover}></img>
-                    <div>
+                    <div className="audio-song-info-name">
                         <p>{currentSong?.name}</p>
                         <p>{currentSong?.artist_name}</p>
                     </div>
@@ -333,8 +333,13 @@ export default function AudioPlayer() {
                     <div onClick={(e) => nextSong(e)}>
                         <i class="fa-solid fa-forward-step"></i>
                     </div>
-                    <div onClick={(e) => handleLoop(e)}>
+                    {/* <div onClick={(e) => handleLoop(e)}>
                         <i class="fa-solid fa-repeat">{loopOne ? "loop 1" : loop ? "loop" : ""}</i>
+                    </div> */}
+                    <div className="repeat-button" onClick={(e) => handleLoop(e)}>
+                        <i class="fa-solid fa-repeat"></i>
+                        <div className={!loopOne && loop ? "repeat-all" : "display-off"}><i class="fa-solid fa-circle-dot fa-2xs"></i></div>
+                        <div className={!loop && loopOne ? "repeat-one" : "display-off"}>1</div>
                     </div>
 
                 </div>
