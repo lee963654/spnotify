@@ -48,6 +48,12 @@ export default function CreateAlbumReviewModal({ formType, currentAlbumId, curre
         }
     }
 
+    useEffect(() => {
+        const errors = {}
+        if (review.length > 1000) errors.review = "Review must be fewer than 1000 characters"
+
+        setErrors(errors)
+    }, [review])
 
 
     useEffect(() => {
@@ -67,6 +73,7 @@ export default function CreateAlbumReviewModal({ formType, currentAlbumId, curre
                 :
                 <h1>Edit a review for the album <span>{currentAlbum.name}</span></h1>
                 }
+                {errors.review && <div className="errors">{errors.review}</div>}
                 <textarea
                     className="album-review-textarea"
                     minLength="10"
@@ -125,7 +132,7 @@ export default function CreateAlbumReviewModal({ formType, currentAlbumId, curre
                     </div>
                     <div>Stars</div>
                 </div> */}
-                <button className="review-form-submit-button" disabled={review.length < 10}>Submit Your Review</button>
+                <button className="review-form-submit-button" disabled={review.length < 10 || review.length > 1000}>Submit Your Review</button>
             </form>
         </div>
     )

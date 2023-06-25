@@ -51,7 +51,7 @@ def seed_albums():
         name = "You Get What You Give (Deluxe)",
         artist_id = 4,
         artist_name = "Zac Brown Band",
-        album_picture = "https://spnotify.s3.us-east-2.amazonaws.com/zac-brown-band-you-get-what.jpg"
+        album_picture = "https://spnotify.s3.us-east-2.amazonaws.com/zac-brown-band-you-get.jpg"
     )
 
     from_a_room = Album(
