@@ -4,6 +4,7 @@ import { useModal } from "../../context/Modal";
 import { deletePlaylistThunk, getUserPlaylistsThunk } from "../../store/playlists";
 import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import "./DeletePlaylistModal.css"
+import { clearAudioThunk } from "../../store/audioPlayer";
 
 
 export default function DeletePlaylistModal({playlistId, playlistName}) {
@@ -20,6 +21,7 @@ export default function DeletePlaylistModal({playlistId, playlistName}) {
         if (location.pathname === `/playlists/${playlistId}`) {
             history.push("/")
         }
+        dispatch(clearAudioThunk())
         closeModal()
     }
 

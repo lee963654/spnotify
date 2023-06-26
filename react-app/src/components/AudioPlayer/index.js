@@ -204,6 +204,11 @@ export default function AudioPlayer() {
             console.log("THE CURRENTSONG PLAY INSIDE THE IF CONDITION", audioPlayer)
             setSongUrl(currentSongPlay)
         }
+        // testing
+        if (!currentSongPlay) {
+            setSongUrl("")
+        }
+        //testing
     }, [currentSongPlay])
     // , trackCurrentSong, audioPlayer
 
@@ -216,6 +221,13 @@ export default function AudioPlayer() {
             barAnimationRef.current = requestAnimationFrame(whilePlaying)
             setTrackCurrentSong(audioPlayer?.songList[currentIndex])
         }
+
+        //testing
+        if (!songUrl) {
+
+        }
+        //testing
+
     }, [songUrl])
 
     useEffect(() => {
