@@ -1,0 +1,10 @@
+.no-session-user-buttons {
+    height: 2rem;
+    border-radius: 25px;
+    background-color:#1FDF64;
+    font-weight: bolder;
+    width: 6rem;
+    align-self: center;
+    color: black;
+    cursor: pointer;
+}
