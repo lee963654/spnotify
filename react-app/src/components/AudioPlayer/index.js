@@ -267,11 +267,17 @@ export default function AudioPlayer() {
 
 
     useEffect(() => {
-
+        console.log("in the useeffect for sesssion user")
         if (!sessionUser) {
+            console.log("checking to see if log out session user useeffect is working")
             dispatch(clearAudioThunk())
+            //testing
+
+            //testing
         }
     }, [dispatch, sessionUser])
+    console.log("THIS IS THE SESSIONUSER++++++++++", sessionUser)
+
 
     // Checking to see if a different set of songs are playing.
     useEffect(() => {
@@ -304,7 +310,9 @@ export default function AudioPlayer() {
     }, [shuffle])
     // Shuffle testing
 
+    // testing for session user
 
+    // testing for session user
 
 
     return (
