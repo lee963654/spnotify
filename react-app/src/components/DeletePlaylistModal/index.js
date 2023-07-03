@@ -25,6 +25,7 @@ export default function DeletePlaylistModal({playlistId, playlistName}) {
         closeModal()
     }
 
+
     const handleCancelButton = (e) => {
         e.preventDefault()
         closeModal()
