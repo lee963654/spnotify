@@ -36,6 +36,7 @@ export default function DeletePlaylistModal({playlistId, playlistName}) {
             <button className="delete-playlist-button" onClick={e => handleCancelButton(e)}>Cancel</button>
             <button className="delete-playlist-button" onClick={e => handleDeleteButton(e)}>Delete</button>
             </div>
+
         </div>
     )
 }
