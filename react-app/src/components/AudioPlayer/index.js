@@ -204,6 +204,11 @@ export default function AudioPlayer() {
             console.log("THE CURRENTSONG PLAY INSIDE THE IF CONDITION", audioPlayer)
             setSongUrl(currentSongPlay)
         }
+        // testing
+        if (!currentSongPlay) {
+            setSongUrl("")
+        }
+        //testing
     }, [currentSongPlay])
     // , trackCurrentSong, audioPlayer
 
@@ -216,6 +221,13 @@ export default function AudioPlayer() {
             barAnimationRef.current = requestAnimationFrame(whilePlaying)
             setTrackCurrentSong(audioPlayer?.songList[currentIndex])
         }
+
+        //testing
+        if (!songUrl) {
+
+        }
+        //testing
+
     }, [songUrl])
 
     useEffect(() => {
@@ -255,11 +267,17 @@ export default function AudioPlayer() {
 
 
     useEffect(() => {
-
+        console.log("in the useeffect for sesssion user")
         if (!sessionUser) {
+            console.log("checking to see if log out session user useeffect is working")
             dispatch(clearAudioThunk())
+            //testing
+
+            //testing
         }
     }, [dispatch, sessionUser])
+    console.log("THIS IS THE SESSIONUSER++++++++++", sessionUser)
+
 
     // Checking to see if a different set of songs are playing.
     useEffect(() => {
@@ -292,7 +310,9 @@ export default function AudioPlayer() {
     }, [shuffle])
     // Shuffle testing
 
+    // testing for session user
 
+    // testing for session user
 
 
     return (
@@ -301,7 +321,7 @@ export default function AudioPlayer() {
                 {currentSong ?
                 <div className="audio-song-info">
                     <img src={currentSong?.album_cover}></img>
-                    <div>
+                    <div className="audio-song-info-name">
                         <p>{currentSong?.name}</p>
                         <p>{currentSong?.artist_name}</p>
                     </div>
@@ -333,8 +353,13 @@ export default function AudioPlayer() {
                     <div onClick={(e) => nextSong(e)}>
                         <i class="fa-solid fa-forward-step"></i>
                     </div>
-                    <div onClick={(e) => handleLoop(e)}>
+                    {/* <div onClick={(e) => handleLoop(e)}>
                         <i class="fa-solid fa-repeat">{loopOne ? "loop 1" : loop ? "loop" : ""}</i>
+                    </div> */}
+                    <div className="repeat-button" onClick={(e) => handleLoop(e)}>
+                        <i class="fa-solid fa-repeat"></i>
+                        <div className={!loopOne && loop ? "repeat-all" : "display-off"}><i class="fa-solid fa-circle-dot fa-2xs"></i></div>
+                        <div className={!loop && loopOne ? "repeat-one" : "display-off"}>1</div>
                     </div>
 
                 </div>

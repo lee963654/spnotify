@@ -61,6 +61,8 @@
   align-items: end;
   border-radius: 10px;
   cursor: pointer;
+  background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .artist-page-play-button {
@@ -90,7 +92,7 @@
 }
 
 .modal-picture {
-  width: 33rem;
+  width: 100%;
   background-repeat: no-repeat;
 }
 
@@ -141,7 +143,9 @@
 }
 
 .top-header-container {
-  height: 25rem;
+  height: 30rem;
   display: flex;
   align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }

@@ -2,8 +2,16 @@
     display: flex;
 }
 
+.audio-song-info-container {
+    width: 22rem;
+}
+
 .audio-song-info > img {
     width: 75px;
+}
+
+.audio-song-info-name {
+    margin-left: 1rem;
 }
 
 .on {
@@ -13,12 +21,12 @@
 .footer-buttons-container {
 
     display: flex;
-
-    width: 75rem;
-
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    width: 100%;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .buttons-container {
@@ -41,4 +49,27 @@
     display: flex;
     width: 10rem;
     align-items: center;
+}
+
+.repeat-button {
+    display: flex;
+    width: 1rem;
+}
+
+.repeat-all {
+    position: relative;
+    right: 13px;
+    top: 15px;
+    color: green;
+}
+
+.repeat-one {
+    position: relative;
+    right: -3px;
+    bottom: 1px;
+    color: green;
+}
+
+.display-off {
+    display: none;
 }

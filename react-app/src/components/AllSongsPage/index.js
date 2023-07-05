@@ -27,8 +27,8 @@ export default function AllSongsPage() {
                             </div>
                             <div className="all-songs-info-bottom">
                                 <h3>{song?.name?.length > 16 ? `${song?.name?.slice(0, 16)}...` : `${song?.name}`}</h3>
-
                                 <p>{song?.artist_name?.length > 16 ? `${song?.artist_name?.slice(0, 16)}...` : `${song?.artist_name}`}</p>
+
                             </div>
                         </div>
                     </div>
