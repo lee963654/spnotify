@@ -34,7 +34,6 @@ export default function DeletePlaylistModal({playlistId, playlistName}) {
     return (
         <div className="delete-playlist-container">
             <h1>Delete from Library?</h1>
-
             <p>This will delete {playlistName} from <span>Your Library</span></p>
             <div className="delete-playlist-buttons-container">
             <button className="delete-playlist-button" onClick={e => handleCancelButton(e)}>Cancel</button>
