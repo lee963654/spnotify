@@ -1,11 +1,24 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.api.auth_routes import validation_errors_to_error_messages
-from app.models import User, db, Artist, Album, Song, Playlist
-from app.forms import PlaylistForm
+from app.models import User, db, Artist, Album, Song, Playlist, PlaylistReview
+from app.forms import PlaylistForm, PlaylistReviewForm
 
 
 playlist_routes = Blueprint("playlists", __name__)
+
+
+
+@playlist_routes.route("/reviews/all")
+@login_required
+def get_all_playlist_reviews():
+    """
+    Getting all playlist reviews
+    """
+    playlist_reviews = PlaylistReview.query.all()
+    res_playlist_reviews = {review.id: review.to_dict() for review in playlist_reviews}
+    return res_playlist_reviews
+
 
 
 
@@ -27,45 +40,30 @@ def add_song_to_playlist(playlist_id, song_id):
         return playlist.to_dict()
 
 
-
-@playlist_routes.route("/user")
+@playlist_routes.route("/reviews/<int:playlist_id>", methods=["POST"])
 @login_required
-def get_user_playlists():
+def create_playlist_review(playlist_id):
     """
-    Getting all user playlists
+    Create a new review for a playlist
     """
-
-    playlists = Playlist.query.filter(Playlist.user_id == current_user.id)
-
-    user_playlists = {playlist.id : playlist.to_dict() for playlist in playlists}
-
-    return user_playlists
-
-
-@playlist_routes.route("/", methods=["POST"])
-@login_required
-def create_a_playlist():
-    """
-    Creating a playlist
-    """
-
-    form = PlaylistForm()
+    form = PlaylistReviewForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
-
     if form.validate_on_submit():
         user_id = current_user.id
-        new_playlist = Playlist(
-            name = form.data["name"],
-            private = form.data["private"],
-            user_id = int(user_id),
+        new_playlist_review = PlaylistReview(
+            review = form.data["review"],
+            playlist_id = playlist_id,
+            user_id = int(user_id)
         )
-
-        db.session.add(new_playlist)
+        db.session.add(new_playlist_review)
+        curr_playlist = Playlist.query.get(playlist_id)
+        curr_playlist.playlist_review.append(new_playlist_review)
         db.session.commit()
-        return new_playlist.to_dict()
+        return new_playlist_review.to_dict()
     else:
         errors = form.errors
         return errors
+
 
 
 @playlist_routes.route("/<int:playlist_id>/update", methods = ["PUT"])
@@ -106,6 +104,50 @@ def delete_users_playlist(playlist_id):
         return deleted_dict
     else:
         return {"message": "Playlist was not deleted"}
+
+
+
+@playlist_routes.route("/user")
+@login_required
+def get_user_playlists():
+    """
+    Getting all user playlists
+    """
+
+    playlists = Playlist.query.filter(Playlist.user_id == current_user.id)
+
+    user_playlists = {playlist.id : playlist.to_dict() for playlist in playlists}
+
+    return user_playlists
+
+
+
+@playlist_routes.route("/", methods=["POST"])
+@login_required
+def create_a_playlist():
+    """
+    Creating a playlist
+    """
+
+    form = PlaylistForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    if form.validate_on_submit():
+        user_id = current_user.id
+        new_playlist = Playlist(
+            name = form.data["name"],
+            private = form.data["private"],
+            user_id = int(user_id),
+        )
+
+        db.session.add(new_playlist)
+        db.session.commit()
+        return new_playlist.to_dict()
+    else:
+        errors = form.errors
+        return errors
+
+
 
 
 @playlist_routes.route("/")

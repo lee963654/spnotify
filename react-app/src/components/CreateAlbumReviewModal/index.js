@@ -69,9 +69,9 @@ export default function CreateAlbumReviewModal({ formType, currentAlbumId, curre
             <form className="review-form" onSubmit={handleSubmit}>
                 {/* <h1>Write a review for the album <span>{currentAlbum.name}</span></h1> */}
                 {formType === "new" ?
-                <h1>Write a review for the album <span>{currentAlbum.name}</span></h1>
+                <h1>Write a review for the album <span>{currentAlbum?.name}</span></h1>
                 :
-                <h1>Edit a review for the album <span>{currentAlbum.name}</span></h1>
+                <h1>Edit a review for the album <span>{currentAlbum?.name}</span></h1>
                 }
                 {errors.review && <div className="errors">{errors.review}</div>}
                 <textarea

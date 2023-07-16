@@ -8,7 +8,7 @@ class PlaylistReview(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     review = db.Column(db.String(1000), nullable=False)
-    star_review = db.Column(db.Integer, nullable=False)
+
     playlist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("playlists.id")), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
 
@@ -20,7 +20,7 @@ class PlaylistReview(db.Model):
         return {
             "id": self.id,
             "review": self.review,
-            "star_review": self.star_review,
+
             "playlist_id": self.playlist_id,
             # "playlist": self.playlist.to_dict(),
             "user_playlist_review": self.user_playlist_review.to_dict()

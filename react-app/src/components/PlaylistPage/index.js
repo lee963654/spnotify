@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { getAllPlaylistsThunk, getUserPlaylistsThunk, removeSongFromPlaylistThunk } from '../../store/playlists';
-import OpenModalButton from '../OpenModalButton';
+import { getAllPlaylistsThunk, getUserPlaylistsThunk, removeSongFromPlaylistThunk, getAllPlaylistReviewThunk } from '../../store/playlists';
 import UpdatePlaylist from '../UpdatePlaylist';
 import { getArtistsThunk } from '../../store/artists';
 import { getAlbumsThunk } from '../../store/albums';
 import { playPlaylistThunk, playSongThunk } from '../../store/audioPlayer';
 import "./PlaylistPage.css"
-import PlaylistNameModal from './PlaylistNameModal';
+import CreatePlaylistReviewModal from './CreatePlaylistReviewModal';
+import OpenPlaylistReviewButton from './OpenPlaylistReviewButton';
+import PlaylistNameModal from "./PlaylistNameModal"
+import CreateAlbumReviewModal from '../CreateAlbumReviewModal';
+
 
 export default function PlaylistPage() {
     const history = useHistory()
@@ -18,14 +21,28 @@ export default function PlaylistPage() {
     const currentPlaylist = allPlaylists[id]
     const artists = useSelector(state => state?.artists?.allArtists)
     const albums = useSelector(state => state?.albums?.allAlbums)
+    const sessionUser = useSelector(state=> state?.session?.user)
 
     const userPlaylist = useSelector(state => state?.playlists?.userPlaylists)
     console.log("THIS IS THE USER PLAYLIST", userPlaylist)
+
+    const allPlaylistReviews = useSelector(state => state?.playlists?.playlistReviews)
+    const allPlaylistReviewsObj = Object.values(allPlaylistReviews).filter(review => review.playlist_id == id)
+    console.log("all playlist reviews obj", allPlaylistReviewsObj)
+
 
     const songsInPlaylist = currentPlaylist?.songs_in_playlist
     const songObj = Object.values(songsInPlaylist || {})
 
     const playlistPrivate = currentPlaylist?.private === true ? "private" : "public"
+
+    let hasReview;
+    for (let review of allPlaylistReviewsObj) {
+
+        if (review?.user_playlist_review?.id == sessionUser?.id) {
+            hasReview = true
+        }
+    }
 
     const handleSubmit = async (e, songId) => {
         e.preventDefault()
@@ -45,11 +62,12 @@ export default function PlaylistPage() {
 
 
     useEffect(() => {
-
+        dispatch(getAllPlaylistReviewThunk(id))
         dispatch(getAllPlaylistsThunk())
         dispatch(getUserPlaylistsThunk())
         dispatch(getArtistsThunk())
         dispatch(getAlbumsThunk())
+
     }, [dispatch])
 
     // On a redirect, will rerender to top of the page
@@ -70,7 +88,24 @@ export default function PlaylistPage() {
                 :
                 <div className="playlist-name-modal-not-owner">
                 {currentPlaylist?.name}
-
+                {!hasReview && sessionUser && (
+                    <OpenPlaylistReviewButton
+                    type="new-playlist"
+                    modalComponent={<CreatePlaylistReviewModal
+                        currentPlaylistId={id}
+                        currentPlaylist={currentPlaylist}
+                        formType="newPlaylist"
+                        />}
+                />
+                )}
+                    {/* <OpenPlaylistReviewButton
+                        type="new-playlist"
+                        modalComponent={<CreatePlaylistReviewModal
+                            currentPlaylistId={id}
+                            currentPlaylist={currentPlaylist}
+                            formType="newPlaylist"
+                            />}
+                    /> */}
                 </div>
                 }
                 {/* <PlaylistNameModal
@@ -105,7 +140,36 @@ export default function PlaylistPage() {
             <div className="playlist-review-container">
                 <h2>Playlist Reviews</h2>
                 <div classname="playlist-container">
+                    {allPlaylistReviewsObj && allPlaylistReviewsObj.length ?
+                    allPlaylistReviewsObj.map(review => (
+                        <div className="playlist-review">
+                            <h3>{review?.user_playlist_review?.username}</h3>
+                            <p>{review?.review}</p>
+                            {sessionUser?.id == review.user_playlist_review?.id && (
+                                <div className="playlist-review-edit-delete-buttons">
+                                    <OpenPlaylistReviewButton
+                                        type="edit-playlist"
+                                        modalComponent={<CreatePlaylistReviewModal
+                                            reviewId={review.id}
+                                            playlistReview={review}
+                                            formType="editPlaylist"
+                                        />}
+                                    />
+                                    <OpenPlaylistReviewButton
+                                        type="delete-playlist"
+                                        modalComponent={<CreatePlaylistReviewModal
 
+                                        />}
+                                    />
+
+                                </div>
+                            )}
+                        </div>
+                    )) :
+                    <div>
+                        <h2>No Reviews</h2>
+                    </div>
+                    }
                 </div>
             </div>
         </div>
