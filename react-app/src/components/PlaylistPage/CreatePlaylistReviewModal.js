@@ -4,7 +4,7 @@ import { useModal } from "../../context/Modal";
 import { getAlbumReviewsThunk, updateAlbumReviewThunk, getAllAlbumReviewsThunk } from "../../store/albumReviews";
 // import "./CreateAlbumReview.css"
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { createPlaylistReviewThunk, updatePlaylistReviewThunk } from "../../store/playlists";
+import { createPlaylistReviewThunk, getAllPlaylistReviewThunk, updatePlaylistReviewThunk } from "../../store/playlists";
 
 export default function CreatePlaylistReviewModal({ formType, currentPlaylistId, playlistReview, currentPlaylist, reviewId }) {
     const history = useHistory()
@@ -21,7 +21,7 @@ export default function CreatePlaylistReviewModal({ formType, currentPlaylistId,
         formData.append("playlist_id", currentPlaylistId)
         formData.append("review", review)
         // formData.append("star_review", stars)
-
+        console.log("the formdata", formData.get("review"))
         if (formType === "newPlaylist") {
             const newPlaylistReview = await dispatch(createPlaylistReviewThunk(formData, currentPlaylistId))
             if (newPlaylistReview.errors) {
@@ -33,16 +33,19 @@ export default function CreatePlaylistReviewModal({ formType, currentPlaylistId,
             }
         }
         if (formType === "editPlaylist") {
+            console.log("in the edit playlist conditional")
             const updatePlaylistReview = await dispatch(updatePlaylistReviewThunk(formData, reviewId))
-        //     if (updateAlbumReview.errors) {
-        //         setErrors(updateAlbumReview.errors)
-        //         setHasSubmitted(false)
-        //     } else {
-        //         dispatch(getAlbumReviewsThunk(currentAlbum?.id))
-        //         dispatch(getAllAlbumReviewsThunk())
-        //         setHasSubmitted(false)
-        //         closeModal()
-        //     }
+
+            if (updatePlaylistReview.errors) {
+                setErrors(updatePlaylistReview.errors)
+                setHasSubmitted(false)
+            } else {
+                // dispatch(getAlbumReviewsThunk(currentAlbum?.id))
+                // dispatch(getAllAlbumReviewsThunk())
+                dispatch(getAllPlaylistReviewThunk())
+                setHasSubmitted(false)
+                closeModal()
+            }
         }
     }
 
@@ -57,6 +60,7 @@ export default function CreatePlaylistReviewModal({ formType, currentPlaylistId,
     useEffect(() => {
         // dispatch(getAllAlbumReviewsThunk())
         // dispatch(getAlbumReviewsThunk(currentAlbum?.id))
+        dispatch(getAllPlaylistReviewThunk())
     }, [dispatch, hasSubmitted])
 
     const newReview = "new-album-review-form-container"
@@ -69,7 +73,7 @@ export default function CreatePlaylistReviewModal({ formType, currentPlaylistId,
                 {formType === "newPlaylist" ?
                 <h1>Write a review for the Playlist <span>{currentPlaylist.name}</span></h1>
                 :
-                <h1>Edit a review for the Playlist <span>test</span></h1>
+                <h1>Edit a review for the Playlist <span>{currentPlaylist.name}</span></h1>
                 }
                 {errors.review && <div className="errors">{errors.review}</div>}
                 <textarea

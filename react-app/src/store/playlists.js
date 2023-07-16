@@ -174,10 +174,12 @@ export const getAllPlaylistReviewThunk = (id) => async (dispatch) => {
 }
 
 export const updatePlaylistReviewThunk = (formData, reviewId) => async (dispatch) => {
+    console.log("the form data in the thunk", formData.get("review"))
     const response = await fetch(`/api/playlists/reviews/edit/${reviewId}`, {
         method: "PUT",
-        formData
+        body: formData
     })
+
     const updatedPlaylistReview = await response.json()
     if (response.ok) {
         dispatch(updatePlaylistReviewAction(updatedPlaylistReview))
@@ -216,6 +218,9 @@ export default function reducer(state = initialState, action) {
             return newState
         case GET_PLAYLIST_REVIEWS:
             newState.playlistReviews = {...action.playlistReviews}
+            return newState
+        case UPDATE_PLAYLIST_REVIEW:
+            newState.playlistReviews[action.playlistReview.id] = action.playlistReview
             return newState
         default:
             return state

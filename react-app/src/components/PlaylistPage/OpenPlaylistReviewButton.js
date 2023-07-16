@@ -21,7 +21,7 @@ function OpenPlaylistReviewButton({
     <div className="album-review-button" onClick={onClick}><i class={
       type === "new-playlist" ? "fa-regular fa-pen-to-square fa-lg"
       :
-      type === "edit" ? "fa-solid fa-pencil fa-lg"
+      type === "edit-playlist" ? "fa-solid fa-pencil fa-lg"
       :
       "fa-solid fa-ban fa-lg"
       }></i></div>

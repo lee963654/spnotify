@@ -8,6 +8,26 @@ from app.forms import PlaylistForm, PlaylistReviewForm
 playlist_routes = Blueprint("playlists", __name__)
 
 
+@playlist_routes.route("/reviews/edit/<int:review_id>", methods = ["PUT"])
+@login_required
+def update_playlist_review(review_id):
+    """
+    Update a playlist review
+    """
+    review = PlaylistReview.query.get(review_id)
+    form = PlaylistReviewForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    print("THIS IS THE PLAYLIST REVIEW+++++++++++++++++++++++", review.review)
+    print("this is the form=======================", form.data)
+    if form.validate_on_submit():
+
+        review.review = form.data["review"]
+        db.session.commit()
+        return review.to_dict()
+    else:
+        return {"errors": validation_errors_to_error_messages(form.errors)}
+
+
 
 @playlist_routes.route("/reviews/all")
 @login_required
@@ -85,6 +105,7 @@ def update_playlist(playlist_id):
         return playlist.to_dict()
     else:
         return {"errors": validation_errors_to_error_messages(form.errors)}
+
 
 
 

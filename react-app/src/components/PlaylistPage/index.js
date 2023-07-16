@@ -152,6 +152,7 @@ export default function PlaylistPage() {
                                         modalComponent={<CreatePlaylistReviewModal
                                             reviewId={review.id}
                                             playlistReview={review}
+                                            currentPlaylist={currentPlaylist}
                                             formType="editPlaylist"
                                         />}
                                     />
