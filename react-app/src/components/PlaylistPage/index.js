@@ -19,6 +19,9 @@ export default function PlaylistPage() {
     const artists = useSelector(state => state?.artists?.allArtists)
     const albums = useSelector(state => state?.albums?.allAlbums)
 
+    const userPlaylist = useSelector(state => state?.playlists?.userPlaylists)
+    console.log("THIS IS THE USER PLAYLIST", userPlaylist)
+
     const songsInPlaylist = currentPlaylist?.songs_in_playlist
     const songObj = Object.values(songsInPlaylist || {})
 
@@ -60,10 +63,19 @@ export default function PlaylistPage() {
         <div className="single-playlist-page-container">
             <div className="playlist-header-container">
                 <p>Playlist</p>
-                <PlaylistNameModal
+                {userPlaylist[id] ? <PlaylistNameModal
                     buttonText={currentPlaylist?.name}
                     modalComponent={<UpdatePlaylist playlistName={currentPlaylist?.name} playlistId={id} playlistPrivate={playlistPrivate} />}
                 />
+                :
+                <div className="playlist-name-modal-not-owner">
+                {currentPlaylist?.name}
+                </div>
+                }
+                {/* <PlaylistNameModal
+                    buttonText={currentPlaylist?.name}
+                    modalComponent={<UpdatePlaylist playlistName={currentPlaylist?.name} playlistId={id} playlistPrivate={playlistPrivate} />}
+                /> */}
                 <p>{currentPlaylist?.user_playlist?.username}</p>
             </div>
             <div className="middle-play-container"><i onClick={handleClickPlaylist} class="fa-solid fa-play fa-lg"></i></div>
@@ -88,6 +100,12 @@ export default function PlaylistPage() {
                         </div>
                     </div>
                 ))) : <div style={{fontSize: 50, color: "white"}}>No Songs</div>}
+            </div>
+            <div className="playlist-review-container">
+                <h2>Playlist Reviews</h2>
+                <div classname="playlist-container">
+
+                </div>
             </div>
         </div>
     )

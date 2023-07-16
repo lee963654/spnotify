@@ -53,4 +53,5 @@ class User(db.Model, UserMixin):
             # "album_reviews": [review.to_dict() for review in self.user_album_reviews],
             # "playlists": [playlist.to_dict() for playlist in self.playlists],
             # "playlist_reviews": [review.to_dict() for review in self.playlist_review]
+            # "following": {artist.id: artist.to_dict() for artist in self.follows_artist}
         }

@@ -12,6 +12,7 @@ import OpenModalAuthCheck from '../OpenModalAuthCheck';
 import ConfirmLoginOrSignin from '../Sidebar/Confirm';
 import OpenAboutModal from './OpenAboutModal';
 import AboutPageModal from './AboutPageModal';
+import { followArtistThunk } from '../../store/following';
 
 
 export default function ArtistPage() {
@@ -34,6 +35,11 @@ export default function ArtistPage() {
         e.preventDefault()
         dispatch(playArtistThunk(id))
     }
+
+    // const handleClickFollow = async (e) => {
+    //     e.preventDefault()
+    //     dispatch(followArtistThunk(id))
+    // }
 
 
     useEffect(() => {
@@ -58,11 +64,15 @@ export default function ArtistPage() {
             </div>
             {/* <div className="middle-play-container"> */}
             {sessionUser ?
-                <div className="middle-play-container"><i onClick={handleClickArtistSongs} class="fa-solid fa-play fa-lg"></i></div>
+                <div className="middle-play-container"><i onClick={handleClickArtistSongs} class="fa-solid fa-play fa-lg"></i>
+                {/* <div onClick={(e) => handleClickFollow(e)}>Follow</div> */}
+                </div>
+
                 :
                 <OpenModalAuthCheck mainButtonTest={true} modalComponent={<ConfirmLoginOrSignin />} />
             }
             {/* </div> */}
+
             <div className="single-songs-container">
                 <h2>Songs</h2>
                 {currentArtist?.songs?.map(song => (

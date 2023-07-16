@@ -18,6 +18,7 @@ import AllSongsPage from "./components/AllSongsPage";
 import AllAlbumsPage from "./components/AllAlbumsPage";
 import AllArtistsPage from "./components/AllArtistsPage";
 import ProfilePage from "./components/ProfilePage";
+import AllPlaylistsPage from "./components/AllPlaylistsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,8 +65,11 @@ function App() {
               <Route exact path="/artists">
                 <AllArtistsPage />
               </Route>
-              <Route>
-                <ProfilePage exact path="/profile"/>
+              <Route exact path="/profile">
+                <ProfilePage/>
+              </Route>
+              <Route exact path="/playlists">
+                <AllPlaylistsPage />
               </Route>
             </Switch>
           )}

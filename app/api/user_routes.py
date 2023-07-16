@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User
+from flask_login import login_required, current_user
+from app.models import User, Artist, db
 
 user_routes = Blueprint('users', __name__)
 
@@ -23,3 +23,15 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+# @user_routes.route("/follow/<int:artist_id>", methods=["POST"])
+# @login_required
+# def follow_artist(artist_id):
+#     """
+#     Follow an artist
+#     """
+#     user = User.query.get(current_user.id)
+#     artist = Artist.query.get(artist_id)
+#     user.follows_artists.append(artist)
+#     db.session.commit()
+#     return user.to_dict()

@@ -61,7 +61,7 @@ export default function Sidebar() {
                     <div className="sidebar-container">
                         <div className="home-text" onClick={() => history.push("/")}>
                             Home
-                            </div>
+                        </div>
                         <div className="home-text">Search</div>
                         <div onClick={() => history.push("/songs")} className="home-text">All Songs</div>
                         <div onClick={() => history.push("/albums")} className="home-text">All Albums</div>
@@ -88,19 +88,20 @@ export default function Sidebar() {
                 <div className="sidebar-main-container">
                     <div className="sidebar-container">
                         <div className="home-text" onClick={() => history.push("/")}>Home</div>
-                        <div className="home-text">Search</div>
+                        {/* <div className="home-text">Search</div> */}
                         <div onClick={() => history.push("/songs")} className="home-text">All Songs</div>
                         <div onClick={() => history.push("/albums")} className="home-text">All Albums</div>
                         <div onClick={() => history.push("/artists")} className="home-text">All Artists</div>
+                        <div onClick={() => history.push("/playlists")} className="home-text">All Playlists</div>
                     </div>
                     <div className="sidebar-container-bottom">
                         <div className="sidebar-bottom-header">
-                        <div className="home-text">Your Library</div>
-                        {/* <OpenModalPlaylist
+                            <div className="home-text">Your Library</div>
+                            {/* <OpenModalPlaylist
                             buttonText="Create Playlist"
                             modalComponent={<CreatePlaylistModal userId={userId} />}
                         /> */}
-                        <div className="create-playlist" onClick={handleSubmit}><i class="fa-solid fa-plus"></i></div>
+                            <div className="create-playlist" onClick={handleSubmit}><i class="fa-solid fa-plus"></i></div>
                         </div>
                         <div className="side-playlist-container">
                             {userPlaylistObj.length ? userPlaylistObj.map(playlist => (

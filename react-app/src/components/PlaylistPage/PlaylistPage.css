@@ -39,6 +39,14 @@
     width: fit-content;
 }
 
+.playlist-name-modal-not-owner {
+    font-size: 5rem;
+    font-weight: bolder;
+    color: white;
+
+    width: fit-content;
+}
+
 .playlist-song {
 
     display: flex;

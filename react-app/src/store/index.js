@@ -7,6 +7,7 @@ import playlists from "./playlists"
 import albumReviews from "./albumReviews"
 import songs from "./songs"
 import audioPlayer from "./audioPlayer"
+import following from "./following"
 
 const rootReducer = combineReducers({
   session,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   playlists,
   albumReviews,
   songs,
-  audioPlayer
+  audioPlayer,
+  following,
 });
 
 
