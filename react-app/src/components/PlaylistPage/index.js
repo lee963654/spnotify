@@ -70,6 +70,7 @@ export default function PlaylistPage() {
                 :
                 <div className="playlist-name-modal-not-owner">
                 {currentPlaylist?.name}
+
                 </div>
                 }
                 {/* <PlaylistNameModal
