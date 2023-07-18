@@ -8,6 +8,7 @@ const REMOVE_SONG_FROM_PLAYLIST = "playlists/REMOVE_SONG_FROM_PLAYLIST"
 const CREATE_PLAYLIST_REVIEW = "playlists/CREATE_PLAYLIST_REVIEW"
 const GET_PLAYLIST_REVIEWS = "playlists/GET_PLAYLIST_REVIEWS"
 const UPDATE_PLAYLIST_REVIEW = "playlists/UPDATE_PLAYLIST_REVIEW"
+const DELETE_PLAYLIST_REVIEW = "playlists/DELETE_PLAYLIST_REVIEW"
 
 
 const getUserPlaylists = (playlists) => ({
@@ -52,6 +53,11 @@ const getPlaylistReviewsAction = (playlistReviews) => ({
 
 const updatePlaylistReviewAction = (playlistReview) => ({
     type: UPDATE_PLAYLIST_REVIEW,
+    playlistReview
+})
+
+const deletePlaylistReviewAction = (playlistReview) => ({
+    type: DELETE_PLAYLIST_REVIEW,
     playlistReview
 })
 
@@ -189,6 +195,19 @@ export const updatePlaylistReviewThunk = (formData, reviewId) => async (dispatch
     }
 }
 
+export const deletePlaylistReviewThunk = (playlistReviewId) => async (dispatch) => {
+    const response = await fetch(`/api/playlists/reviews/${playlistReviewId}/delete`, {
+        method: "DELETE"
+    })
+    const deletedPlaylistReview = await response.json()
+    if (response.ok) {
+        dispatch(deletePlaylistReviewAction(deletedPlaylistReview))
+        return deletedPlaylistReview
+    } else {
+        return deletedPlaylistReview
+    }
+}
+
 
 const initialState = { allPlaylists: {}, userPlaylists: {}, playlistReviews: {}}
 
@@ -221,6 +240,9 @@ export default function reducer(state = initialState, action) {
             return newState
         case UPDATE_PLAYLIST_REVIEW:
             newState.playlistReviews[action.playlistReview.id] = action.playlistReview
+            return newState
+        case DELETE_PLAYLIST_REVIEW:
+            delete newState.playlistReviews[action.playlistReview.id]
             return newState
         default:
             return state

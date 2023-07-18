@@ -11,6 +11,7 @@ import CreatePlaylistReviewModal from './CreatePlaylistReviewModal';
 import OpenPlaylistReviewButton from './OpenPlaylistReviewButton';
 import PlaylistNameModal from "./PlaylistNameModal"
 import CreateAlbumReviewModal from '../CreateAlbumReviewModal';
+import DeletePlaylistReviewModal from './DeletePlaylistReviewModal';
 
 
 export default function PlaylistPage() {
@@ -158,7 +159,9 @@ export default function PlaylistPage() {
                                     />
                                     <OpenPlaylistReviewButton
                                         type="delete-playlist"
-                                        modalComponent={<CreatePlaylistReviewModal
+                                        modalComponent={<DeletePlaylistReviewModal
+                                            playlistReview={review}
+                                            playlistReviewId={review.id}
 
                                         />}
                                     />

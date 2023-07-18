@@ -8,6 +8,20 @@ from app.forms import PlaylistForm, PlaylistReviewForm
 playlist_routes = Blueprint("playlists", __name__)
 
 
+
+@playlist_routes.route("/reviews/<int:playlist_id>/delete", methods=["DELETE"])
+@login_required
+def delete_playlist_review(playlist_id):
+    """
+    Delete a review for a playlist
+    """
+    deleted_playlist_review = PlaylistReview.query.get(playlist_id)
+    db.session.delete(deleted_playlist_review)
+    db.session.commit()
+    return deleted_playlist_review.to_dict()
+
+
+
 @playlist_routes.route("/reviews/edit/<int:review_id>", methods = ["PUT"])
 @login_required
 def update_playlist_review(review_id):
