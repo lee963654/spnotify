@@ -44,14 +44,18 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+
+
+
         return {
             'id': self.id,
             'username': self.username,
             'email': self.email,
             "password": self.password,
-            # "following": [follow.to_dict() for follow in self.follows_artist],
+            # "following": [artist.id for artist in self.follows_artist]
+            "following": {artist.id: artist.name for artist in self.follows_artist}
             # "album_reviews": [review.to_dict() for review in self.user_album_reviews],
             # "playlists": [playlist.to_dict() for playlist in self.playlists],
             # "playlist_reviews": [review.to_dict() for review in self.playlist_review]
-            # "following": {artist.id: artist.to_dict() for artist in self.follows_artist}
+
         }

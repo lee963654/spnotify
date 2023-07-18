@@ -70,6 +70,16 @@
   cursor: pointer;
 }
 
+.follow-artist-button {
+  width: fit-content;
+  margin-left: 1rem;
+  border: 1px solid white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  color: white;
+}
+
 .header-artist-name {
   color: white;
   font-size: 6rem;

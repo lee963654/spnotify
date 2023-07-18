@@ -12,7 +12,8 @@ import OpenModalAuthCheck from '../OpenModalAuthCheck';
 import ConfirmLoginOrSignin from '../Sidebar/Confirm';
 import OpenAboutModal from './OpenAboutModal';
 import AboutPageModal from './AboutPageModal';
-import { followArtistThunk } from '../../store/following';
+// import { followArtistThunk } from '../../store/following';
+import { followArtistThunk, unfollowArtistThunk } from '../../store/session';
 
 
 export default function ArtistPage() {
@@ -36,10 +37,15 @@ export default function ArtistPage() {
         dispatch(playArtistThunk(id))
     }
 
-    // const handleClickFollow = async (e) => {
-    //     e.preventDefault()
-    //     dispatch(followArtistThunk(id))
-    // }
+    const handleClickFollow = async (e) => {
+        e.preventDefault()
+        dispatch(followArtistThunk(id))
+    }
+
+    const handleClickUnfollow = async (e) => {
+        e.preventDefault()
+        dispatch(unfollowArtistThunk(id))
+    }
 
 
     useEffect(() => {
@@ -72,6 +78,12 @@ export default function ArtistPage() {
                 <OpenModalAuthCheck mainButtonTest={true} modalComponent={<ConfirmLoginOrSignin />} />
             }
             {/* </div> */}
+            {sessionUser.following[id] ?
+            <div className="follow-artist-button" onClick={(e) => handleClickUnfollow(e)}>Follow</div>
+            :
+            <div className="follow-artist-button" onClick={(e) => handleClickFollow(e)}>Unfollow</div>
+            }
+            {/* <div onClick={(e) => handleClickFollow(e)}>TEST FOLLOW ARTIST</div> */}
 
             <div className="single-songs-container">
                 <h2>Songs</h2>

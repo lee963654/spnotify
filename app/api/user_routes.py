@@ -24,14 +24,27 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
-# @user_routes.route("/follow/<int:artist_id>", methods=["POST"])
-# @login_required
-# def follow_artist(artist_id):
-#     """
-#     Follow an artist
-#     """
-#     user = User.query.get(current_user.id)
-#     artist = Artist.query.get(artist_id)
-#     user.follows_artists.append(artist)
-#     db.session.commit()
-#     return user.to_dict()
+@user_routes.route("/follow/<int:artist_id>", methods=["POST"])
+@login_required
+def follow_artist(artist_id):
+    """
+    Follow an artist
+    """
+    user = User.query.get(current_user.id)
+    artist = Artist.query.get(artist_id)
+    user.follows_artist.append(artist)
+    db.session.commit()
+    return user.to_dict()
+
+
+@user_routes.route("/unfollow/<int:artist_id>", methods=["DELETE"])
+@login_required
+def unfollow_artist(artist_id):
+    """
+    unfollow an artist
+    """
+    user = User.query.get(current_user.id)
+    artist = Artist.query.get(artist_id)
+    user.follows_artist.remove(artist)
+    db.session.commit()
+    return user.to_dict()

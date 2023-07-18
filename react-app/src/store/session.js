@@ -1,6 +1,7 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const FOLLOW_ARTIST = "session/FOLLOW_ARTIST"
 
 
 const setUser = (user) => ({
@@ -95,6 +96,33 @@ export const signUp = (username, email, password) => async (dispatch) => {
 		return ["An error occurred. Please try again."];
 	}
 };
+
+
+export const followArtistThunk = (artistId) => async (dispatch) => {
+	const response = await fetch(`/api/users/follow/${artistId}`, {
+		method: "POST"
+	})
+	const followingArtist = await response.json()
+	if (response.ok) {
+		dispatch(authenticate())
+		return followingArtist
+	} else {
+		return followingArtist
+	}
+}
+
+export const unfollowArtistThunk = (artistId) => async (dispatch) => {
+	const response = await fetch(`/api/users/unfollow/${artistId}`, {
+		method: "DELETE"
+	})
+	const unfollowingArtist = await response.json()
+	if (response.ok) {
+		dispatch(authenticate())
+		return unfollowingArtist
+	} else {
+		return unfollowingArtist
+	}
+}
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
