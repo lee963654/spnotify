@@ -44,7 +44,11 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+        # res_follow = {}
+        # for artist in self.follows_artist:
 
+        #     artist_info = {"id": artist.id, "name": artist.name, "about": artist.about, "artist_picture": artist.artist_picture, "artist_icon_picture": artist.artist_icon_picture, "about_picture": artist.about_picture}
+        #     res_follow[artist.id] = artist_info
 
 
         return {
@@ -52,8 +56,9 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             "password": self.password,
-            # "following": [artist.id for artist in self.follows_artist]
-            "following": {artist.id: artist.name for artist in self.follows_artist}
+            # "following": res_follow
+            # "following": {artist.id: artist.name for artist in self.follows_artist}
+            "following": {artist.id: {"id": artist.id, "name": artist.name, "about": artist.about, "artist_picture": artist.artist_picture, "artist_icon_picture": artist.artist_icon_picture, "about_picture": artist.about_picture} for artist in self.follows_artist}
             # "album_reviews": [review.to_dict() for review in self.user_album_reviews],
             # "playlists": [playlist.to_dict() for playlist in self.playlists],
             # "playlist_reviews": [review.to_dict() for review in self.playlist_review]
