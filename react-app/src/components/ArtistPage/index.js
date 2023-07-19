@@ -79,9 +79,9 @@ export default function ArtistPage() {
             }
             {/* </div> */}
             {sessionUser.following[id] ?
-            <div className="follow-artist-button" onClick={(e) => handleClickUnfollow(e)}>Follow</div>
+            <div className="follow-artist-button" onClick={(e) => handleClickUnfollow(e)}>Unfollow</div>
             :
-            <div className="follow-artist-button" onClick={(e) => handleClickFollow(e)}>Unfollow</div>
+            <div className="follow-artist-button" onClick={(e) => handleClickFollow(e)}>Follow</div>
             }
             {/* <div onClick={(e) => handleClickFollow(e)}>TEST FOLLOW ARTIST</div> */}
 

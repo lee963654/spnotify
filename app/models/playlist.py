@@ -22,6 +22,7 @@ class Playlist(db.Model):
     name = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     private = db.Column(db.Boolean, default=True)
+    playlist_picture = db.Column(db.String(1000), default="https://spnotify.s3.us-east-2.amazonaws.com/defaultPlaylistImage.png")
 
 
     # relationship
@@ -39,5 +40,6 @@ class Playlist(db.Model):
             "user_playlist": self.user_playlist.to_dict(),
             # "songs_in_playlist": [song.to_dict() for song in self.songs_on_playlist],
             "songs_in_playlist": {song.id : song.to_dict() for song in self.songs},
-            "playlist_reviews": [review.to_dict() for review in self.playlist_review]
+            "playlist_reviews": [review.to_dict() for review in self.playlist_review],
+            "playlist_picture": self.playlist_picture
         }

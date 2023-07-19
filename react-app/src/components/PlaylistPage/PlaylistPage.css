@@ -1,9 +1,14 @@
+.album-review-button {
+    width: fit-content;
+}
+
 .fa-solid {
     cursor: pointer;
 }
 
 .fa-regular {
     cursor: pointer;
+    color: white;
 }
 
 .playlist-album-name {
@@ -19,6 +24,12 @@
 .playlist-bar-right {
     display: flex;
 
+}
+
+.playlist-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .playlist-controls-container {
@@ -45,6 +56,29 @@
     color: white;
 
     width: fit-content;
+}
+
+.playlist-review-edit-delete-buttons {
+    display: flex;
+    width: fit-content;
+    gap: 2rem;
+    color: white;
+}
+
+.playlist-review > p {
+    color: rgb(190, 186, 186);
+    word-wrap: break-word;
+}
+
+.playlist-review > h3 {
+    color: rgb(238, 232, 232);
+
+}
+
+.playlist-review-container {
+    margin-bottom: 5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .playlist-song {

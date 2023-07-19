@@ -90,16 +90,9 @@ export default function AlbumPage() {
                         </div>
                     </div>
                 </div>
-                {/* {!hasReview && currentUser && (
-                    <OpenReviewButton
-                        buttonText="Write a Review"
-                        modalComponent={<CreateAlbumReviewModal currentAlbumId={id} formType="new" currentAlbum={currentAlbum} />}
-                    />
-                )} */}
+
             </div>
-            {/* <div onClick={handleClickAlbum} className="middle-play-container">
-                <i class="fa-solid fa-play"></i>
-            </div> */}
+
             {currentUser ?
                 <div className="middle-play-container">
                     <i onClick={handleClickAlbum} class="fa-solid fa-play fa-lg"></i>

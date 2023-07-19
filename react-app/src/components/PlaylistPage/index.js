@@ -89,6 +89,21 @@ export default function PlaylistPage() {
                 :
                 <div className="playlist-name-modal-not-owner">
                 {currentPlaylist?.name}
+                {/* {!hasReview && sessionUser && (
+                    <OpenPlaylistReviewButton
+                    type="new-playlist"
+                    modalComponent={<CreatePlaylistReviewModal
+                        currentPlaylistId={id}
+                        currentPlaylist={currentPlaylist}
+                        formType="newPlaylist"
+                        />}
+                />
+                )} */}
+
+                </div>
+                }
+
+                <p>{currentPlaylist?.user_playlist?.username}</p>
                 {!hasReview && sessionUser && (
                     <OpenPlaylistReviewButton
                     type="new-playlist"
@@ -99,21 +114,6 @@ export default function PlaylistPage() {
                         />}
                 />
                 )}
-                    {/* <OpenPlaylistReviewButton
-                        type="new-playlist"
-                        modalComponent={<CreatePlaylistReviewModal
-                            currentPlaylistId={id}
-                            currentPlaylist={currentPlaylist}
-                            formType="newPlaylist"
-                            />}
-                    /> */}
-                </div>
-                }
-                {/* <PlaylistNameModal
-                    buttonText={currentPlaylist?.name}
-                    modalComponent={<UpdatePlaylist playlistName={currentPlaylist?.name} playlistId={id} playlistPrivate={playlistPrivate} />}
-                /> */}
-                <p>{currentPlaylist?.user_playlist?.username}</p>
             </div>
             <div className="middle-play-container"><i onClick={handleClickPlaylist} class="fa-solid fa-play fa-lg"></i></div>
             <div className="playlist-song-container">

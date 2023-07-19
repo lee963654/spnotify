@@ -27,7 +27,25 @@ export default function ProfilePage() {
             <div className="all-artists-container">
                 <h1>Following Artists</h1>
                 <div className="artists-container">
-
+                    {followingArtists.length ?
+                    followingArtists.map(artist => (
+                        <div onClick={() => history.push(`/artists/${artist.id}`)} className="artist">
+                            <div className="artist">
+                                <div className="artist-inside">
+                                    <div className="artist-image">
+                                    <img src={artist.artist_icon_picture}></img>
+                                    </div>
+                                    <div className="artist-info-bottom">
+                                        <h3>{artist.name}</h3>
+                                        <p>Artist</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                    :
+                    <div></div>
+                    }
                 </div>
             </div>
         </div>
