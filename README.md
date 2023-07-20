@@ -15,3 +15,13 @@ This is a Spotify clone where you can listen to country music!
   ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 </div>
+
+## Features
+* User can sign up, login with existing credintials, or login with one of two demo-users.
+* Logged in users can listen to music.
+* Logged in users can create their own playlist and add or remove songs to the playlist.
+* Logged in users can edit or delete any of their own playlists.
+* Logged in users can write a review for any public playlists other than their own.
+* Logged in users can write a review for an album.
+* Logged in users can follow and unfollow an artist and see all of the artists they are following in their profile page.
+  
