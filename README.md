@@ -25,3 +25,5 @@ This is a Spotify clone where you can listen to country music!
 * Logged in users can write a review for an album.
 * Logged in users can follow and unfollow an artist and see all of the artists they are following in their profile page.
   
+## Landing Page
+![image](https://spnotify.s3.us-east-2.amazonaws.com/spnotify+landing+screenshot.png)
