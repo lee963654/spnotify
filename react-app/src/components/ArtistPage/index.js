@@ -78,11 +78,11 @@ export default function ArtistPage() {
                 <OpenModalAuthCheck mainButtonTest={true} modalComponent={<ConfirmLoginOrSignin />} />
             }
             {/* </div> */}
-            {sessionUser.following[id] ?
+            {sessionUser && (sessionUser?.following[id] ?
             <div className="follow-artist-button" onClick={(e) => handleClickUnfollow(e)}>Unfollow</div>
             :
             <div className="follow-artist-button" onClick={(e) => handleClickFollow(e)}>Follow</div>
-            }
+            )}
             {/* <div onClick={(e) => handleClickFollow(e)}>TEST FOLLOW ARTIST</div> */}
 
             <div className="single-songs-container">

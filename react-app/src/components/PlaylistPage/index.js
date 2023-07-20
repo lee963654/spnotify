@@ -82,7 +82,7 @@ export default function PlaylistPage() {
         <div className="single-playlist-page-container">
             <div className="playlist-header-container">
                 <p>Playlist</p>
-                {userPlaylist[id] ? <PlaylistNameModal
+                {sessionUser && userPlaylist[id] ? <PlaylistNameModal
                     buttonText={currentPlaylist?.name}
                     modalComponent={<UpdatePlaylist playlistName={currentPlaylist?.name} playlistId={id} playlistPrivate={playlistPrivate} />}
                 />
@@ -104,7 +104,7 @@ export default function PlaylistPage() {
                 }
 
                 <p>{currentPlaylist?.user_playlist?.username}</p>
-                {!hasReview && sessionUser && (
+                {!hasReview && sessionUser && !userPlaylist[id] && (
                     <OpenPlaylistReviewButton
                     type="new-playlist"
                     modalComponent={<CreatePlaylistReviewModal
