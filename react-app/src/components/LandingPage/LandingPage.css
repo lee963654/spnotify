@@ -89,7 +89,24 @@
     flex-wrap: wrap;
 }
 
+.fa-brands {
+    color: white;
+}
+
 h2 {
     font-size: 2rem;
     color: white;
+}
+
+.my-info-container {
+    margin-left: 3rem;
+    margin-bottom: 3rem;
+}
+
+.my-info-container > h2 {
+    margin-bottom: .5rem;
+}
+
+.my-info-icons > a {
+    margin-right: 1rem;
 }

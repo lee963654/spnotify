@@ -37,6 +37,17 @@ export default function LandingPage() {
 
     return (
         <div className="landing-container">
+            <div className="my-info-container">
+                <h2>James Lee</h2>
+                <div className="my-info-icons">
+                    <a href="https://www.linkedin.com/in/jamesleeswe/" target="_blank" rel="noreferrer">
+                    <i class="fa-brands fa-linkedin fa-xl"></i>
+                    </a>
+                    <a href="https://github.com/lee963654" target="_blank" rel="noreferrer">
+                    <i class="fa-brands fa-github fa-xl"></i>
+                    </a>
+                </div>
+            </div>
             <div className="body-container">
                 <div className="all-artists-container">
                     <h2>Featured Artists</h2>

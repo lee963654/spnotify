@@ -38,7 +38,7 @@ export default function SongOptionsModal({songId, songName}) {
             {userPlaylistsObj && userPlaylistsObj.length ?
             (userPlaylistsObj.map(playlist => (
                 <div className="playlists-container-modal">
-                    <div className="playlist" onClick={(e) => {handleSubmit(e, playlist.id)}}>
+                    <div className="playlist-add-modal" onClick={(e) => {handleSubmit(e, playlist.id)}}>
                         {playlist.name}
                     </div>
                 </div>

@@ -31,11 +31,17 @@ body {
     background-color: #121212;
     overflow: auto;
     scrollbar-color: #121212;
-    height: 53rem;
+    /* height: 53rem; */
     border-radius: 10px;
     display: flex;
     width: 100%;
     flex-direction: column;
+
+    /* Test */
+    max-height: 53rem;
+    margin-bottom: 5rem;
+    /* Test */
+
 }
 
 .nav-landing-container::-webkit-scrollbar {
